@@ -1,0 +1,9 @@
+{
+  "survivalfly.enabled": "Enabled",
+  "survivalfly.disabled": "Disabled",
+  "survivalfly.flight_changed.self": "%s flight.",
+  "survivalfly.flight_changed": "Your flight has been %s.",
+  "survivalfly.flight_changed.other": "%s flight for %s.",
+  "survivalfly.cannot_change_flight.self": "Cannot change flight ability because your gamemode is %s.",
+  "survivalfly.cannot_change_flight.other": "Couldn't change flight ability for %s because their gamemode is %s."
+}
