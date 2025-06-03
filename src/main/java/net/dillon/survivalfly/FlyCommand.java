@@ -6,7 +6,6 @@ import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.GameMode;
@@ -26,7 +25,7 @@ public class FlyCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 CommandManager.literal("fly")
-                        .requires(source -> source.hasPermissionLevel(2))
+                        .requires(source -> source.hasPermissionLevel(SurvivalFly.options().permissionLevel.getId()))
                         .executes(
                                 context -> execute(
                                         context, Collections.singleton(context.getSource().getPlayerOrThrow())
@@ -56,7 +55,7 @@ public class FlyCommand {
             }
         } else {
             if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && !bl) {
-                player.sendMessage(Text.translatable("survivalfly.flight_changed", text.getContent().toString().toLowerCase()));
+                player.sendMessage(Text.translatable("survivalfly.flight_changed", text));
             }
 
             if (!bl) {

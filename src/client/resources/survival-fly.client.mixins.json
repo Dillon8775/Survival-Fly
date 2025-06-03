@@ -1,8 +1,9 @@
 {
   "required": true,
-  "package": "net.dillon.survivalfly.mixin.client",
+  "package": "net.dillon.survivalfly.mixin.screen",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "ScreensMixin"
   ],
   "injectors": {
     "defaultRequire": 1

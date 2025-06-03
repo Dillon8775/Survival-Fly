@@ -1,5 +1,6 @@
 package net.dillon.survivalfly;
 
+import net.dillon.survivalfly.option.ModOptions;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import org.slf4j.Logger;
@@ -20,6 +21,16 @@ public class SurvivalFly implements ModInitializer {
 		info("Initialized Survival Fly mod successfully!");
 	}
 
+	/**
+	 * Returns the options.
+	 */
+	public static ModOptions options() {
+		return ModOptions.OPTIONS;
+	}
+
+	/**
+	 * Sends a message to console.
+	 */
 	public static void info(String message) {
 		LOGGER.info(message);
 	}
