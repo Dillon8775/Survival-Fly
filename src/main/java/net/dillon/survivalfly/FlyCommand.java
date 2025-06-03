@@ -51,7 +51,7 @@ public class FlyCommand {
             if (!bl) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.self", text), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.getGameMode().getId()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().getName()), true);
             }
         } else {
             if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && !bl) {
@@ -61,7 +61,7 @@ public class FlyCommand {
             if (!bl) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.other", text, player.getDisplayName()), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.getGameMode().getId()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.interactionManager.getGameMode().getName()), true);
             }
         }
     }
@@ -73,7 +73,7 @@ public class FlyCommand {
         int i = 0;
 
         for (ServerPlayerEntity player : targets) {
-            if (!(player.getGameMode().isCreative() || player.getGameMode() == GameMode.SPECTATOR)) {
+            if (!(player.interactionManager.getGameMode().isCreative() || player.interactionManager.getGameMode() == GameMode.SPECTATOR)) {
                 player.getAbilities().allowFlying = !player.getAbilities().allowFlying;
                 if (player.getAbilities().flying && !player.getAbilities().allowFlying) {
                     player.getAbilities().flying = false;
