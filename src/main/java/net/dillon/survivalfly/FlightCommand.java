@@ -70,7 +70,7 @@ public class FlightCommand {
             if (!bl) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.self", text), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().getName()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().getId()), true);
             }
         } else {
             if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && !bl) {
@@ -80,7 +80,7 @@ public class FlightCommand {
             if (!bl) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.other", text, player.getDisplayName()), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.interactionManager.getGameMode().getName()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.interactionManager.getGameMode().getId()), true);
             }
         }
     }

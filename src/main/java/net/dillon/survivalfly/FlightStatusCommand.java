@@ -41,9 +41,9 @@ public class FlightStatusCommand {
     private static int execute(CommandContext<ServerCommandSource> context, ServerPlayerEntity target) {
         if (target.interactionManager.getGameMode().isCreative() || target.interactionManager.getGameMode() == GameMode.SPECTATOR) {
             if (context.getSource().getEntity() == target) {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", target.interactionManager.getGameMode().getName()), true);
+                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", target.interactionManager.getGameMode().getId()), true);
             } else {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode.other", target.getDisplayName(), target.interactionManager.getGameMode().getName()), true);
+                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode.other", target.getDisplayName(), target.interactionManager.getGameMode().getId()), true);
             }
             return 0;
         } else {
