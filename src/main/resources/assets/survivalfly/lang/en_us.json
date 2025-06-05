@@ -13,10 +13,18 @@
   "survivalfly.options.permission_level.admin.tooltip": "Players with multiplayer management commands can use /fly.",
   "survivalfly.options.permission_level.owner.tooltip": "Only the owner can use /fly.",
   "survivalfly.enabled": "Enabled",
+  "survivalfly.enabled.lowercase": "enabled",
   "survivalfly.disabled": "Disabled",
+  "survivalfly.disabled.lowercase": "disabled",
   "survivalfly.flight_changed.self": "%s flight.",
   "survivalfly.flight_changed": "Your flight has been %s.",
   "survivalfly.flight_changed.other": "%s flight for %s.",
   "survivalfly.cannot_change_flight.self": "Cannot change flight ability because your gamemode is %s.",
-  "survivalfly.cannot_change_flight.other": "Couldn't change flight ability for %s because their gamemode is %s."
+  "survivalfly.cannot_change_flight.other": "Couldn't change flight ability for %s because their gamemode is %s.",
+  "survivalfly.flight_status": "Your flight is currently %s.",
+  "survivalfly.flight_status.other": "%s's flight is currently %s.",
+  "survivalfly.flight_status.flying_gamemode": "You have flying abilities because your gamemode is %s.",
+  "survivalfly.flight_status.flying_gamemode.other": "%s has flying abilities because their gamemode is %s.",
+  "survivalfly.flight_is_the_same": "Your flight is already %s.",
+  "survivalfly.flight_is_the_same.other": "%s's flight is already %s."
 }

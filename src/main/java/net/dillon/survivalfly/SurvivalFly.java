@@ -3,6 +3,9 @@ package net.dillon.survivalfly;
 import net.dillon.survivalfly.option.ModOptions;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +18,13 @@ public class SurvivalFly implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		CommandRegistrationCallback.EVENT.register(((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
-			FlyCommand.register(commandDispatcher);
-		}));
+		ModOptions.loadConfig();
+		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+			FlightCommand.register(commandDispatcher);
+		});
+		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+			FlightStatusCommand.register(commandDispatcher);
+		});
 		info("Initialized Survival Fly mod successfully!");
 	}
 
@@ -33,5 +40,9 @@ public class SurvivalFly implements ModInitializer {
 	 */
 	public static void info(String message) {
 		LOGGER.info(message);
+	}
+
+	public static Text lowercaseText(ServerPlayerEntity player) {
+		return player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled.lowercase").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled.lowercase").formatted(Formatting.RED);
 	}
 }
