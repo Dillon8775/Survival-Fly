@@ -6,7 +6,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.TranslatableOption;
 
-@Environment(EnvType.CLIENT)
 public enum PermissionLevel implements TranslatableOption, StringIdentifiable {
     REGULAR(0, "regular", "survivalfly.options.permission_level.regular"),
     MODERATOR(1, "moderator", "survivalfly.options.permission_level.moderator"),
