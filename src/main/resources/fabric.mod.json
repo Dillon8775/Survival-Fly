@@ -8,10 +8,10 @@
     "Dillon8775"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://modrinth.com/mod/survival-fly",
+    "sources": "https://github.com/Dillon8775/Survival-Fly"
   },
-  "license": "CC0-1.0",
+  "license": "All rights reserved.",
   "icon": "assets/survivalfly/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -20,9 +20,6 @@
     ],
     "client": [
       "net.dillon.survivalfly.SurvivalFlyClient"
-    ],
-    "fabric-datagen": [
-      "net.dillon.survivalfly.SurvivalFlyDataGenerator"
     ],
     "modmenu": [
       "net.dillon.survivalfly.impl.ModMenuImpl"

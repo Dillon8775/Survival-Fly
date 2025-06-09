@@ -1,2 +1,4 @@
+- Mod icon!
 - Added support for Mod Menu.
 - Fixed inconsistency when switching between flying gamemodes and non-flying gamemodes.
+- Changed license (All rights reserved).
