@@ -3,7 +3,9 @@
   "package": "net.dillon.survivalfly.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "GameModeMixin"
+    "GameModeMixin",
+    "PlayerAbilitiesMixin",
+    "ServerPlayerInteractionManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

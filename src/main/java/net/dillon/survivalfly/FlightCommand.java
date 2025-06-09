@@ -2,6 +2,7 @@ package net.dillon.survivalfly;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -88,13 +89,14 @@ public class FlightCommand {
     /**
      * Enables/disables fly for certain players.
      */
-    private static int execute(CommandContext<ServerCommandSource> context, Collection<ServerPlayerEntity> targets, boolean which) {
+    private static int execute(CommandContext<ServerCommandSource> context, Collection<ServerPlayerEntity> targets, boolean value) {
         int i = 0;
 
         for (ServerPlayerEntity player : targets) {
             if (!(player.interactionManager.getGameMode().isCreative() || player.interactionManager.getGameMode() == GameMode.SPECTATOR)) {
-                if (player.getAbilities().allowFlying != which) {
-                    player.getAbilities().allowFlying = which;
+                if (player.getAbilities().allowFlying != value) {
+                    player.getAbilities().allowFlying = value;
+                    ((PlayerAbilitiesExtension)player.getAbilities()).setEverEnabledFlight(value);
                     if (player.getAbilities().flying && !player.getAbilities().allowFlying) {
                         player.getAbilities().flying = false;
                     }

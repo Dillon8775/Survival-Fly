@@ -1,8 +1,6 @@
 package net.dillon.survivalfly.option;
 
 import com.mojang.serialization.Codec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.TranslatableOption;
 
