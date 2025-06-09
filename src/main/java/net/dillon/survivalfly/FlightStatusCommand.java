@@ -41,16 +41,16 @@ public class FlightStatusCommand {
     private static int execute(CommandContext<ServerCommandSource> context, ServerPlayerEntity target) {
         if (target.interactionManager.getGameMode().isCreative() || target.interactionManager.getGameMode() == GameMode.SPECTATOR) {
             if (context.getSource().getEntity() == target) {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", target.interactionManager.getGameMode().getId()), true);
+                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", target.interactionManager.getGameMode().asString()), true);
             } else {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode.other", target.getDisplayName(), target.interactionManager.getGameMode().getId()), true);
+                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode.other", target.getDisplayName(), target.interactionManager.getGameMode().asString()), true);
             }
             return 0;
         } else {
             if (context.getSource().getEntity() == target) {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status", SurvivalFly.lowercaseText(target)), true);
+                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status", SurvivalFly.statusText(target, true)), true);
             } else {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.other", target.getDisplayName(), SurvivalFly.lowercaseText(target)), true);
+                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.other", target.getDisplayName(), SurvivalFly.statusText(target, true)), true);
             }
             return 1;
         }

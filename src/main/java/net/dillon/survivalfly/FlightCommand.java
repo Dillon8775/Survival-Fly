@@ -8,7 +8,6 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.GameRules;
 
@@ -66,22 +65,21 @@ public class FlightCommand {
      * Sends messages to chat based on the player's flight ability.
      */
     private static void sendFeedback(ServerCommandSource source, ServerPlayerEntity player, boolean bl) {
-        Text text = player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled").formatted(Formatting.RED);
         if (source.getEntity() == player) {
             if (!bl) {
-                source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.self", text), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.self", SurvivalFly.statusText(player, false)), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().getId()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().asString()), true);
             }
         } else {
             if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && !bl) {
-                player.sendMessage(Text.translatable("survivalfly.flight_changed", text));
+                player.sendMessage(Text.translatable("survivalfly.flight_changed", SurvivalFly.statusText(player, false)));
             }
 
             if (!bl) {
-                source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.other", text, player.getDisplayName()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.other", SurvivalFly.statusText(player, false), player.getDisplayName()), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.interactionManager.getGameMode().getId()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.interactionManager.getGameMode().asString()), true);
             }
         }
     }
@@ -104,9 +102,9 @@ public class FlightCommand {
                     sendFeedback(context.getSource(), player, false);
                 } else {
                     if (context.getSource().getEntity() == player) {
-                        context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_is_the_same", SurvivalFly.lowercaseText(player)), true);
+                        context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_is_the_same", SurvivalFly.statusText(player, true)), true);
                     } else {
-                        context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_is_the_same.other", player.getDisplayName(), SurvivalFly.lowercaseText(player)), true);
+                        context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_is_the_same.other", player.getDisplayName(), SurvivalFly.statusText(player, true)), true);
                     }
                 }
             } else {
