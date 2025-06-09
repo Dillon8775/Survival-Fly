@@ -55,7 +55,7 @@ public class SurvivalFly implements ModInitializer {
 	}
 
 	/**
-	 * Returns enabled/disabled text based on if isFirstLetterLowercase.
+	 * Returns enabled/disabled text.
 	 */
 	public static Text statusText(ServerPlayerEntity player, boolean isFirstLetterLowercase) {
 		return isFirstLetterLowercase ? player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled.lowercase").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled.lowercase").formatted(Formatting.RED) : player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled").formatted(Formatting.RED);
