@@ -21,7 +21,7 @@ public class ServerPlayerInteractionManagerMixin {
      */
     @Inject(method = "changeGameMode", at = @At("TAIL"))
     private void fixFlyingInconsistency(GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {
-        if (this.player.getGameMode().isSurvivalLike()) {
+        if (this.player.interactionManager.getGameMode().isSurvivalLike()) {
             if (!((PlayerAbilitiesExtension)this.player.getAbilities()).hasEverEnabledFlight()) {
                 this.player.getAbilities().allowFlying = false;
                 this.player.getAbilities().flying = false;
