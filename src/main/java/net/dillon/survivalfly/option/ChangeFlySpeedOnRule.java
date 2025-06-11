@@ -8,8 +8,8 @@ import net.minecraft.util.TranslatableOption;
  * Defines under what rule the player can change their flight speed.
  */
 public enum ChangeFlySpeedOnRule implements TranslatableOption, StringIdentifiable {
-    NON_SURVIVAL_LIKE_GAMEMODES(0, "non_survival_like_gamemodes", "survivalfly.options.change_fly_speed_on_rule.non_survival_like_gamemodes"),
-    ANY_GAMEMODE(1, "any_gamemode", "survivalfly.options.change_fly_speed_on_rule.any_gamemode"),
+    ANY_GAMEMODE(0, "any_gamemode", "survivalfly.options.change_fly_speed_on_rule.any_gamemode"),
+    NON_SURVIVAL_LIKE_GAMEMODES(1, "non_survival_like_gamemodes", "survivalfly.options.change_fly_speed_on_rule.non_survival_like_gamemodes"),
     SPECTATOR_MODE_ONLY(2, "spectator_only", "survivalfly.options.change_fly_speed_on_rule.spectator_mode_only");
 
     public static final Codec<ChangeFlySpeedOnRule> Codec = StringIdentifiable.createCodec(ChangeFlySpeedOnRule::values);

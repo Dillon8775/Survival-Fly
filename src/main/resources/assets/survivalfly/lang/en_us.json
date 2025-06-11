@@ -1,5 +1,6 @@
 {
   "survivalfly.title.options": "Survival Fly",
+
   "survivalfly.gui.options.tooltip": "Configure Survival Fly...",
   "survivalfly.gui.on": "ON",
   "survivalfly.gui.off": "OFF",
@@ -26,8 +27,7 @@
   "survivalfly.options.snap_flight_speed.tooltip": "Snaps the flight speed back to default (0.05) if the player gets close to the default value (so around 0.03 - 0.07 is when it will lock to 0.05).",
   "survivalfly.options.show_config_button": "Show Config Button",
   "survivalfly.options.show_config_button.tooltip": "Display the §7Survival Fly§r§f configuration button on the title screen and the pause screen.\n\n§e§lPlease Note:§r§f If you disable this option, you can only re-enable it if you go into the config file §o(located in .minecraft/config/survivalfly-config.json, §r§for if you have Mod Menu installed you can open this screen from there.).",
-  "survivalfly.change_flight_speed": "Change Flight Speed",
-  "survivalfly.current_flight_speed": "Flight Speed: %s",
+
   "survivalfly.enabled": "Enabled",
   "survivalfly.enabled.lowercase": "enabled",
   "survivalfly.disabled": "Disabled",
@@ -35,17 +35,24 @@
   "survivalfly.flight_changed.self": "%s flight.",
   "survivalfly.flight_changed": "Your flight has been %s.",
   "survivalfly.flight_changed.other": "%s flight for %s.",
+
+  "survivalfly.change_flight_speed": "Change Flight Speed",
+  "survivalfly.reset_flight_speed": "Reset Flight Speed",
+  "survivalfly.current_flight_speed": "Flight Speed: %s",
+  "survivalfly.flight_speed": "Your flight speed is %s",
+  "survivalfly.flight_speed.other": "%s's flight speed is %s",
+  "survivalfly.flight_speed_changed.self": "Set flight speed to %s",
+  "survivalfly.flight_speed_changed": "Your flight speed has been set to %s",
+  "survivalfly.flight_speed_changed.other": "Set %s's flight speed to %s",
   "survivalfly.cannot_change_flight_speed.self": "Cannot change flight speed because you don't have flying abilities.",
   "survivalfly.cannot_change_flight_speed.other": "Couldn't change flight speed for %s because they do not have flying abilities.",
-  "survivalfly.cannot_change_flight.self": "Cannot change flight ability because your gamemode is %s.",
-  "survivalfly.cannot_change_flight.other": "Couldn't change flight ability for %s because their gamemode is %s.",
-  "survivalfly.flight_speed_changed.self": "Set flight speed to %s.",
-  "survivalfly.flight_speed_changed": "Your flight speed has been set to %s.",
-  "survivalfly.flight_speed_changed.other": "Set %s's flight speed to %s.",
+
   "survivalfly.flight_status": "Your flight is currently %s.",
   "survivalfly.flight_status.other": "%s's flight is currently %s.",
   "survivalfly.flight_status.flying_gamemode": "You have flying abilities because your gamemode is %s.",
   "survivalfly.flight_status.flying_gamemode.other": "%s has flying abilities because their gamemode is %s.",
   "survivalfly.flight_is_the_same": "Your flight is already %s.",
-  "survivalfly.flight_is_the_same.other": "%s's flight is already %s."
+  "survivalfly.flight_is_the_same.other": "%s's flight is already %s.",
+  "survivalfly.cannot_change_flight.self": "Cannot change flight ability because your gamemode is %s.",
+  "survivalfly.cannot_change_flight.other": "Couldn't change flight ability for %s because their gamemode is %s."
 }

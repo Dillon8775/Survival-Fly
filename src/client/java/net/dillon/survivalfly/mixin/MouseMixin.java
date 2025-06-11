@@ -39,13 +39,10 @@ public class MouseMixin {
     }
 
     /**
-     * Tells the player their flight speed and snaps fly speed.
+     * Tells the player their flight speed.
      */
     @Inject(method = "onMouseScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;setFlySpeed(F)V"))
     private void sendMessage(long window, double horizontal, double vertical, CallbackInfo ci) {
-        if (SurvivalFly.options().snapFlightSpeed && this.client.player.getAbilities().getFlySpeed() >= 0.03 && this.client.player.getAbilities().getFlySpeed() <= 0.07) {
-            this.client.player.getAbilities().setFlySpeed(0.05F);
-        }
-        this.client.player.sendMessage(Text.translatable("survivalfly.current_flight_speed", Math.round(this.client.player.getAbilities().getFlySpeed() * 100.0D) / 100.0D).formatted(Formatting.GREEN), true);
+        this.client.player.sendMessage(Text.translatable("survivalfly.current_flight_speed", SurvivalFly.decimalAsPercentage(this.client.player.getAbilities().getFlySpeed())).formatted(Formatting.GREEN).append("%"), true);
     }
 }

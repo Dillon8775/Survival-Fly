@@ -13,6 +13,7 @@ import net.minecraft.client.util.InputUtil;
 public class ModKeybinds {
     public static final String SURVIVAL_FLY = "survivalfly.title.options";
 
+    public static final KeyBinding RESET_FLIGHT_SPEED = KeyBindingHelper.registerKeyBinding(new KeyBinding("survivalfly.reset_flight_speed", InputUtil.GLFW_KEY_B, SURVIVAL_FLY));
     public static final KeyBinding CHANGE_FLIGHT_SPEED = KeyBindingHelper.registerKeyBinding(new KeyBinding("survivalfly.change_flight_speed", InputUtil.GLFW_KEY_LEFT_ALT, SURVIVAL_FLY));
 
     /**

@@ -6,6 +6,7 @@
     "screen.GameMenuScreenMixin",
     "screen.ScreensMixin",
     "screen.TitleScreenMixin",
+    "MinecraftClientMixin",
     "MouseMixin"
   ],
   "injectors": {

@@ -26,6 +26,23 @@ public class FlightCommand {
         dispatcher.register(
                 CommandManager.literal("flight")
                         .requires(source -> source.hasPermissionLevel(SurvivalFly.options().permissionLevel.getId()))
+                        .executes(
+                                context -> execute(
+                                        context,
+                                        List.of(context.getSource().getPlayerOrThrow()),
+                                        !context.getSource().getPlayerOrThrow().getAbilities().allowFlying
+                                )
+                        )
+                        .then(
+                                CommandManager.argument("target", EntityArgumentType.player())
+                                        .executes(
+                                                context -> execute(
+                                                        context,
+                                                        List.of(context.getSource().getPlayerOrThrow()),
+                                                        !context.getSource().getPlayerOrThrow().getAbilities().allowFlying
+                                                )
+                                        )
+                        )
                         .then(
                                 CommandManager.literal("enable")
                                         .executes(context -> execute(

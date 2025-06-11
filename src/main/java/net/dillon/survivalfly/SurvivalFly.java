@@ -63,4 +63,18 @@ public class SurvivalFly implements ModInitializer {
 	protected static Text statusText(ServerPlayerEntity player, boolean isFirstLetterLowercase) {
 		return isFirstLetterLowercase ? player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled.lowercase").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled.lowercase").formatted(Formatting.RED) : player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled").formatted(Formatting.RED);
 	}
+
+	/**
+	 * Returns the flight speed in decimal form.
+	 */
+	public static float percentageAsDecimal(float speed) {
+		return (speed / 100.0F) * 0.2F;
+	}
+
+	/**
+	 * Returns the flight speed in percentage form.
+	 */
+	public static int decimalAsPercentage(float speed) {
+		return Math.round((speed / 0.2F) * 100);
+	}
 }

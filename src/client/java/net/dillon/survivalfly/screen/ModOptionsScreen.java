@@ -1,7 +1,9 @@
 package net.dillon.survivalfly.screen;
 
+import net.dillon.survivalfly.SurvivalFly;
 import net.dillon.survivalfly.keybind.ModKeybinds;
 import net.dillon.survivalfly.option.ModListOptions;
+import net.dillon.survivalfly.option.ModOptions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -25,7 +27,6 @@ public class ModOptionsScreen extends GameOptionsScreen {
      */
     private static SimpleOption<?>[] options() {
         return new SimpleOption<?>[]{
-                ModListOptions.SNAP_FLIGHT_SPEED,
                 ModListOptions.SHOW_CONFIG_BUTTON
         };
     }
@@ -36,6 +37,13 @@ public class ModOptionsScreen extends GameOptionsScreen {
         this.body.addSingleOptionEntry(ModListOptions.PERMISSION_LEVEL);
         this.body.addSingleOptionEntry(ModListOptions.CHANGE_FLY_SPEED_ON_RULE);
         this.body.addAll(options());
+    }
+
+    @Override
+    public void close() {
+        ModOptions.saveConfig();
+        SurvivalFly.info("Flushed changes.");
+        super.close();
     }
 
     @Override
