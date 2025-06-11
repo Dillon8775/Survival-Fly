@@ -43,6 +43,9 @@ public class ModListOptions {
             SurvivalFly.options().changeFlySpeedOnRule,
             value -> SurvivalFly.options().changeFlySpeedOnRule = value);
 
+    public static final SimpleOption<Boolean> SNAP_FLIGHT_SPEED = new SimpleOption<>("survivalfly.options.snap_flight_speed", SimpleOption.constantTooltip(Text.translatable("survivalfly.options.snap_flight_speed.tooltip")),
+            (optionText, value) -> !value ? ModTexts.OFF : ModTexts.ON, SimpleOption.BOOLEAN, SurvivalFly.options().snapFlightSpeed, value -> SurvivalFly.options().snapFlightSpeed = value);
+
     public static final SimpleOption<Boolean> SHOW_CONFIG_BUTTON = new SimpleOption<>("survivalfly.options.show_config_button", SimpleOption.constantTooltip(Text.translatable("survivalfly.options.show_config_button.tooltip")),
             (optionText, value) -> !value ? ModTexts.OFF : ModTexts.ON, SimpleOption.BOOLEAN, SurvivalFly.options().showConfigButton, value -> SurvivalFly.options().showConfigButton = value);
 }

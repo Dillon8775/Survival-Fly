@@ -15,6 +15,7 @@ public class ModOptions {
 
     public PermissionLevel permissionLevel = PermissionLevel.REGULAR;
     public ChangeFlySpeedOnRule changeFlySpeedOnRule = ChangeFlySpeedOnRule.NON_SURVIVAL_LIKE_GAMEMODES;
+    public boolean snapFlightSpeed = true;
     public boolean showConfigButton = true;
 
     /**
