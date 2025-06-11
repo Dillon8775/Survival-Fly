@@ -1,9 +1,12 @@
 {
   "required": true,
-  "package": "net.dillon.survivalfly.mixin.screen",
+  "package": "net.dillon.survivalfly.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ScreensMixin"
+    "screen.GameMenuScreenMixin",
+    "screen.ScreensMixin",
+    "screen.TitleScreenMixin",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

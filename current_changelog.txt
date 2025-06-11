@@ -1,4 +1,4 @@
-- Mod icon!
-- Added support for Mod Menu.
-- Fixed inconsistency when switching between flying gamemodes and non-flying gamemodes.
-- Changed license (All rights reserved).
+- Added /flightspeed command, which allows the player to change their flight speed!
+- The player can also change their flight speed by using ALT + SCROLL on any gamemode (this is configurable, and by default is set only to creative and spectator mode).
+- Added keybind for which key needs to be pressed in order to change flight speed.
+- Added button to configure survival fly.

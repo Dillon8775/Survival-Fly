@@ -1,5 +1,6 @@
 package net.dillon.survivalfly;
 
+import net.dillon.survivalfly.keybind.ModKeybinds;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -11,6 +12,7 @@ public class SurvivalFlyClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		ModKeybinds.init();
 		SurvivalFly.info("Initialized survival fly keybinds!");
 	}
 }

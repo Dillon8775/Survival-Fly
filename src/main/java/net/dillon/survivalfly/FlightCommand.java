@@ -64,19 +64,19 @@ public class FlightCommand {
     /**
      * Sends messages to chat based on the player's flight ability.
      */
-    private static void sendFeedback(ServerCommandSource source, ServerPlayerEntity player, boolean bl) {
+    private static void sendFeedback(ServerCommandSource source, ServerPlayerEntity player, boolean success) {
         if (source.getEntity() == player) {
-            if (!bl) {
+            if (success) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.self", SurvivalFly.statusText(player, false)), true);
             } else {
                 source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().asString()), true);
             }
         } else {
-            if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && !bl) {
-                player.sendMessage(Text.translatable("survivalfly.flight_changed", SurvivalFly.statusText(player, false)));
+            if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && success) {
+                player.sendMessage(Text.translatable("survivalfly.flight_changed", SurvivalFly.statusText(player, true)));
             }
 
-            if (!bl) {
+            if (success) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_changed.other", SurvivalFly.statusText(player, false), player.getDisplayName()), true);
             } else {
                 source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.other", player.getDisplayName(), player.interactionManager.getGameMode().asString()), true);
@@ -99,7 +99,8 @@ public class FlightCommand {
                         player.getAbilities().flying = false;
                     }
                     player.sendAbilitiesUpdate();
-                    sendFeedback(context.getSource(), player, false);
+                    sendFeedback(context.getSource(), player, true);
+                    i++;
                 } else {
                     if (context.getSource().getEntity() == player) {
                         context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_is_the_same", SurvivalFly.statusText(player, true)), true);
@@ -108,9 +109,8 @@ public class FlightCommand {
                     }
                 }
             } else {
-                sendFeedback(context.getSource(), player, true);
+                sendFeedback(context.getSource(), player, false);
             }
-            i++;
         }
 
         return i;

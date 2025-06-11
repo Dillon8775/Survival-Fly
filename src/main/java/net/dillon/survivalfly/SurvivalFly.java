@@ -28,6 +28,9 @@ public class SurvivalFly implements ModInitializer {
 			FlightCommand.register(commandDispatcher);
 		});
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+			FlightSpeedCommand.register(commandDispatcher);
+		});
+		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
 			FlightStatusCommand.register(commandDispatcher);
 		});
 		info("Initialized Survival Fly mod successfully!");
@@ -57,7 +60,7 @@ public class SurvivalFly implements ModInitializer {
 	/**
 	 * Returns enabled/disabled text.
 	 */
-	public static Text statusText(ServerPlayerEntity player, boolean isFirstLetterLowercase) {
+	protected static Text statusText(ServerPlayerEntity player, boolean isFirstLetterLowercase) {
 		return isFirstLetterLowercase ? player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled.lowercase").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled.lowercase").formatted(Formatting.RED) : player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled").formatted(Formatting.RED);
 	}
 }

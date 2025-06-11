@@ -15,7 +15,7 @@ import net.minecraft.world.GameMode;
 public class FlightStatusCommand {
 
     /**
-     * Registers the flight status command.
+     * Registers the {@code /flightstatus} command.
      */
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -36,22 +36,33 @@ public class FlightStatusCommand {
     }
 
     /**
+     * Returns the feedback text based on if the command succeeded or not.
+     */
+    private static void sendFeedback(ServerCommandSource source, ServerPlayerEntity player, boolean success) {
+        if (source.getEntity() == player) {
+            if (success) {
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_status", SurvivalFly.statusText(player, true)), true);
+            } else {
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", player.getDisplayName(), player.interactionManager.getGameMode().asString()), true);
+            }
+        } else {
+            if (success) {
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_status.other", player.getDisplayName(), SurvivalFly.statusText(player, true)), true);
+            } else {
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode.other", player.getDisplayName(), player.interactionManager.getGameMode().asString()), true);
+            }
+        }
+    }
+
+    /**
      * Executes the command.
      */
     private static int execute(CommandContext<ServerCommandSource> context, ServerPlayerEntity target) {
         if (target.interactionManager.getGameMode().isCreative() || target.interactionManager.getGameMode() == GameMode.SPECTATOR) {
-            if (context.getSource().getEntity() == target) {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", target.interactionManager.getGameMode().asString()), true);
-            } else {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode.other", target.getDisplayName(), target.interactionManager.getGameMode().asString()), true);
-            }
+            sendFeedback(context.getSource(), target, false);
             return 0;
         } else {
-            if (context.getSource().getEntity() == target) {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status", SurvivalFly.statusText(target, true)), true);
-            } else {
-                context.getSource().sendFeedback(() -> Text.translatable("survivalfly.flight_status.other", target.getDisplayName(), SurvivalFly.statusText(target, true)), true);
-            }
+            sendFeedback(context.getSource(), target, true);
             return 1;
         }
     }
