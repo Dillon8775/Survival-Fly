@@ -33,7 +33,7 @@ public class GameMenuScreenMixin extends Screen {
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
         if (SurvivalFly.options().showConfigButton && this.showMenu) {
-            this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 106, this.height / 4 + 120 - 16));
+            this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 106, this.height / 4 + 48 - 16));
         }
     }
 
