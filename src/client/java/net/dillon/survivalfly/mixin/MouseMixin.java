@@ -2,14 +2,23 @@ package net.dillon.survivalfly.mixin;
 
 import net.dillon.survivalfly.SurvivalFly;
 import net.dillon.survivalfly.keybind.ModKeybinds;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Mouse.class)
 public class MouseMixin {
+    @Shadow @Final
+    private MinecraftClient client;
 
     /**
      * Allows the player to use {@code CTRL + SCROLL} on any gamemode to change flight speed.
@@ -27,5 +36,13 @@ public class MouseMixin {
         } else {
             return clientPlayer.isSpectator();
         }
+    }
+
+    /**
+     * Tells the player their flight speed.
+     */
+    @Inject(method = "onMouseScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerAbilities;setFlySpeed(F)V"))
+    private void sendMessage(long window, double horizontal, double vertical, CallbackInfo ci) {
+        this.client.player.sendMessage(Text.translatable("survivalfly.current_flight_speed", Math.round(this.client.player.getAbilities().getFlySpeed() * 10.0D) / 10.0D).formatted(Formatting.GREEN), true);
     }
 }

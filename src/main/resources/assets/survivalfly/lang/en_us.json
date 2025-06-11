@@ -25,6 +25,7 @@
   "survivalfly.options.show_config_button": "Show Config Button",
   "survivalfly.options.show_config_button.tooltip": "Display the §7Survival Fly§r§f configuration button on the title screen and the pause screen.\n\n§e§lPlease Note:§r§f If you disable this option, you can only re-enable it if you go into the config file §o(located in .minecraft/config/survivalfly-config.json, §r§for if you have Mod Menu installed you can open this screen from there.).",
   "survivalfly.change_flight_speed": "Change Flight Speed",
+  "survivalfly.current_flight_speed": "Flight Speed: %s",
   "survivalfly.enabled": "Enabled",
   "survivalfly.enabled.lowercase": "enabled",
   "survivalfly.disabled": "Disabled",
