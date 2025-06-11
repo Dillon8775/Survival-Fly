@@ -23,6 +23,22 @@ public class FlightSpeedCommand {
                 CommandManager.literal("flightspeed")
                         .requires(source -> source.hasPermissionLevel(SurvivalFly.options().permissionLevel.getId()))
                         .then(
+                                CommandManager.literal("reset")
+                                        .executes(context -> execute(
+                                                context,
+                                                List.of(context.getSource().getPlayerOrThrow()),
+                                                0.05F
+                                        ))
+                                        .then(
+                                                CommandManager.argument("target", EntityArgumentType.players())
+                                                        .executes(context -> execute(
+                                                                context,
+                                                                EntityArgumentType.getPlayers(context, "target"),
+                                                                0.05F
+                                                        ))
+                                        )
+                        )
+                        .then(
                                 CommandManager.argument("speed", FloatArgumentType.floatArg(0.0F, 0.2F))
                                         .executes(context -> execute(
                                                 context,

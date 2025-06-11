@@ -37,7 +37,8 @@ public class FlightCommand {
                                                 CommandManager.argument("target", EntityArgumentType.players())
                                                         .executes(
                                                                 context -> execute(
-                                                                        context, EntityArgumentType.getPlayers(context, "target"), true
+                                                                        context,
+                                                                        EntityArgumentType.getPlayers(context, "target"), true
                                                                 )
                                                         )
                                         )

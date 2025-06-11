@@ -23,13 +23,15 @@ public class FlightStatusCommand {
                         .requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(0))
                         .executes(
                                 context -> execute(
-                                        context, context.getSource().getPlayerOrThrow()
+                                        context,
+                                        context.getSource().getPlayerOrThrow()
                                 )
                         )
                         .then(
                                 CommandManager.argument("target", EntityArgumentType.player())
                                         .executes(context -> execute(
-                                                context, EntityArgumentType.getPlayer(context, "target")
+                                                context,
+                                                EntityArgumentType.getPlayer(context, "target")
                                         ))
                         )
         );
