@@ -19,7 +19,7 @@
 
 # _/flightspeed command!_
 #### Changes the flight speed of the target player.
-### You can also use _ALT + SCROLL_ to increase/decrease your flight speed.
+### You can also use _ALT + SCROLL_ to increase/decrease your flight speed, and press B to reset your flight speed.
 ### Command Usages:
 #### /flightspeed _set_ _**speed%**_ _*'target(s)'*_
 #### /flightspeed _get_ _*'target'*_
