@@ -3,4 +3,5 @@
 - Added keybind for which key needs to be pressed in order to change flight speed.
 - Added keybind to reset flight speed.
 - Player can now just execute /flight and it will set their flight ability to whatever the opposite of their current flying ability is.
+- Now only compatible with Minecraft 1.21.2 - 1.21.5.
 - Added button to configure survival fly.
