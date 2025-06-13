@@ -40,4 +40,4 @@ Command Usage: /flightstatus _*'target'*_
 
 ---
 
-#### Created by Dillon8775.
+Created by Dillon8775.
