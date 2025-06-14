@@ -2,8 +2,11 @@ package net.dillon.survivalfly;
 
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.PermissionLevel;
+import net.dillon.survivalfly.payload.UpdateFlightSpeedC2SPayload;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -15,6 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SurvivalFly implements ModInitializer {
 	private static final Logger LOGGER = LoggerFactory.getLogger("Survival Fly");
+	public static final float DEFAULT_FLIGHT_SPEED = 0.05F;
 
 	@Override
 	public void onInitialize() {
@@ -24,6 +28,38 @@ public class SurvivalFly implements ModInitializer {
 			ModOptions.saveConfig();
 		}
 		ModOptions.loadConfig();
+
+		registerPayloads();
+		registerCommands();
+
+		info("Initialized Survival Fly mod successfully!");
+	}
+
+	/**
+	 * Registers the {@code client-to-server} flight speed change payload.
+	 */
+	private static void registerPayloads() {
+		PayloadTypeRegistry.playC2S().register(
+				UpdateFlightSpeedC2SPayload.PAYLOAD_ID,
+				UpdateFlightSpeedC2SPayload.CODEC
+		);
+
+		ServerPlayNetworking.registerGlobalReceiver(
+				UpdateFlightSpeedC2SPayload.PAYLOAD_ID,
+				(payload, context) -> {
+					var player = context.player();
+					float speed = payload.speed();
+
+					player.getAbilities().setFlySpeed(speed);
+					player.sendAbilitiesUpdate();
+				}
+		);
+	}
+
+	/**
+	 * Registers all {@code Survival Fly} commands.
+	 */
+	private static void registerCommands() {
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
 			FlightCommand.register(commandDispatcher);
 		});
@@ -33,7 +69,6 @@ public class SurvivalFly implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
 			FlightStatusCommand.register(commandDispatcher);
 		});
-		info("Initialized Survival Fly mod successfully!");
 	}
 
 	/**

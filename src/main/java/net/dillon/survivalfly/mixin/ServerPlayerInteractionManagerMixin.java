@@ -18,6 +18,7 @@ public class ServerPlayerInteractionManagerMixin {
 
     /**
      * Fixes flying ability inconsistency.
+     * <p>Ex. if you switch from creative -> survival and your flight was previously enabled with {@code /flight}, flight remains on. Otherwise flight disables.</p>
      */
     @Inject(method = "changeGameMode", at = @At("TAIL"))
     private void fixFlyingInconsistency(GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {

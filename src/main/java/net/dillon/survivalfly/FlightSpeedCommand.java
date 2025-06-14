@@ -13,6 +13,8 @@ import net.minecraft.world.GameRules;
 import java.util.Collection;
 import java.util.List;
 
+import static net.dillon.survivalfly.SurvivalFly.DEFAULT_FLIGHT_SPEED;
+
 public class FlightSpeedCommand {
     private static final String SPEED_ARGUMENT_NAME = "speed (as percentage)";
 
@@ -62,14 +64,14 @@ public class FlightSpeedCommand {
                                         .executes(context -> execute(
                                                 context,
                                                 List.of(context.getSource().getPlayerOrThrow()),
-                                                0.05F
+                                                DEFAULT_FLIGHT_SPEED
                                         ))
                                         .then(
                                                 CommandManager.argument("target", EntityArgumentType.players())
                                                         .executes(context -> execute(
                                                                 context,
                                                                 EntityArgumentType.getPlayers(context, "target"),
-                                                                0.05F
+                                                                DEFAULT_FLIGHT_SPEED
                                                         ))
                                         )
                         )

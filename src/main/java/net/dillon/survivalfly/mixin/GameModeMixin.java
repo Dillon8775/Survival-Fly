@@ -30,6 +30,9 @@ public class GameModeMixin {
         abilities.flying = value;
     }
 
+    /**
+     * @return {@code true} if gamemode doesn't equal {@code creative} or {@code spectator.}
+     */
     @Unique
     private boolean shouldCancelElseBlock(boolean value) {
         GameMode self = (GameMode) (Object) this;
