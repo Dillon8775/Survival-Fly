@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.impl;
+package net.dillon.survivalfly.screen.impl;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

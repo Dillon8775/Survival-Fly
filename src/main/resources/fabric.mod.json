@@ -16,13 +16,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.dillon.survivalfly.SurvivalFly"
+      "net.dillon.survivalfly.main.SurvivalFly"
     ],
     "client": [
-      "net.dillon.survivalfly.SurvivalFlyClient"
+      "net.dillon.survivalfly.main.SurvivalFlyClient"
     ],
     "modmenu": [
-      "net.dillon.survivalfly.impl.ModMenuImpl"
+      "net.dillon.survivalfly.screen.impl.ModMenuImpl"
     ]
   },
   "mixins": [

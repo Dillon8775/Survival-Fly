@@ -1,7 +1,8 @@
-package net.dillon.survivalfly;
+package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;

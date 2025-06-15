@@ -1,7 +1,8 @@
-package net.dillon.survivalfly;
+package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -45,7 +46,7 @@ public class FlightStatusCommand {
             if (success) {
                 source.sendFeedback(() -> Text.translatable("survivalfly.flight_status", SurvivalFly.statusText(player, true)), true);
             } else {
-                source.sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", player.getDisplayName(), player.interactionManager.getGameMode().asString()), true);
+                source.sendFeedback(() -> Text.translatable("survivalfly.flight_status.flying_gamemode", player.interactionManager.getGameMode().asString()), true);
             }
         } else {
             if (success) {

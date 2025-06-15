@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.mixin.screen;
 
-import net.dillon.survivalfly.SurvivalFly;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.util.ButtonUtil;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;

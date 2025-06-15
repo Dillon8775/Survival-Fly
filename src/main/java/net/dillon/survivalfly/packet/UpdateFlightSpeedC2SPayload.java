@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.payload;
+package net.dillon.survivalfly.packet;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;

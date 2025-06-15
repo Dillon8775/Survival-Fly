@@ -1,8 +1,9 @@
-package net.dillon.survivalfly;
+package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -13,7 +14,7 @@ import net.minecraft.world.GameRules;
 import java.util.Collection;
 import java.util.List;
 
-import static net.dillon.survivalfly.SurvivalFly.DEFAULT_FLIGHT_SPEED;
+import static net.dillon.survivalfly.main.SurvivalFly.DEFAULT_FLIGHT_SPEED;
 
 public class FlightSpeedCommand {
     private static final String SPEED_ARGUMENT_NAME = "speed (as percentage)";

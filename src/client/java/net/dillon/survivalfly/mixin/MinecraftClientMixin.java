@@ -1,7 +1,7 @@
 package net.dillon.survivalfly.mixin;
 
 import net.dillon.survivalfly.keybind.ModKeybinds;
-import net.dillon.survivalfly.payload.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.dillon.survivalfly.SurvivalFly.DEFAULT_FLIGHT_SPEED;
+import static net.dillon.survivalfly.main.SurvivalFly.DEFAULT_FLIGHT_SPEED;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {

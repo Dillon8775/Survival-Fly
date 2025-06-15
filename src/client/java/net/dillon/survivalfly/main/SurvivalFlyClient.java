@@ -1,4 +1,4 @@
-package net.dillon.survivalfly;
+package net.dillon.survivalfly.main;
 
 import net.dillon.survivalfly.keybind.ModKeybinds;
 import net.fabricmc.api.ClientModInitializer;

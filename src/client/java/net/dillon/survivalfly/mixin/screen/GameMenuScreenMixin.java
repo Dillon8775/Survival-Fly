@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.mixin.screen;
 
-import net.dillon.survivalfly.SurvivalFly;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.util.ButtonUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

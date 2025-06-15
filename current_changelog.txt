@@ -1,2 +1,3 @@
 - Fixed flight speed scrolling permissions.
 - Flight speed no longer resets when switching gamemodes.
+- Bug fixes and optimizations.

@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.option;
 
-import net.dillon.survivalfly.SurvivalFly;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.util.ModTexts;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.option.SimpleOption;

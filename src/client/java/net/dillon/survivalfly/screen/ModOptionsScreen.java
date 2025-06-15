@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.screen;
 
-import net.dillon.survivalfly.SurvivalFly;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.keybind.ModKeybinds;
 import net.dillon.survivalfly.option.ModListOptions;
 import net.dillon.survivalfly.option.ModOptions;

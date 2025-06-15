@@ -1,8 +1,11 @@
-package net.dillon.survivalfly;
+package net.dillon.survivalfly.main;
 
+import net.dillon.survivalfly.command.FlightCommand;
+import net.dillon.survivalfly.command.FlightSpeedCommand;
+import net.dillon.survivalfly.command.FlightStatusCommand;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.PermissionLevel;
-import net.dillon.survivalfly.payload.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -95,7 +98,7 @@ public class SurvivalFly implements ModInitializer {
 	/**
 	 * Returns enabled/disabled text.
 	 */
-	protected static Text statusText(ServerPlayerEntity player, boolean isFirstLetterLowercase) {
+	public static Text statusText(ServerPlayerEntity player, boolean isFirstLetterLowercase) {
 		return isFirstLetterLowercase ? player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled.lowercase").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled.lowercase").formatted(Formatting.RED) : player.getAbilities().allowFlying ? Text.translatable("survivalfly.enabled").formatted(Formatting.GREEN) : Text.translatable("survivalfly.disabled").formatted(Formatting.RED);
 	}
 
