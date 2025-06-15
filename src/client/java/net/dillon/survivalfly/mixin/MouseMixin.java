@@ -1,7 +1,7 @@
 package net.dillon.survivalfly.mixin;
 
-import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.keybind.ModKeybinds;
+import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;

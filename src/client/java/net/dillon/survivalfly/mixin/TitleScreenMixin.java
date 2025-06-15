@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.mixin.screen;
+package net.dillon.survivalfly.mixin;
 
 import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.util.ButtonUtil;

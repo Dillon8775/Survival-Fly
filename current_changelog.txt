@@ -1,3 +1,4 @@
 - Fixed flight speed scrolling permissions.
 - Flight speed no longer resets when switching gamemodes.
+- Removed open config hotkey.
 - Bug fixes and optimizations.
