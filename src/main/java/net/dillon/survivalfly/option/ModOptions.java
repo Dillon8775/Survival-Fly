@@ -1,14 +1,16 @@
 package net.dillon.survivalfly.option;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import static net.fabricmc.fabric.impl.resource.loader.ModResourcePackUtil.GSON;
-
 public class ModOptions {
+    private static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
     public static final String CONFIG = "survivalfly-config.json";
     private static File file;
     public static ModOptions OPTIONS = getConfig();
