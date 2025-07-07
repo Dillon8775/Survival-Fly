@@ -4,7 +4,6 @@
   "survivalfly.gui.options.tooltip": "Configure Survival Fly...",
   "survivalfly.gui.on": "ON",
   "survivalfly.gui.off": "OFF",
-  "survivalfly.options.open_config_screen": "Open Config Screen",
   "survivalfly.options.permission_level": "Permission Level",
   "survivalfly.options.permission_level.regular": "Regular",
   "survivalfly.options.permission_level.moderator": "Moderator",
