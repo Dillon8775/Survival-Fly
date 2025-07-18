@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "survivalfly",
-  "version": "1.2.1+mc1.21.6",
+  "version": "1.2.2+mc1.21.6",
   "name": "Survival Fly",
   "description": "Adds a /flight command for survival players.",
   "authors": [
