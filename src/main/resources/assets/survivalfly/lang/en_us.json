@@ -25,7 +25,7 @@
   "survivalfly.options.snap_flight_speed": "Snap Flight Speed",
   "survivalfly.options.snap_flight_speed.tooltip": "Snaps the flight speed back to default (0.05) if the player gets close to the default value (so around 0.03 - 0.07 is when it will lock to 0.05).",
   "survivalfly.options.show_config_button": "Show Config Button",
-  "survivalfly.options.show_config_button.tooltip": "Display the §7Survival Fly§r§f configuration button on the title screen and the pause screen.\n\n§e§lPlease Note:§r§f If you disable this option, you can only re-enable it if you go into the config file §o(located in .minecraft/config/survivalfly-config.json, §r§for if you have Mod Menu installed you can open this screen from there.).",
+  "survivalfly.options.show_config_button.tooltip": "Display the §7Survival Fly§r§f configuration button on the pause screen.",
 
   "survivalfly.enabled": "Enabled",
   "survivalfly.enabled.lowercase": "enabled",

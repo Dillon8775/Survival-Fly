@@ -1,1 +1,2 @@
-- ACTUALLY Removed open config hotkey.
+- Added support for the Flashback mod; moved the configuration button on the game menu screen up if Flashback is loaded to prevent overlapping.
+- The "Show Config Button" option now only affects the button displaying on the pause screen; the config button always displays on the title screen.

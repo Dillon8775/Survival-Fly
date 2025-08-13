@@ -1,6 +1,5 @@
 package net.dillon.survivalfly.mixin;
 
-import net.dillon.survivalfly.main.SurvivalFly;
 import net.dillon.survivalfly.util.ButtonUtil;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -24,15 +23,11 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
-        if (SurvivalFly.options().showConfigButton) {
-            this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 104, this.height / 4 + 156));
-        }
+        this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 104, this.height / 4 + 156));
     }
 
     @Inject(method = "render", at = @At("TAIL"))
     private void renderTooltips(DrawContext context, int mouseX, int mouseY, float deltaTicks, CallbackInfo ci) {
-        if (SurvivalFly.options().showConfigButton) {
-            ButtonUtil.drawTooltipAndTexture(context, this.textRenderer, this.settingsButton, mouseX, mouseY);
-        }
+        ButtonUtil.drawTooltipAndTexture(context, this.textRenderer, this.settingsButton, mouseX, mouseY);
     }
 }

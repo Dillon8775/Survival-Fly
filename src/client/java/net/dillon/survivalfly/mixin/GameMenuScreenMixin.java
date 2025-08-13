@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.dillon.survivalfly.main.SurvivalFlyClient.isFlashbackLoaded;
+
 @Environment(EnvType.CLIENT)
 @Mixin(GameMenuScreen.class)
 public class GameMenuScreenMixin extends Screen {
@@ -33,7 +35,7 @@ public class GameMenuScreenMixin extends Screen {
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
         if (SurvivalFly.options().showConfigButton && this.showMenu) {
-            this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 106, this.height / 4 + 48 - 16));
+            this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 106, isFlashbackLoaded() ? this.height / 4 + 24 - 16 : this.height / 4 + 48 - 16));
         }
     }
 
