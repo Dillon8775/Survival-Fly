@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "survivalfly",
-  "version": "1.2.3+mc1.21.6",
+  "version": "1.2.3+mc1.21.9x",
   "name": "Survival Fly",
   "description": "Adds a /flight command for survival players.",
   "authors": [
@@ -33,8 +33,8 @@
     }
   ],
   "depends": {
-    "fabricloader": ">=0.16.14",
-    "minecraft": ">=1.21.6",
+    "fabricloader": ">=0.17.2",
+    "minecraft": ">=1.21.9",
     "java": ">=21",
     "fabric-api": "*"
   },

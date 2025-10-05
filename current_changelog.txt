@@ -1,2 +1,2 @@
-- Added support for the Flashback mod; moved the configuration button on the game menu screen up if Flashback is loaded to prevent overlapping.
-- The "Show Config Button" option now only affects the button displaying on the pause screen; the config button always displays on the title screen.
+- Updated to 1.21.9.
+- Now requires Fabric Loader version 0.17.2 or greater to load.

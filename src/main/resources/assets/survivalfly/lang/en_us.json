@@ -35,6 +35,7 @@
   "survivalfly.flight_changed": "Your flight has been %s.",
   "survivalfly.flight_changed.other": "%s flight for %s.",
 
+  "key.category.survivalfly.survivalfly": "Survival Fly",
   "survivalfly.change_flight_speed": "Change Flight Speed",
   "survivalfly.reset_flight_speed": "Reset Flight Speed",
   "survivalfly.current_flight_speed": "Flight Speed: %s",

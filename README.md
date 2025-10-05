@@ -2,12 +2,12 @@
 
 # Adds a **_/flight_** command for survival players.
 
-### Currently compatible with Minecraft versions **1.21.2-1.21.5.**
+### Currently compatible with Minecraft versions ***1.21.6-1.21.9.***
 
 ---
 
 # _/flight command!_
-#### By default, _anyone_ can use this command. You can change this if you'd like.
+#### By default, _anyone_ can use this command. You can change this if you'd like by navigating to the configuration menu, located on the title screen / pause menu.
 ### Command Usages:
 #### /flight
 #### /flight _**enable**_/_**disable**_ _*'target(s)'*_
