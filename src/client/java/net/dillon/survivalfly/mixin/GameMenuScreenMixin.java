@@ -42,7 +42,7 @@ public class GameMenuScreenMixin extends Screen {
     @Inject(method = "render", at = @At("TAIL"))
     private void renderTooltips(DrawContext context, int mouseX, int mouseY, float deltaTicks, CallbackInfo ci) {
         if (SurvivalFly.options().showConfigButton && this.showMenu) {
-            ButtonUtil.drawTooltipAndTexture(context, this.textRenderer, this.settingsButton, mouseX, mouseY);
+            ButtonUtil.drawTooltipAndTexture(context, this.textRenderer, this.settingsButton, mouseX, mouseY, null);
         }
     }
 }
