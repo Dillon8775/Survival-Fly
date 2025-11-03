@@ -4,9 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "GameMenuScreenMixin",
-    "TitleScreenMixin",
     "MinecraftClientMixin",
-    "MouseMixin"
+    "MouseMixin",
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
