@@ -1,8 +1,24 @@
-# ![Mod requires Fabric API.](https://cdn.modrinth.com/data/cached_images/deafc20c4eb1ab02e3f8ac364a61aa78e90ee056.png)
-
 # Adds a **_/flight_** command for survival players.
 
-### Currently compatible with Minecraft versions ***1.21.6-1.21.9.***
+###
+
+<a href="https://files.minecraftforge.net/" target="_blank">
+  <img src="https://i.imgur.com/gbZFxKU.png" width="427" height="115" alt="Compatible with Forge">
+</a>
+
+####
+
+<a href="https://fabricmc.net/" target="_blank">
+  <img src="https://i.imgur.com/vIbuVv8.png" width="433" height="149" alt="Compatible with Forge">
+</a>
+
+####
+
+<a href="https://modrinth.com/mod/fabric-api/versions" target="_blank">
+  <img src="https://i.imgur.com/yFnszAw.png" width="286" height="96" alt="Compatible with Forge">
+</a>
+
+### Please report *any* bugs you may find <a href="https://github.com/Dillon8775/Survival-Fly/issues" target="_blank">here.</a>
 
 ---
 
