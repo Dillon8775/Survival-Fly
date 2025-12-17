@@ -11,6 +11,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.command.permission.PermissionCheck;
 import net.minecraft.server.command.CommandManager;
@@ -64,7 +65,13 @@ public class SurvivalFly implements ModInitializer {
 
 		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
 			newPlayer.getAbilities().allowFlying = ((PlayerAbilitiesExtension)oldPlayer.getAbilities()).hasEverEnabledFlight();
+            newPlayer.getAbilities().setFlySpeed(oldPlayer.getAbilities().getFlySpeed());
 			newPlayer.sendAbilitiesUpdate();
+		});
+
+		ServerPlayConnectionEvents.JOIN.register((serverPlayNetworkHandler, packetSender, minecraftServer) -> {
+			ServerPlayerEntity serverPlayer = serverPlayNetworkHandler.player;
+			((PlayerAbilitiesExtension)serverPlayer.getAbilities()).setEverEnabledFlight(serverPlayer.getAbilities().allowFlying);
 		});
 	}
 
