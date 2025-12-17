@@ -6,10 +6,14 @@ import net.dillon.survivalfly.command.FlightStatusCommand;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.PermissionLevel;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.command.permission.PermissionCheck;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -57,6 +61,22 @@ public class SurvivalFly implements ModInitializer {
 					player.sendAbilitiesUpdate();
 				}
 		);
+
+		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+			newPlayer.getAbilities().allowFlying = ((PlayerAbilitiesExtension)oldPlayer.getAbilities()).hasEverEnabledFlight();
+			newPlayer.sendAbilitiesUpdate();
+		});
+	}
+
+	/**
+	 * @return the permission level required to run any /flight commands.
+	 * @since 1.21.11
+	 */
+	public static PermissionCheck getPermissionLevel(int level) {
+		return level == 4 ? CommandManager.OWNERS_CHECK :
+				level == 3 ? CommandManager.ADMINS_CHECK :
+						level == 2 ? CommandManager.GAMEMASTERS_CHECK :
+								level == 1 ? CommandManager.MODERATORS_CHECK : CommandManager.ALWAYS_PASS_CHECK;
 	}
 
 	/**

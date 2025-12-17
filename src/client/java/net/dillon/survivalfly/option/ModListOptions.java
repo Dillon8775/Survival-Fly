@@ -24,7 +24,7 @@ public class ModListOptions {
                     case OWNER -> Tooltip.of(Text.translatable("survivalfly.options.permission_level.owner.tooltip"));
                 };
             },
-            SimpleOption.enumValueText(),
+            (optionText, value) -> value.getText(),
             new SimpleOption.PotentialValuesBasedCallbacks<>(Arrays.asList(PermissionLevel.values()), PermissionLevel.Codec),
             SurvivalFly.options().permissionLevel,
             value -> SurvivalFly.options().permissionLevel = value);
@@ -38,7 +38,7 @@ public class ModListOptions {
                     case SPECTATOR_MODE_ONLY -> Tooltip.of(Text.translatable("survivalfly.options.change_fly_speed_on_rule.spectator_mode_only.tooltip"));
                 };
             },
-            SimpleOption.enumValueText(),
+            (optionText, value) -> value.getText(),
             new SimpleOption.PotentialValuesBasedCallbacks<>(Arrays.asList(ChangeFlySpeedOnRule.values()), ChangeFlySpeedOnRule.Codec),
             SurvivalFly.options().changeFlySpeedOnRule,
             value -> SurvivalFly.options().changeFlySpeedOnRule = value);

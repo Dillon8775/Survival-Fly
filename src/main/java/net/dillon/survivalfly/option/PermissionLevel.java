@@ -1,10 +1,10 @@
 package net.dillon.survivalfly.option;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.TranslatableOption;
 
-public enum PermissionLevel implements TranslatableOption, StringIdentifiable {
+public enum PermissionLevel implements StringIdentifiable {
     REGULAR(0, "regular", "survivalfly.options.permission_level.regular"),
     MODERATOR(1, "moderator", "survivalfly.options.permission_level.moderator"),
     GAMEMASTER(2, "gamemaster", "survivalfly.options.permission_level.gamemaster"),
@@ -14,19 +14,19 @@ public enum PermissionLevel implements TranslatableOption, StringIdentifiable {
     public static final Codec<PermissionLevel> Codec = StringIdentifiable.createCodec(PermissionLevel::values);
     private final int ordinal;
     private final String name;
-    private final String translationKey;
+    private final Text translationKey;
 
     PermissionLevel(final int ordinal, final String name, final String translationKey) {
         this.ordinal = ordinal;
         this.name = name;
-        this.translationKey = translationKey;
+        this.translationKey = Text.translatable(translationKey);
     }
 
-    public int getId() {
+    public int getOrdinal() {
         return this.ordinal;
     }
 
-    public String getTranslationKey() {
+    public Text getText() {
         return this.translationKey;
     }
 

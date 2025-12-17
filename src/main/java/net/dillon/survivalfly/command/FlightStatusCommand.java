@@ -10,6 +10,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.world.GameMode;
 
+import static net.dillon.survivalfly.main.SurvivalFly.getPermissionLevel;
+
 /**
  * A command to check the status of your flight ability.
  */
@@ -21,7 +23,7 @@ public class FlightStatusCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 CommandManager.literal("flightstatus")
-                        .requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(0))
+                        .requires(CommandManager.requirePermissionLevel(getPermissionLevel(SurvivalFly.options().permissionLevel.getOrdinal())))
                         .executes(
                                 context -> execute(
                                         context,

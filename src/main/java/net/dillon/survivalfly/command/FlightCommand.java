@@ -10,10 +10,12 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.world.GameMode;
-import net.minecraft.world.GameRules;
+import net.minecraft.world.rule.GameRules;
 
 import java.util.Collection;
 import java.util.List;
+
+import static net.dillon.survivalfly.main.SurvivalFly.getPermissionLevel;
 
 /**
  * The functionality for the {@code /flight} command.
@@ -26,7 +28,7 @@ public class FlightCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 CommandManager.literal("flight")
-                        .requires(source -> source.hasPermissionLevel(SurvivalFly.options().permissionLevel.getId()))
+                        .requires(CommandManager.requirePermissionLevel(getPermissionLevel(SurvivalFly.options().permissionLevel.getOrdinal())))
                         .executes(
                                 context -> execute(
                                         context,
@@ -91,7 +93,7 @@ public class FlightCommand {
                 source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight.self", player.interactionManager.getGameMode().asString()), true);
             }
         } else {
-            if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && success) {
+            if (source.getWorld().getGameRules().getValue(GameRules.SEND_COMMAND_FEEDBACK) && success) {
                 player.sendMessage(Text.translatable("survivalfly.flight_changed", SurvivalFly.statusText(player, true)));
             }
 

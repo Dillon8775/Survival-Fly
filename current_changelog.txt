@@ -1,5 +1,5 @@
-- Forge port!
-(Forge) backported to 1.20.1, 1.21.1, 1.21.4, 1.21.6-1.21.10.
+Version 1.2.5:
 
-- Fixed title screen rendering issue.
-- Added a "report bug" button on main survival fly screen.
+- Updated to Minecraft 1.21.11!
+- The /flightstatus command now only runs if the player has the correct permission level.
+- Fixed bug where the player does not keep their flight status upon death/relogging.

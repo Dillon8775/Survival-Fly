@@ -1,26 +1,24 @@
 package net.dillon.survivalfly.option;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.TranslatableOption;
 
 /**
  * Defines under what rule the player can change their flight speed.
  */
-public enum ChangeFlySpeedOnRule implements TranslatableOption, StringIdentifiable {
-    ANY_GAMEMODE(0, "any_gamemode", "survivalfly.options.change_fly_speed_on_rule.any_gamemode"),
-    NON_SURVIVAL_LIKE_GAMEMODES(1, "non_survival_like_gamemodes", "survivalfly.options.change_fly_speed_on_rule.non_survival_like_gamemodes"),
-    SPECTATOR_MODE_ONLY(2, "spectator_only", "survivalfly.options.change_fly_speed_on_rule.spectator_mode_only");
+public enum ChangeFlySpeedOnRule implements StringIdentifiable {
+    ANY_GAMEMODE("any_gamemode", "survivalfly.options.change_fly_speed_on_rule.any_gamemode"),
+    NON_SURVIVAL_LIKE_GAMEMODES("non_survival_like_gamemodes", "survivalfly.options.change_fly_speed_on_rule.non_survival_like_gamemodes"),
+    SPECTATOR_MODE_ONLY("spectator_only", "survivalfly.options.change_fly_speed_on_rule.spectator_mode_only");
 
     public static final Codec<ChangeFlySpeedOnRule> Codec = StringIdentifiable.createCodec(ChangeFlySpeedOnRule::values);
-    private final int ordinal;
     private final String name;
-    private final String translationKey;
+    private final Text translationKey;
 
-    ChangeFlySpeedOnRule(final int ordinal, final String name, final String translationKey) {
-        this.ordinal = ordinal;
+    ChangeFlySpeedOnRule(final String name, final String translationKey) {
         this.name = name;
-        this.translationKey = translationKey;
+        this.translationKey = Text.translatable(translationKey);
     }
 
     public boolean nonSurvivalLikeGamemodes() {
@@ -31,15 +29,7 @@ public enum ChangeFlySpeedOnRule implements TranslatableOption, StringIdentifiab
         return this == ANY_GAMEMODE;
     }
 
-    public boolean spectatorModeOnly() {
-        return this == SPECTATOR_MODE_ONLY;
-    }
-
-    public int getId() {
-        return this.ordinal;
-    }
-
-    public String getTranslationKey() {
+    public Text getText() {
         return this.translationKey;
     }
 

@@ -9,12 +9,13 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.world.GameRules;
+import net.minecraft.world.rule.GameRules;
 
 import java.util.Collection;
 import java.util.List;
 
 import static net.dillon.survivalfly.main.SurvivalFly.DEFAULT_FLIGHT_SPEED;
+import static net.dillon.survivalfly.main.SurvivalFly.getPermissionLevel;
 
 public class FlightSpeedCommand {
     private static final String SPEED_ARGUMENT_NAME = "speed (as percentage)";
@@ -25,7 +26,7 @@ public class FlightSpeedCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 CommandManager.literal("flightspeed")
-                        .requires(source -> source.hasPermissionLevel(SurvivalFly.options().permissionLevel.getId()))
+                        .requires(CommandManager.requirePermissionLevel(getPermissionLevel(SurvivalFly.options().permissionLevel.getOrdinal())))
                         .then(
                                 CommandManager.literal("set")
                                         .then(
@@ -110,7 +111,7 @@ public class FlightSpeedCommand {
                 source.sendFeedback(() -> Text.translatable("survivalfly.cannot_change_flight_speed.self"), true);
             }
         } else {
-            if (source.getWorld().getGameRules().getBoolean(GameRules.SEND_COMMAND_FEEDBACK) && success) {
+            if (source.getWorld().getGameRules().getValue(GameRules.SEND_COMMAND_FEEDBACK) && success) {
                 player.sendMessage(Text.translatable("survivalfly.flight_speed_changed", speed).append("%."));
             }
 
