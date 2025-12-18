@@ -1,22 +1,17 @@
 package net.dillon.survivalfly.mixin;
 
 import net.dillon.survivalfly.util.ButtonUtil;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin extends Screen {
-    @Unique
-    private ButtonWidget settingsButton;
 
     public TitleScreenMixin(Text title) {
         super(title);
@@ -24,11 +19,7 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
-        this.settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this, this.width / 2 + 104, this.height / 4 + 156));
-    }
-
-    @Inject(method = "render", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void renderTooltips(DrawContext context, int mouseX, int mouseY, float deltaTicks, CallbackInfo ci, float f) {
-        ButtonUtil.drawTooltipAndTexture(context, this.textRenderer, this.settingsButton, mouseX, mouseY, f);
+        TextIconButtonWidget settingsButton = this.addDrawableChild(ButtonUtil.initializeButton(this.client, this));
+        settingsButton.setPosition(this.width / 2 + 104, this.height / 4 + 156);
     }
 }
