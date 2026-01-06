@@ -9,7 +9,8 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/survival-fly",
-    "sources": "https://github.com/Dillon8775/Survival-Fly"
+    "sources": "https://github.com/Dillon8775/Survival-Fly",
+    "issues": "https://github.com/Dillon8775/Survival-Fly/issues"
   },
   "license": "All rights reserved.",
   "icon": "assets/survivalfly/icon.png",
@@ -33,8 +34,8 @@
     }
   ],
   "depends": {
-    "fabricloader": ">=0.17.2",
-    "minecraft": ">=1.21.9",
+    "fabricloader": ">=0.18.2",
+    "minecraft": "1.21.11",
     "java": ">=21",
     "fabric-api": "*"
   },
