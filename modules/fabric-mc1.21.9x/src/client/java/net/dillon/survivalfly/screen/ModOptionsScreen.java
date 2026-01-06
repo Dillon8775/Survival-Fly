@@ -33,7 +33,7 @@ public class ModOptionsScreen extends GameOptionsScreen {
         this.body.addSingleOptionEntry(ModListOptions.CHANGE_FLY_SPEED_ON_RULE);
 
         List<ClickableWidget> options = new ArrayList<>(List.of(
-                ModListOptions.SHOW_CONFIG_BUTTON.createWidget(MinecraftClient.getInstance().options),
+                ModListOptions.CONFIG_BUTTON.createWidget(MinecraftClient.getInstance().options),
                 ButtonWidget.builder(Text.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.opening(this, "https://github.com/Dillon8775/Survival-Fly/issues", false)).build()
         ));
         this.body.addAll(options);

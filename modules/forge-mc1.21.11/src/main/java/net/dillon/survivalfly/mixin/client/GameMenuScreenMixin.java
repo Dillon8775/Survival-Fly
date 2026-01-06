@@ -27,7 +27,7 @@ public class GameMenuScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
-        if (ModOptions.SHOW_CONFIG_BUTTON.get() && this.showPauseMenu) {
+        if (ModOptions.CONFIG_BUTTON.get().everywhere() && this.showPauseMenu) {
             SpriteIconButton settingsButton = this.addRenderableWidget(ButtonUtil.initializeButton(this.minecraft, this));
             settingsButton.setPosition(this.width / 2 + 106, this.height / 4 + 48 - 16);
         }

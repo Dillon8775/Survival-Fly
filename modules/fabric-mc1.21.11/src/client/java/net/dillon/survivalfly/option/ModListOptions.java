@@ -1,12 +1,13 @@
 package net.dillon.survivalfly.option;
 
 import net.dillon.survivalfly.main.SurvivalFly;
-import net.dillon.survivalfly.util.ModTexts;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.text.Text;
 
 import java.util.Arrays;
+
+import static net.dillon.survivalfly.main.SurvivalFly.options;
 
 /**
  * The options displayed on the options screen.
@@ -43,6 +44,17 @@ public class ModListOptions {
             SurvivalFly.options().changeFlySpeedOnRule,
             value -> SurvivalFly.options().changeFlySpeedOnRule = value);
 
-    public static final SimpleOption<Boolean> SHOW_CONFIG_BUTTON = new SimpleOption<>("survivalfly.options.show_config_button", SimpleOption.constantTooltip(Text.translatable("survivalfly.options.show_config_button.tooltip")),
-            (optionText, value) -> !value ? ModTexts.OFF : ModTexts.ON, SimpleOption.BOOLEAN, SurvivalFly.options().showConfigButton, value -> SurvivalFly.options().showConfigButton = value);
+    public static final SimpleOption<ConfigButton> CONFIG_BUTTON = new SimpleOption<>(
+            "survivalfly.options.config_button",
+            option -> {
+                return switch (option) {
+                    case EVERYWHERE -> Tooltip.of(Text.translatable("survivalfly.options.config_button.everywhere.tooltip"));
+                    case TITLE_ONLY -> Tooltip.of(Text.translatable("survivalfly.options.config_button.title_only.tooltip"));
+                    case OFF -> Tooltip.of(Text.translatable("survivalfly.options.config_button.off.tooltip"));
+                };
+            },
+            (optionText, value) -> value.getText(),
+            new SimpleOption.PotentialValuesBasedCallbacks<>(Arrays.asList(ConfigButton.values()), ConfigButton.Codec),
+            options().configButton,
+            value -> options().configButton = value);
 }

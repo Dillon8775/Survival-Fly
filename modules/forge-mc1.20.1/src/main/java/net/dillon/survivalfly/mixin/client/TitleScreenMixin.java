@@ -1,5 +1,6 @@
 package net.dillon.survivalfly.mixin.client;
 
+import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.util.ButtonUtil;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -21,6 +22,8 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
-        this.addRenderableWidget(ButtonUtil.initializeButton(this.minecraft, this, this.width / 2 + 104, this.height / 4 + 156));
+        if (ModOptions.CONFIG_BUTTON.get().everywhere() || ModOptions.CONFIG_BUTTON.get().titleOnly()) {
+            this.addRenderableWidget(ButtonUtil.initializeButton(this.minecraft, this, this.width / 2 + 104, this.height / 4 + 156));
+        }
     }
 }

@@ -48,6 +48,17 @@ public class ModListOptions {
             ModOptions.CHANGE_FLY_SPEED_ON_RULE.get(),
             ModOptions.CHANGE_FLY_SPEED_ON_RULE::set);
 
-    public static final OptionInstance<Boolean> SHOW_CONFIG_BUTTON = OptionInstance.createBoolean("survivalfly.options.show_config_button", OptionInstance.cachedConstantTooltip(Component.translatable("survivalfly.options.show_config_button.tooltip")),
-            ON_OFF_TEXT, ModOptions.SHOW_CONFIG_BUTTON.get(), ModOptions.SHOW_CONFIG_BUTTON::set);
+    public static final OptionInstance<ConfigButton> CONFIG_BUTTON = new OptionInstance<>(
+            "survivalfly.options.config_button",
+            option -> {
+                return switch (option) {
+                    case EVERYWHERE -> Tooltip.create(Component.translatable("survivalfly.options.config_button.everywhere.tooltip"));
+                    case TITLE_ONLY -> Tooltip.create(Component.translatable("survivalfly.options.config_button.title_only.tooltip"));
+                    case OFF -> Tooltip.create(Component.translatable("survivalfly.options.config_button.off.tooltip"));
+                };
+            },
+            OptionInstance.forOptionEnum(),
+            new OptionInstance.Enum<>(Arrays.asList(ConfigButton.values()), ConfigButton.Codec),
+            ModOptions.CONFIG_BUTTON.get(),
+            ModOptions.CONFIG_BUTTON::set);
 }

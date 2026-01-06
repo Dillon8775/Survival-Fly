@@ -28,7 +28,7 @@ public class ModOptionsScreen extends OptionsSubScreen {
 
     protected OptionInstance<?>[] options() {
         return new OptionInstance[]{
-                ModListOptions.SHOW_CONFIG_BUTTON
+                ModListOptions.CONFIG_BUTTON
         };
     }
 

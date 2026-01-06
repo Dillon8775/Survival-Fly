@@ -17,7 +17,7 @@ public class ModOptions {
 
     public PermissionLevel permissionLevel = PermissionLevel.REGULAR;
     public ChangeFlySpeedOnRule changeFlySpeedOnRule = ChangeFlySpeedOnRule.ANY_GAMEMODE;
-    public boolean showConfigButton = true;
+    public ConfigButton configButton = ConfigButton.EVERYWHERE;
 
     /**
      * Loads the configuration file.
