@@ -1,8 +1,1 @@
-Version 1.2.5:
-
-- Updated to Minecraft 1.21.11!
-- The /flightstatus command now only runs if the player has the correct permission level.
-- Fixed bug where the player does not keep their flight status upon death/relogging.
-- Fixed bug with Forge where older Minecraft versions are not compatible.
-- Fixed bug where button texture appears before fading.
-- Added mod logo.
+Version 1.2.6:
