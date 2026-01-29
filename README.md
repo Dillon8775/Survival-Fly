@@ -3,19 +3,19 @@
 ###
 
 <a href="https://files.minecraftforge.net/" target="_blank">
-  <img src="https://i.imgur.com/gbZFxKU.png" width="427" height="115" alt="Compatible with Forge">
+  <img src="https://cdn.discordapp.com/attachments/1466497679902376162/1466497862861979863/gbZFxKU_-_Imgur.png?ex=697cf610&is=697ba490&hm=533616a1a2bca03dd1aa8192b079d0cc94e7c034dc787b687a4fc8754bfa0a13&" width="427" height="115" alt="Compatible with Forge.">
 </a>
 
 ####
 
 <a href="https://fabricmc.net/" target="_blank">
-  <img src="https://i.imgur.com/vIbuVv8.png" width="433" height="149" alt="Compatible with Forge">
+  <img src="https://cdn.discordapp.com/attachments/1466497679902376162/1466497863428214816/vIbuVv8_-_Imgur.png?ex=697cf610&is=697ba490&hm=5a443e36592a828a8def1abdbeecd2e8aa645463c167c53c03f12e7ddbc57143&" width="433" height="149" alt="Compatible with Fabric.">
 </a>
 
 ####
 
 <a href="https://modrinth.com/mod/fabric-api/versions" target="_blank">
-  <img src="https://i.imgur.com/yFnszAw.png" width="286" height="96" alt="Compatible with Forge">
+  <img src="https://cdn.discordapp.com/attachments/1466497679902376162/1466497864296562882/yFnszAw_-_Imgur.png?ex=697cf611&is=697ba491&hm=37f49e755e167b145c8586280a74f39b08f4e353b95dbd224c50136e34ab1390&" width="286" height="96" alt="Requires Fabric API.">
 </a>
 
 ### Please report *any* bugs you may find <a href="https://github.com/Dillon8775/Survival-Fly/issues" target="_blank">here.</a>
@@ -29,7 +29,7 @@
 #### /flight _**enable**_/_**disable**_ _*'target(s)'*_
 #### (since: v1.0)
 
-![/flight command in action.](https://i.imgur.com/oYBpxtu.gif)
+![/flight command in action.](https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flight%20Command.gif?raw=true)
 
 ---
 
@@ -43,7 +43,7 @@
 
 #### (since: v1.2)
 
-![/flightspeed command in action.](https://i.imgur.com/FqqNHPn.gif)
+![/flightspeed command in action.](https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightspeed%20Command.gif?raw=true)
 
 ---
 
@@ -52,7 +52,7 @@
 Command Usage: /flightstatus _*'target'*_
 #### (since: v1.1)
 
-![/flightstatus command in action.](https://i.imgur.com/d7b3E5h.gif)
+![/flightstatus command in action.](https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightstatus%20Command.gif?raw=true)
 
 ---
 
