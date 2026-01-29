@@ -29,7 +29,9 @@
 #### /flight _**enable**_/_**disable**_ _*'target(s)'*_
 #### (since: v1.0)
 
-![/flight command in action.](https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flight%20Command.gif?raw=true)
+<a href="https://media.discordapp.net/attachments/1466497168386031726/1466499037829267537/oYBpxtu.gif?ex=697cf728&is=697ba5a8&hm=fbb826491636b20269b233384397c370ff8a69006344576b11495cc4efecab43&=&width=1522&height=856" target="_blank">
+  <img src="https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flight%20Command.gif?raw=true" width="960" height="540" alt="Requires Fabric API.">
+</a>
 
 ---
 
@@ -43,7 +45,9 @@
 
 #### (since: v1.2)
 
-![/flightspeed command in action.](https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightspeed%20Command.gif?raw=true)
+<a href="https://media.discordapp.net/attachments/1466497168386031726/1466499239692472380/FqqNHPn.gif?ex=697cf758&is=697ba5d8&hm=393fc960138ac984a897552590047edc6487595db7b09b80ae4d8afb62a6f44c&=&width=1522&height=856" target="_blank">
+  <img src="https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightspeed%20Command.gif?raw=true" width="960" height="540" alt="Requires Fabric API.">
+</a>
 
 ---
 
@@ -52,7 +56,9 @@
 Command Usage: /flightstatus _*'target'*_
 #### (since: v1.1)
 
-![/flightstatus command in action.](https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightstatus%20Command.gif?raw=true)
+<a href="https://media.discordapp.net/attachments/1466497168386031726/1466498704746741791/d7b3E5h.gif?ex=697cf6d9&is=697ba559&hm=8caaf5f44c995e4f8ec32596f161b8b6cd261107cd91272db86885cd0bc5aa67&=&width=1522&height=856" target="_blank">
+  <img src="https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightstatus%20Command.gif?raw=true" width="960" height="540" alt="Requires Fabric API.">
+</a>
 
 ---
 
