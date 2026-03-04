@@ -1,4 +1,3 @@
-Version 1.2.6:
-- Changed "Show Config Button" to "Config Button", which allows you to change where exactly the configuration button for this mod appears (everywhere, title screen only, or not at all)
-- Updated version requirements.
-- Tweaks and optimizations.
+Version 1.2.7:
+- Updated to Minecraft 26.1 (snapshot...)!
+- NeoForge support.
