@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "survivalfly",
+  "version": "1.2.7+mc26.1",
+  "name": "Survival Fly",
+  "description": "Adds a /flight command for survival players.",
+  "authors": [
+    "Dillon8775"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/survival-fly",
+    "sources": "https://github.com/Dillon8775/Survival-Fly",
+    "issues": "https://github.com/Dillon8775/Survival-Fly/issues"
+  },
+  "license": "All rights reserved.",
+  "icon": "assets/survivalfly/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.dillon.survivalfly.SurvivalFly"
+    ],
+    "client": [
+      "net.dillon.survivalfly.SurvivalFlyClient"
+    ],
+    "modmenu": [
+      "net.dillon.survivalfly.impl.ModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "survivalfly.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": ">=26.1-alpha.10",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
