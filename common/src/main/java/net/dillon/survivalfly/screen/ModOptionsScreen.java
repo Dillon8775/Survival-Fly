@@ -32,6 +32,7 @@ public class ModOptionsScreen extends OptionsSubScreen {
 
         List<AbstractWidget> options = new ArrayList<>(List.of(
                 ModListOptions.CONFIG_BUTTON.createButton(Minecraft.getInstance().options),
+                Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),
                 Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Survival-Fly/issues", false)).build()
         ));
         this.list.addSmall(options);

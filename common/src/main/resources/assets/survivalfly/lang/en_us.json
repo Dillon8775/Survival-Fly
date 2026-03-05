@@ -5,6 +5,7 @@
   "survivalfly.gui.on": "ON",
   "survivalfly.gui.off": "OFF",
   "survivalfly.gui.report_bugs": "Report a bug...",
+  "survivalfly.gui.ask_questions": "Ask questions...",
   "survivalfly.options.permission_level": "Permission Level",
   "survivalfly.options.permission_level.regular": "Regular",
   "survivalfly.options.permission_level.moderator": "Moderator",

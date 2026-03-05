@@ -28,7 +28,7 @@ public class GameMenuScreenMixin extends Screen {
     private void init(CallbackInfo ci) {
         if (options().configButton.everywhere() && this.showPauseMenu) {
             SpriteIconButton settingsButton = this.addRenderableWidget(ButtonUtil.initializeButton(this.minecraft, this));
-            settingsButton.setPosition(this.width / 2 + 106, this.height / 4 + 48 - 16 + (MultiLoader.PLATFORM.getPlatformName().equals("NeoForge") ? 6 : 0));
+            settingsButton.setPosition(this.width / 2 + 106, this.height / 4 + 48 - 16 + (MultiLoader.PLATFORM.getPlatformName().equals("NeoForge") ? -6 : 0));
         }
     }
 }
