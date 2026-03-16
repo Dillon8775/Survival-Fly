@@ -1,22 +1,20 @@
 # Adds a **_/flight_** command for survival players.
 
-####
-
-<a href="https://neoforged.net/" target="_blank">
-  <img src="https://raw.githubusercontent.com/Dillon8775/ImageGIFs/refs/heads/universal/NeoForged%20Logo.png" width="438 " height="90" alt="Compatible with Forge">
-</a>
-
-####
+#
 
 <a href="https://fabricmc.net/" target="_blank">
-  <img src="https://github.com/Dillon8775/ImageGIFs/blob/universal/Fabric%20Logo.png?raw=true" width="361" height="124" alt="Compatible with Fabric.">
+  <img src="https://docs.fabricmc.net/logo.png" width="100" height="100" alt="Compatible with Forge">
+</a>
+‎ ‎ 
+<a href="https://neoforged.net/" target="_blank">
+  <img src="https://neoforged.net/img/authors/neoforged.png" width="100" height="100" alt="Compatible with Forge">
+</a>
+‎ ‎ ‎
+<a href="https://neoforged.net/" target="_blank">
+  <img src="https://avatars.githubusercontent.com/u/1390178?s=280&v=4" width="100" height="100" alt="Compatible with Forge">
 </a>
 
-####
-
-<a href="https://modrinth.com/mod/fabric-api/versions" target="_blank">
-  <img src="https://github.com/Dillon8775/ImageGIFs/blob/universal/Requires%20Fabric%20API%20Logo.png?raw=true" width="286" height="96" alt="Requires Fabric API.">
-</a>
+###
 
 ### Please report *any* bugs you may find <a href="https://github.com/Dillon8775/Survival-Fly/issues" target="_blank">here.</a>
 
@@ -28,8 +26,6 @@
 #### /flight
 #### /flight _**enable**_/_**disable**_ _*'target(s)'*_
 #### (since: v1.0)
-
-<img src="https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flight%20Command.gif?raw=true" width="960" height="540" alt="Requires Fabric API.">
 
 ---
 
@@ -43,8 +39,6 @@
 
 #### (since: v1.2)
 
-<img src="https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightspeed%20Command.gif?raw=true" width="960" height="540" alt="Requires Fabric API.">
-
 ---
 
 # _/flightstatus command!_
@@ -52,8 +46,6 @@
 Command Usage: /flightstatus _*'target'*_
 #### (since: v1.1)
 
-<img src="https://github.com/Dillon8775/ImageGIFs/blob/survival-fly/flightstatus%20Command.gif?raw=true" width="960" height="540" alt="Requires Fabric API.">
-
 ---
 
-Created by Dillon8775.
+Created by Dillon8775. All rights reserved unless explicitly stated.~~
