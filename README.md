@@ -46,4 +46,4 @@ Command Usage: /flightstatus _*'target'*_
 
 ---
 
-Created by Dillon8775. All rights reserved unless explicitly stated.~~
+Created by Dillon8775. All rights reserved unless explicitly stated.
