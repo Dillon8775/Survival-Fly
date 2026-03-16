@@ -1,7 +1,5 @@
 # Adds a **_/flight_** command for survival players.
 
-#
-
 <a href="https://fabricmc.net/" target="_blank">
   <img src="https://docs.fabricmc.net/logo.png" width="100" height="100" alt="Compatible with Forge">
 </a>
