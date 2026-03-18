@@ -1,5 +1,6 @@
 package net.dillon.survivalfly;
 
+import net.dillon.survivalfly.util.ModUtil;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,6 +18,8 @@ public final class SurvivalFly {
 
     public SurvivalFly(IEventBus modEventBus, ModContainer modContainer) {
         loadConfig();
+
+        ModUtil.initializeSuccess();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

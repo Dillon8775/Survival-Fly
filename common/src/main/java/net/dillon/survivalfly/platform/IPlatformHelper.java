@@ -1,10 +1,17 @@
-package net.dillon.survivalfly.platform.services;
+package net.dillon.survivalfly.platform;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 import java.io.File;
 
 public interface IPlatformHelper {
+
+    /**
+     * @return the mod version.
+     */
+    default String getModVersion() {
+        return "1.2.7";
+    }
 
     /**
      * Gets the name of the current platform
@@ -22,13 +29,6 @@ public interface IPlatformHelper {
     boolean isModLoaded(String modId);
 
     /**
-     * Check if the game is currently in a development environment.
-     *
-     * @return True if in a development environment, false otherwise.
-     */
-    boolean isDevelopmentEnvironment();
-
-    /**
      * Gets the config directory for the supported platform.
      */
     File getConfigDir(String fileName);
@@ -37,13 +37,4 @@ public interface IPlatformHelper {
      * Sends a packet to the server.
      */
     void sendToServer(CustomPacketPayload payload);
-
-    /**
-     * Gets the name of the environment type as a string.
-     *
-     * @return The name of the environment type.
-     */
-    default String getEnvironmentName() {
-        return this.isDevelopmentEnvironment() ? "development" : "production";
-    }
 }

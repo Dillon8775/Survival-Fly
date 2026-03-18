@@ -3,6 +3,7 @@ package net.dillon.survivalfly.util;
 import com.mojang.logging.LogUtils;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.platform.MultiLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -30,6 +31,13 @@ public class ModUtil {
      */
     public static void info(String message) {
         LOGGER.info(message);
+    }
+
+    /**
+     * Sends the successfully initialized message.
+     */
+    public static void initializeSuccess() {
+        info("Survival Fly version " + MultiLoader.PLATFORM.getModVersion() + " (for " + MultiLoader.PLATFORM.getPlatformName() + ") loaded successfully!");
     }
 
     /**

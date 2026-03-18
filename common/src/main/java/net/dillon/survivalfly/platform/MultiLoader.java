@@ -1,7 +1,5 @@
 package net.dillon.survivalfly.platform;
 
-import net.dillon.survivalfly.platform.services.IPlatformHelper;
-
 import java.util.ServiceLoader;
 
 // Service loaders are a built-in Java feature that allow us to locate implementations of an interface that vary from one

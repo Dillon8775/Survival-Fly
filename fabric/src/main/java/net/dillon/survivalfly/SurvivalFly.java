@@ -3,9 +3,11 @@ package net.dillon.survivalfly;
 import net.dillon.survivalfly.event.CommonEvents;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.PermissionLevel;
+import net.dillon.survivalfly.util.ModUtil;
 import net.fabricmc.api.ModInitializer;
 
-import static net.dillon.survivalfly.util.ModUtil.*;
+import static net.dillon.survivalfly.util.ModUtil.options;
+import static net.dillon.survivalfly.util.ModUtil.warn;
 
 /**
  * Main entrypoint for survival fly.
@@ -25,6 +27,6 @@ public class SurvivalFly implements ModInitializer {
 		CommonEvents.registerCommands();
 		CommonEvents.registerPayloads();
 
-		info("Initialized Survival Fly mod successfully!");
+		ModUtil.initializeSuccess();
 	}
 }
