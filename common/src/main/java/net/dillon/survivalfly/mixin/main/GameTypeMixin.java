@@ -15,7 +15,7 @@ public class GameTypeMixin {
 
     @Redirect(method = "updatePlayerAbilities", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Abilities;mayfly:Z", opcode = 181))
     private void redirectAllowFlying(Abilities abilities, boolean value) {
-        if (shouldCancelElseBlock(value)) {
+        if (this.shouldCancelElseBlock(value)) {
             return;
         }
         abilities.mayfly = value;
@@ -23,7 +23,7 @@ public class GameTypeMixin {
 
     @Redirect(method = "updatePlayerAbilities", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Abilities;flying:Z", opcode = 181))
     private void redirectFlying(Abilities abilities, boolean value) {
-        if (shouldCancelElseBlock(value)) {
+        if (this.shouldCancelElseBlock(value)) {
             return;
         }
         abilities.flying = value;

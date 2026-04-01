@@ -1,9 +1,7 @@
 package net.dillon.survivalfly.event;
 
 import net.dillon.survivalfly.SurvivalFly;
-import net.dillon.survivalfly.command.FlightCommand;
-import net.dillon.survivalfly.command.FlightSpeedCommand;
-import net.dillon.survivalfly.command.FlightStatusCommand;
+import net.dillon.survivalfly.command.*;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.dillon.survivalfly.util.ModUtil;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
@@ -27,13 +25,28 @@ public class CommonEvents {
     @SubscribeEvent
     public static void register(RegisterCommandsEvent dispatcher) {
         dispatcher.getDispatcher().register(
+                SurvivalFlyCommand.getHelpCommand()
+        );
+        dispatcher.getDispatcher().register(
                 FlightCommand.getFlightCommand()
+        );
+        dispatcher.getDispatcher().register(
+                FlightStatusCommand.getFlightStatusCommand()
         );
         dispatcher.getDispatcher().register(
                 FlightSpeedCommand.getFlightSpeedCommand()
         );
         dispatcher.getDispatcher().register(
-                FlightStatusCommand.getFlightStatusCommand()
+                ElytraFlightCommand.getElytraFlightCommand()
+        );
+        dispatcher.getDispatcher().register(
+                FlightExhaustionCommand.getFlightExhaustionCommand()
+        );
+        dispatcher.getDispatcher().register(
+                FriendlyFlightCommand.getFriendlyFlightCommand()
+        );
+        dispatcher.getDispatcher().register(
+                PermissionsCommand.getPermissionsCommand()
         );
     }
 
@@ -68,12 +81,12 @@ public class CommonEvents {
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
-        ((PlayerAbilitiesExtension)player.getAbilities()).setEverEnabledFlight(player.getAbilities().mayfly);
+        ((PlayerAbilitiesExtension)player).setEverEnabledFlight(player.getAbilities().mayfly);
     }
 
     @SubscribeEvent
     public static void register(RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("1");
+        final PayloadRegistrar registrar = event.registrar("1").optional();
         registrar.playToServer(
                 UpdateFlightSpeedC2SPayload.PAYLOAD_ID,
                 UpdateFlightSpeedC2SPayload.CODEC,

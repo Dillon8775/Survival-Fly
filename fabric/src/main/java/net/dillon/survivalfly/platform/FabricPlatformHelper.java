@@ -19,12 +19,19 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public boolean isSafeToSend(CustomPacketPayload packet) {
+        return true;
+    }
+
+    @Override
     public File getConfigDir(String fileName) {
         return new File(FabricLoader.getInstance().getConfigDir().toFile(), fileName);
     }
 
     @Override
     public void sendToServer(CustomPacketPayload payload) {
-        ClientPlayNetworking.send(payload);
+        if (this.isSafeToSend(payload)) {
+            ClientPlayNetworking.send(payload);
+        }
     }
 }

@@ -2,7 +2,7 @@ package net.dillon.survivalfly;
 
 import net.dillon.survivalfly.event.CommonEvents;
 import net.dillon.survivalfly.option.ModOptions;
-import net.dillon.survivalfly.option.PermissionLevel;
+import net.dillon.survivalfly.option.Permissions;
 import net.dillon.survivalfly.util.ModUtil;
 import net.fabricmc.api.ModInitializer;
 
@@ -16,9 +16,9 @@ public class SurvivalFly implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		if (options().permissionLevel == null) { // fix odd bug
+		if (options().permissions == null) { // fix odd bug
 			warn("Permission level is somehow null, fixing.");
-			options().permissionLevel = PermissionLevel.REGULAR;
+			options().permissions = Permissions.ANYONE;
 			ModOptions.saveConfig();
 		}
 

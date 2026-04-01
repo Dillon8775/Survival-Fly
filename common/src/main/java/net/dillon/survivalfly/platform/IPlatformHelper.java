@@ -10,7 +10,7 @@ public interface IPlatformHelper {
      * @return the mod version.
      */
     default String getModVersion() {
-        return "1.2.7";
+        return "1.3";
     }
 
     /**
@@ -27,6 +27,11 @@ public interface IPlatformHelper {
      * @return True if the mod is loaded, false otherwise.
      */
     boolean isModLoaded(String modId);
+
+    /**
+     * @return if the payload can send over to the server.
+     */
+    boolean isSafeToSend(CustomPacketPayload packet);
 
     /**
      * Gets the config directory for the supported platform.

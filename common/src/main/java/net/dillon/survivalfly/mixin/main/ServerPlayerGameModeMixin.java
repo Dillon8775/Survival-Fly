@@ -23,7 +23,7 @@ public class ServerPlayerGameModeMixin {
     @Inject(method = "changeGameModeForPlayer", at = @At("TAIL"))
     private void fixFlyingInconsistency(GameType gameMode, CallbackInfoReturnable<Boolean> cir) {
         if (this.player.gameMode.getGameModeForPlayer().isSurvival()) {
-            if (!((PlayerAbilitiesExtension)this.player.getAbilities()).hasEverEnabledFlight()) {
+            if (!((PlayerAbilitiesExtension)this.player).hasEverEnabledFlight()) {
                 this.player.getAbilities().mayfly = false;
                 this.player.getAbilities().flying = false;
             }

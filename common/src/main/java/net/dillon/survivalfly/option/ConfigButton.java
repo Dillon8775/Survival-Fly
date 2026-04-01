@@ -9,8 +9,10 @@ import net.minecraft.util.StringRepresentable;
  */
 public enum ConfigButton implements StringRepresentable {
     EVERYWHERE(0, "everywhere", "survivalfly.options.config_button.everywhere"),
-    TITLE_ONLY(1, "title_only", "survivalfly.options.config_button.title_only"),
-    OFF(2, "off", "survivalfly.options.config_button.off");
+    BOTTOM_LEFT(1, "bottom_left", "survivalfly.options.config_button.bottom_left"),
+    BOTTOM_RIGHT(2, "bottom_right", "survivalfly.options.config_button.bottom_right"),
+    TITLE_ONLY(3, "title_only", "survivalfly.options.config_button.title_only"),
+    OFF(4, "off", "survivalfly.options.config_button.off");
 
     public static final Codec<ConfigButton> Codec = StringRepresentable.fromEnum(ConfigButton::values);
     private final int ordinal;
@@ -24,11 +26,19 @@ public enum ConfigButton implements StringRepresentable {
     }
 
     public boolean everywhere() {
-        return this == EVERYWHERE;
+        return this != OFF && this != TITLE_ONLY;
     }
 
     public boolean titleOnly() {
         return this == TITLE_ONLY;
+    }
+
+    public boolean left() {
+        return this == BOTTOM_LEFT;
+    }
+
+    public boolean right() {
+        return this == BOTTOM_RIGHT;
     }
 
     public int getId() {

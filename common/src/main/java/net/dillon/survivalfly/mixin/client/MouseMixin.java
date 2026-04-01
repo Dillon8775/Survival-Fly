@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.dillon.survivalfly.util.ModUtil.decimalAsPercentage;
-import static net.dillon.survivalfly.util.ModUtil.options;
 
 @Mixin(MouseHandler.class)
 public class MouseMixin {
@@ -35,11 +34,7 @@ public class MouseMixin {
                 return clientPlayer.isSpectator();
             }
 
-            if (options().changeFlySpeedOnRule.nonSurvivalLikeGamemodes()) {
-                return clientPlayer.isSpectator() || clientPlayer.isCreative();
-            } else if (options().changeFlySpeedOnRule.anyGamemode()) {
-                return true;
-            }
+            return true;
         }
         // otherwise only work on spectator mode
         return clientPlayer.isSpectator();

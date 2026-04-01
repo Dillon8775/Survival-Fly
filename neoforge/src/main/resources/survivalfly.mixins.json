@@ -3,15 +3,15 @@
   "package": "net.dillon.survivalfly.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
-    "client.GameMenuScreenMixin",
     "client.MinecraftMixin",
     "client.MouseMixin",
+    "client.PauseScreenMixin",
     "client.TitleScreenMixin"
   ],
   "mixins": [
-    "main.AbilitiesMixin",
     "main.GameTypeMixin",
-    "main.ServerPlayerGameModeMixin"
+    "main.ServerPlayerGameModeMixin",
+    "main.ServerPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

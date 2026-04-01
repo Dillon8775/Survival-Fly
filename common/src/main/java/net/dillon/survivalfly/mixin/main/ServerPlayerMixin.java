@@ -1,0 +1,213 @@
+package net.dillon.survivalfly.mixin.main;
+
+import com.mojang.authlib.GameProfile;
+import net.dillon.survivalfly.util.ModTexts;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static net.dillon.survivalfly.util.ModUtil.*;
+
+@Mixin(ServerPlayer.class)
+public abstract class ServerPlayerMixin extends Player implements PlayerAbilitiesExtension {
+    @Shadow
+    protected abstract boolean isPvpAllowed();
+    @Unique
+    private float elytraDurabilityProgress;
+    @Unique
+    private boolean everEnabledFlight = false;
+    @Unique
+    private boolean wantToFlyAgain;
+    @Unique
+    private boolean playedBroken;
+    @Unique
+    private int damageTimeTicks = 0;
+
+    public ServerPlayerMixin(Level level, GameProfile gameProfile) {
+        super(level, gameProfile);
+    }
+
+    /**
+     * Sets the player if they have ever had flight before.
+     */
+    @Override
+    public void setEverEnabledFlight(boolean value) {
+        this.everEnabledFlight = value;
+    }
+
+    /**
+     * Sets time until flight is allowed for the player again.
+     */
+    @Override
+    public void setWantToFlyAgain(boolean value) {
+        this.wantToFlyAgain = value;
+    }
+
+    /**
+     * Sets the player's damage ticks.
+     */
+    @Override
+    public void setDamageTicks(int value) {
+        this.damageTimeTicks = value;
+    }
+
+    /**
+     * @return if the player has ever had flight before.
+     */
+    @Override
+    public boolean hasEverEnabledFlight() {
+        return this.everEnabledFlight;
+    }
+
+    /**
+     * @return if the player's flight is allowed.
+     */
+    @Override
+    public boolean flyingAllowed() {
+        return !options().friendlyFlight || this.damageTimeTicks == 0;
+    }
+
+    /**
+     * Writes player NBT data for flight.
+     */
+    @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
+    private void saveDamageTime(ValueOutput output, CallbackInfo ci) {
+        output.putBoolean(EVER_ENABLED_FLIGHT_NAME, this.everEnabledFlight);
+        output.putBoolean(WANT_TO_FLY_AGAIN, this.wantToFlyAgain);
+        output.putInt(DAMAGE_TIME_TICKS_NAME, this.damageTimeTicks);
+        output.putBoolean(PLAYED_BROKEN_NAME, this.playedBroken);
+    }
+
+    /**
+     * Reads player NBT data for flight.
+     */
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    private void readDamageTime(ValueInput input, CallbackInfo ci) {
+        this.everEnabledFlight = input.getBooleanOr(EVER_ENABLED_FLIGHT_NAME, false);
+        this.wantToFlyAgain = input.getBooleanOr(WANT_TO_FLY_AGAIN, false);
+        this.damageTimeTicks = input.getIntOr(DAMAGE_TIME_TICKS_NAME, -1);
+        this.playedBroken = input.getBooleanOr(PLAYED_BROKEN_NAME, false);
+    }
+
+    /**
+     * Removes flight from player who started combat.
+     */
+    @Inject(method = "hurtServer", at = @At("HEAD"))
+    private void onDamageDisableFlight(ServerLevel level, DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
+        ServerPlayer victimPlayer = (ServerPlayer)(Object)this;
+        if (!options().friendlyFlight || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
+            return;
+        }
+
+        Entity attacker = source.getEntity();
+
+        if (attacker instanceof ServerPlayer attackerPlayer && !isInvalidPlayerGameMode(attackerPlayer)) {
+            stopFlightForPlayer(attackerPlayer, true);
+            stopFlightForPlayer(victimPlayer, false);
+        }
+    }
+
+    /**
+     * Adds restrictions to the player's flying abilities, based on certain options.
+     */
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void addSideEffects(CallbackInfo ci) {
+        ServerPlayer player = (ServerPlayer)(Object)this;
+        if (isInvalidPlayerGameMode(player)) {
+            return;
+        }
+
+        // Friendly flight functionality (stops player flight if taking damage)
+        if (options().friendlyFlight) {
+            if (this.damageTimeTicks > 0) {
+                if (player.getAbilities().mayfly) {
+                    player.getAbilities().mayfly = false;
+                    player.getAbilities().flying = false;
+                    player.onUpdateAbilities();
+                }
+                if (this.wantToFlyAgain && this.damageTimeTicks == 1) {
+                    player.sendSystemMessage(ModTexts.FLY_AGAIN);
+                }
+                this.damageTimeTicks--;
+            } else if (this.wantToFlyAgain) {
+                player.getAbilities().mayfly = true;
+                player.onUpdateAbilities();
+                this.wantToFlyAgain = false;
+            }
+        }
+
+        // Variables for flight and movement speed
+        float movementSpeed = (float)this.getKnownSpeed().horizontalDistance();
+
+        float configuredFlightSpeed = player.getAbilities().getFlyingSpeed();
+        float flightSpeedMultiplier = movementSpeed == 0 ? 0.25F : configuredFlightSpeed / 0.045F;
+        if (flightSpeedMultiplier > 3.5F) {
+            flightSpeedMultiplier = 3.5F;
+        }
+
+        // Exhaust player when flying
+        if (options().flightExhaustion && hasElytra(player) && player.getAbilities().flying) {
+            float exhaustion = flightSpeedMultiplier * movementSpeed;
+            player.causeFoodExhaustion(exhaustion / 100);
+        }
+
+        // Stop further action, this prevents double jumping lol
+        if (options().friendlyFlight && this.damageTimeTicks > 0) {
+            return;
+        }
+
+        // Elytra flight functionality (requires player to wear elytra to fly)
+        if (options().elytraFlight) {
+            ItemStack chestSlot = player.getItemBySlot(EquipmentSlot.CHEST);
+            boolean validDurability = chestSlot.getDamageValue() != chestSlot.getMaxDamage() - 1;
+            boolean isElytra = chestSlot.is(Items.ELYTRA);
+            boolean elytraButNotValid = isElytra && !validDurability;
+            if (!isElytra || elytraButNotValid) {
+                player.getAbilities().flying = false;
+                player.getAbilities().mayfly = false;
+                if (elytraButNotValid && !this.playedBroken) {
+                    this.level().broadcastEntityEvent(this, (byte) 50);
+                    this.playedBroken = true;
+                }
+            } else {
+                if (((PlayerAbilitiesExtension)player).hasEverEnabledFlight()) {
+                    player.getAbilities().mayfly = true;
+                    if (isElytra && validDurability) {
+                        this.playedBroken = false;
+                    }
+                }
+
+                boolean isAirborneFlight = player.getAbilities().mayfly && !player.onGround() && !player.isFallFlying();
+                if (isAirborneFlight && (player.getAbilities().flying && !player.isCrouching() || player.fallDistance == 0)) {
+                    float durabilityCost = 0.04F * flightSpeedMultiplier * (movementSpeed == 0 ? 1 : movementSpeed);
+
+                    this.elytraDurabilityProgress += durabilityCost;
+                    int durabilityToDamage = (int)this.elytraDurabilityProgress;
+                    if (durabilityToDamage > 0) {
+                        this.elytraDurabilityProgress -= durabilityToDamage;
+                        if (chestSlot.getDamageValue() != chestSlot.getMaxDamage() - 1) {
+                            chestSlot.hurtAndBreak(durabilityToDamage, this, EquipmentSlot.CHEST);
+                        }
+                    }
+                }
+            }
+            player.onUpdateAbilities();
+        }
+    }
+}

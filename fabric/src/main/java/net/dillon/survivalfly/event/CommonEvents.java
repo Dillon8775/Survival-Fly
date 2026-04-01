@@ -1,8 +1,6 @@
 package net.dillon.survivalfly.event;
 
-import net.dillon.survivalfly.command.FlightCommand;
-import net.dillon.survivalfly.command.FlightSpeedCommand;
-import net.dillon.survivalfly.command.FlightStatusCommand;
+import net.dillon.survivalfly.command.*;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -33,14 +31,14 @@ public class CommonEvents {
         );
 
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            newPlayer.getAbilities().mayfly = ((PlayerAbilitiesExtension)oldPlayer.getAbilities()).hasEverEnabledFlight();
+            newPlayer.getAbilities().mayfly = ((PlayerAbilitiesExtension)oldPlayer).hasEverEnabledFlight();
             newPlayer.getAbilities().setFlyingSpeed(oldPlayer.getAbilities().getFlyingSpeed());
             newPlayer.onUpdateAbilities();
         });
 
         ServerPlayConnectionEvents.JOIN.register((serverPlayNetworkHandler, packetSender, minecraftServer) -> {
             ServerPlayer serverPlayer = serverPlayNetworkHandler.player;
-            ((PlayerAbilitiesExtension)serverPlayer.getAbilities()).setEverEnabledFlight(serverPlayer.getAbilities().flying);
+            ((PlayerAbilitiesExtension)serverPlayer).setEverEnabledFlight(serverPlayer.getAbilities().flying);
         });
     }
 
@@ -49,13 +47,28 @@ public class CommonEvents {
      */
     public static void registerCommands() {
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+            commandDispatcher.register(SurvivalFlyCommand.getHelpCommand());
+        });
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
             commandDispatcher.register(FlightCommand.getFlightCommand());
+        });
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+            commandDispatcher.register(FlightStatusCommand.getFlightStatusCommand());
         });
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
             commandDispatcher.register(FlightSpeedCommand.getFlightSpeedCommand());
         });
         CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
-            commandDispatcher.register(FlightStatusCommand.getFlightStatusCommand());
+            commandDispatcher.register(ElytraFlightCommand.getElytraFlightCommand());
+        });
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+            commandDispatcher.register(FlightExhaustionCommand.getFlightExhaustionCommand());
+        });
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+            commandDispatcher.register(FriendlyFlightCommand.getFriendlyFlightCommand());
+        });
+        CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+            commandDispatcher.register(PermissionsCommand.getPermissionsCommand());
         });
     }
 }

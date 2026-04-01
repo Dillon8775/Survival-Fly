@@ -1,0 +1,22 @@
+package net.dillon.survivalfly;
+
+import net.dillon.survivalfly.screen.ModOptionsScreen;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+
+@Mod(value = SurvivalFly.MOD_ID, dist = Dist.CLIENT)
+public class SurvivalFlyClient {
+
+    /**
+     * Registers client-side events for Survival Fly.
+     */
+    public SurvivalFlyClient(IEventBus modEventBus, ModContainer container) {
+        container.registerExtensionPoint(
+                IConfigScreenFactory.class,
+                (mc, parent) -> new ModOptionsScreen(parent)
+        );
+    }
+}

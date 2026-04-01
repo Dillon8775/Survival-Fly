@@ -15,9 +15,11 @@ public class ModOptions {
     private static File file;
     public static ModOptions OPTIONS = getConfig();
 
-    public PermissionLevel permissionLevel = PermissionLevel.REGULAR;
-    public ChangeFlySpeedOnRule changeFlySpeedOnRule = ChangeFlySpeedOnRule.ANY_GAMEMODE;
+    public Permissions permissions = Permissions.ANYONE;
     public ConfigButton configButton = ConfigButton.EVERYWHERE;
+    public boolean elytraFlight = false;
+    public boolean flightExhaustion = false;
+    public boolean friendlyFlight = false;
 
     /**
      * Loads the configuration file.
@@ -61,7 +63,7 @@ public class ModOptions {
     }
 
     /**
-     * Gets all the Speedrunner Mod configuration options and returns them.
+     * Gets all the Survival Fly configuration options and returns them.
      */
     public static ModOptions getConfig() {
         File file = getConfigFile();
@@ -75,7 +77,7 @@ public class ModOptions {
     }
 
     /**
-     * Returns the Speedrunner Mod configuration file.
+     * Returns the Survival Fly configuration file.
      */
     public static File getConfigFile() {
         if (file == null) {
