@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}+${mc_version}",
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": [
+    "Dillon8775"
+  ],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issues}"
+  },
+  "license": "${license}",
+  "icon": "${logo}.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.dillon.survivalfly.SurvivalFly"
+    ],
+    "client": [
+      "net.dillon.survivalfly.ClientSurvivalFly"
+    ],
+    "modmenu": [
+      "net.dillon.survivalfly.impl.ModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "survivalfly.mixins.json"
+  ],
+  "depends": {
+    "java": ">=${java_version}",
+    "minecraft": ">=${minecraft_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "balm-fabric": ">=${balm_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "${discord}"
+      }
+    }
+  }
+}

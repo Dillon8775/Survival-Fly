@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "net.dillon.survivalfly.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "client.MinecraftMixin",
+    "client.MouseMixin",
+    "client.PauseScreenMixin",
+    "client.TitleScreenMixin"
+  ],
+  "mixins": [
+    "main.GameTypeMixin",
+    "main.ServerPlayerGameModeMixin",
+    "main.ServerPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
