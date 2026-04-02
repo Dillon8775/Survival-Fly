@@ -21,7 +21,7 @@ public class NeoForgedCommonEvents {
 
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        CommonEvents.onPlayerJoin(event.getEntity());
+        CommonEvents.onPlayerRespawn(event.getEntity());
     }
 
     @SubscribeEvent

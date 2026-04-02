@@ -49,6 +49,8 @@ public class CommonEvents {
     }
 
     public static void registerPackets() {
+        Balm.getNetworking().allowClientAndServerOnly(ModUtil.MOD_ID);
+
         Balm.getNetworking().registerServerboundPacket(
                 UpdateFlightSpeedC2SPayload.PACKET_TYPE,
                 UpdateFlightSpeedC2SPayload.class,
