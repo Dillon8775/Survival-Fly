@@ -3,7 +3,6 @@ package net.dillon.survivalfly.util;
 import com.mojang.brigadier.context.CommandContext;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
-import net.dillon.survivalfly.platform.MultiLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -21,6 +20,7 @@ import org.slf4j.LoggerFactory;
  * Utility class for the {@code Survival Fly} mod.
  */
 public class ModUtil {
+    public static final String MOD_ID = "survivalfly";
     public static final float DEFAULT_FLIGHT_SPEED = 0.05F;
     public static final int DEFAULT_DAMAGE_TIME_TICKS = 400;
     public static final String EVER_ENABLED_FLIGHT_NAME = "EverEnabledFlight";
@@ -41,13 +41,6 @@ public class ModUtil {
      */
     public static void info(String message) {
         LOGGER.info(message);
-    }
-
-    /**
-     * Sends the successfully initialized message.
-     */
-    public static void initializeSuccess() {
-        info("Survival Fly version " + MultiLoader.PLATFORM.getModVersion() + " (for " + MultiLoader.PLATFORM.getPlatformName() + ") loaded successfully!");
     }
 
     /**
@@ -115,7 +108,7 @@ public class ModUtil {
     /**
      * Handles flight speed changing.
      */
-    public static void handleFlightSpeed(UpdateFlightSpeedC2SPayload payload, Player player) {
+    public static void handleFlightSpeed(Player player, UpdateFlightSpeedC2SPayload payload) {
         float speed = payload.speed();
 
         player.getAbilities().setFlyingSpeed(speed);

@@ -4,6 +4,11 @@
 
 ---
 
+# Balm Dependency
+As a part of this update, [Balm](https://modrinth.com/mod/balm) is now *required* in order to use this mod. This is to make developing on multiple Minecraft versions *and* mod loaders, way easier. It's available on *all mod platforms,* so you don't have to worry about compatibility issues.
+
+---
+
 ## Elytra Flight *(/elytraflight)*
 - A new feature/command, which requires all player's to be wearing an elytra to use /flight!
 - If the player does not have an elytra equipped, they cannot use /flight.

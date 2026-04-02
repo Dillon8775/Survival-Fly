@@ -24,7 +24,7 @@ public class TitleScreenMixin extends Screen {
     private void init(CallbackInfo ci) {
         if (options().configButton.everywhere() || options().configButton.titleOnly()) {
             SpriteIconButton settingsButton = this.addRenderableWidget(ButtonUtil.initializeButton(this.minecraft, this));
-            settingsButton.setPosition(this.width / 2 + 104, this.height / 4 + 156 + (MultiLoader.PLATFORM.getPlatformName().equals("NeoForge") ? 8 : 0));
+            settingsButton.setPosition(this.width / 2 + 104, this.height / 4 + 156 + (MultiLoader.getPlatform().isNeoForged() ? 8 : 0));
         }
     }
 }

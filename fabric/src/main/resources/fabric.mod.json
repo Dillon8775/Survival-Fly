@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "survivalfly",
-  "version": "1.3+mc26.1",
-  "name": "Survival Fly",
-  "description": "Adds a /flight command for survival players.",
+  "id": "${mod_id}",
+  "version": "${mod_version}+${mc_version}",
+  "name": "${mod_name}",
+  "description": "${description}",
   "authors": [
     "Dillon8775"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/survival-fly",
-    "sources": "https://github.com/Dillon8775/Survival-Fly",
-    "issues": "https://github.com/Dillon8775/Survival-Fly/issues"
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issues}"
   },
-  "license": "All rights reserved.",
-  "icon": "assets/survivalfly/icon.png",
+  "license": "${license}",
+  "icon": "${logo}.png",
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "net.dillon.survivalfly.ClientSurvivalFly"
+    ],
     "main": [
       "net.dillon.survivalfly.SurvivalFly"
-    ],
-    "client": [
-      "net.dillon.survivalfly.SurvivalFlyClient"
     ],
     "modmenu": [
       "net.dillon.survivalfly.impl.ModMenuImpl"
@@ -30,15 +30,16 @@
     "survivalfly.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.18.5",
+    "fabricloader": ">=${fabric_loader_version}",
     "minecraft": ">=26.1-pre.2",
-    "java": ">=25",
-    "fabric-api": "*"
+    "java": ">=${java_version}",
+    "fabric-api": "*",
+    "balm-fabric": ">=${balm_version}"
   },
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vfqEAn4YFy"
+        "modmenu.discord": "${discord}"
       }
     }
   }

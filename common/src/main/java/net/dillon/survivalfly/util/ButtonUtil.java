@@ -44,7 +44,7 @@ public class ButtonUtil {
         if (options().configButton.left() || options().configButton.right()) {
             return height - 29;
         } else {
-            return height / 4 + 48 - 16 + (MultiLoader.PLATFORM.getPlatformName().equals("NeoForge") ? -6 : 0);
+            return height / 4 + 48 - 16 + (MultiLoader.getPlatform().isNeoForged() ? -6 : 0);
         }
     }
 }
