@@ -1,11 +1,27 @@
-# Version 1.3 (Fabric 26.1, NeoForge 26.1):
+# Version 1.3 (Fabric 26.1, NeoForge 26.1, *and* 1.21.1 for Fabric/NeoForged/Forge):
 
 # === New Balancing Features and Commands! ===
 
 ---
 
+# 1.21.1 Support
+##  The mod now supports 1.21.1 for Fabric, NeoForged, and Forge!
+
+---
+
 # Balm Dependency
 As a part of this update, [Balm](https://modrinth.com/mod/balm) is now *required* in order to use this mod. This is to make developing on multiple Minecraft versions *and* mod loaders, way easier. It's available on *all mod platforms,* so you don't have to worry about compatibility issues.
+
+---
+
+# LuckPerms Integration
+## Survival Fly now has official integration with [LuckPerms!](https://modrinth.com/plugin/luckperms)
+### Unfortunately, however, due to a [NeoForge bug related to LuckPerms,](https://github.com/LuckPerms/LuckPerms/issues/3963) LuckPerms *will not with with NeoForged 1.21.1.* It *will* work with 26.1+, on all platforms.
+- LuckPerms is ***NOT REQUIRED*** to use this mod. **It is optional!**
+- If you do ***NOT*** install LuckPerms, then the config will default to the "permission level" for command execution.
+- If you ***DO*** install LuckPerms, then you can set the permission at which players can use /flight commands, with these **nodes:**
+  - "survivalfly.flight" - allows */flight* and */flightspeed* execution (***NOT*** on other players, only yourself).
+  - "survivalfly.flight_speed" - allows */flightspeed* execution.
 
 ---
 

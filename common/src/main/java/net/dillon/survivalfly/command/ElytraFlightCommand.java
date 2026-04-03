@@ -2,6 +2,7 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -24,7 +25,7 @@ public class ElytraFlightCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getElytraFlightCommand() {
         return Commands.literal("elytraflight")
-                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                .requires(PermissionUtil::hasAdminPermissions)
                 .executes(
                         context -> {
                             options().elytraFlight = !options().elytraFlight;

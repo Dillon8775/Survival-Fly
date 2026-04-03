@@ -4,10 +4,8 @@ import com.mojang.brigadier.context.CommandContext;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.permissions.PermissionCheck;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -113,16 +111,6 @@ public class ModUtil {
 
         player.getAbilities().setFlyingSpeed(speed);
         player.onUpdateAbilities();
-    }
-
-    /**
-     * @return the permission level required to run any /flight commands.
-     * @since 1.21.11
-     */
-    public static PermissionCheck getPermissionLevel(int level) {
-        return level == 3 ? Commands.LEVEL_ADMINS :
-                        level == 2 ? Commands.LEVEL_GAMEMASTERS :
-                                level == 1 ? Commands.LEVEL_MODERATORS : Commands.LEVEL_ALL;
     }
 
     /**

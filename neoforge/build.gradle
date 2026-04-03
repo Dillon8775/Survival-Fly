@@ -20,6 +20,8 @@ dependencies {
     implementation("net.blay09.mods:balm-neoforge:${balm_version}") {
         changing = balm_version.contains('SNAPSHOT')
     }
+
+    compileOnly "net.luckperms:api:${luckperms_api}"
 }
 
 neoForge {

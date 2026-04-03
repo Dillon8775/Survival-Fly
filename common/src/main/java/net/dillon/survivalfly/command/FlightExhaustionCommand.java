@@ -2,6 +2,7 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -24,7 +25,7 @@ public class FlightExhaustionCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightExhaustionCommand() {
         return Commands.literal("flightexhaustion")
-                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                .requires(PermissionUtil::hasAdminPermissions)
                 .executes(
                         context -> {
                             options().flightExhaustion = !options().flightExhaustion;

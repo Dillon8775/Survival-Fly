@@ -17,6 +17,7 @@ repositories {
             includeGroup 'net.blay09.mods'
         }
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -29,6 +30,8 @@ dependencies {
     implementation("net.blay09.mods:balm-fabric:${balm_version}") {
         changing = balm_version.contains('SNAPSHOT')
     }
+
+    compileOnly "me.lucko:fabric-permissions-api:${fabric_permissions_api}"
 }
 
 loom {

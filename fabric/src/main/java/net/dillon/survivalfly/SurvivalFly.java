@@ -6,10 +6,14 @@ import net.dillon.survivalfly.main.Main;
 import net.dillon.survivalfly.util.ModUtil;
 import net.fabricmc.api.ModInitializer;
 
+import static net.dillon.survivalfly.event.FabricCommonEvents.registerFabricCommands;
+
 public class SurvivalFly implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		registerFabricCommands();
+
 		Balm.initializeMod(ModUtil.MOD_ID, FabricLoadContext.INSTANCE, Main::initialize);
 	}
 }

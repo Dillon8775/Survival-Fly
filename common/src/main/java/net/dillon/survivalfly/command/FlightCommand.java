@@ -1,6 +1,8 @@
 package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.dillon.survivalfly.permission.Nodes;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -14,8 +16,10 @@ import net.minecraft.world.level.gamerules.GameRules;
 import java.util.Collection;
 import java.util.List;
 
+import static net.dillon.survivalfly.permission.PermissionUtil.hasPermissionDefaultFallback;
 import static net.dillon.survivalfly.util.ModTexts.*;
-import static net.dillon.survivalfly.util.ModUtil.*;
+import static net.dillon.survivalfly.util.ModUtil.hasElytra;
+import static net.dillon.survivalfly.util.ModUtil.isFlyingAllowed;
 
 /**
  * The functionality for the {@code /flight} command.
@@ -29,7 +33,7 @@ public class FlightCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightCommand() {
         return Commands.literal("flight")
-                .requires(Commands.hasPermission(getPermissionLevel(options().permissions.getId())))
+                .requires(commandSourceStack -> hasPermissionDefaultFallback(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
                 .executes(
                         context -> execute(
                                 context.getSource(),
@@ -39,7 +43,7 @@ public class FlightCommand {
                 )
                 .then(
                         Commands.argument("target", EntityArgument.player())
-                                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                .requires(PermissionUtil::hasAdminPermissions)
                                 .executes(
                                         context -> execute(
                                                 context.getSource(),
@@ -57,7 +61,7 @@ public class FlightCommand {
                                 ))
                                 .then(
                                         Commands.argument("target", EntityArgument.players())
-                                                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                                .requires(PermissionUtil::hasAdminPermissions)
                                                 .executes(
                                                         context -> execute(
                                                                 context.getSource(),
@@ -75,7 +79,7 @@ public class FlightCommand {
                                 ))
                                 .then(
                                         Commands.argument("target", EntityArgument.players())
-                                                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                                .requires(PermissionUtil::hasAdminPermissions)
                                                 .executes(
                                                         context -> execute(
                                                                 context.getSource(), EntityArgument.getPlayers(context, "target"), false

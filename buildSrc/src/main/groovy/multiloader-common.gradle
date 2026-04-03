@@ -8,7 +8,7 @@ base {
 }
 
 tasks.named('jar', Jar) {
-    archiveFileName.set("${mod_id}-${version}_${project.name}-mc${minecraft_version}.jar")
+    archiveFileName.set("${mod_id}-${mod_version}_${project.name}-mc${minecraft_version}.jar")
 }
 
 java {

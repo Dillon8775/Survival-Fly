@@ -2,6 +2,8 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.dillon.survivalfly.permission.Nodes;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.gamerules.GameRules;
 import java.util.Collection;
 import java.util.List;
 
+import static net.dillon.survivalfly.permission.PermissionUtil.hasPermissionDefaultFallback;
 import static net.dillon.survivalfly.util.ModTexts.getPlayerName;
 import static net.dillon.survivalfly.util.ModUtil.*;
 
@@ -26,7 +29,7 @@ public class FlightSpeedCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightSpeedCommand() {
         return Commands.literal("flightspeed")
-                .requires(Commands.hasPermission(getPermissionLevel(options().permissions.getId())))
+                .requires(commandSourceStack -> hasPermissionDefaultFallback(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT_SPEED))
                 .then(
                         Commands.literal("set")
                                 .then(
@@ -38,7 +41,7 @@ public class FlightSpeedCommand {
                                                 ))
                                                 .then(
                                                         Commands.argument("target", EntityArgument.players())
-                                                                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                                                .requires(PermissionUtil::hasAdminPermissions)
                                                                 .executes(context -> execute(
                                                                         context.getSource(),
                                                                         EntityArgument.getPlayers(context, "target"),
@@ -56,7 +59,7 @@ public class FlightSpeedCommand {
                                         ))
                                 .then(
                                         Commands.argument("target", EntityArgument.player())
-                                                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                                .requires(PermissionUtil::hasAdminPermissions)
                                                 .executes(context -> getSpeed(
                                                         context.getSource(),
                                                         EntityArgument.getPlayer(context, "target")
@@ -72,7 +75,7 @@ public class FlightSpeedCommand {
                                 ))
                                 .then(
                                         Commands.argument("target", EntityArgument.players())
-                                                .requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
+                                                .requires(PermissionUtil::hasAdminPermissions)
                                                 .executes(context -> execute(
                                                         context.getSource(),
                                                         EntityArgument.getPlayers(context, "target"),
