@@ -12,14 +12,19 @@
   <img src="https://avatars.githubusercontent.com/u/1390178?s=280&v=4" width="100" height="100" alt="Compatible with Forge">
 </a>
 
-###
+---
 
-### Please report *any* bugs you may find <a href="https://github.com/Dillon8775/Survival-Fly/issues" target="_blank">here.</a>
+# Requires [Balm!](https://modrinth.com/mod/balm)
+<a href="https://modrinth.com/mod/balm" target="_blank">
+<img src="https://media.forgecdn.net/avatars/thumbnails/1107/117/256/256/638657111836546584.png" width="128" height="128" alt="Compatible with Forge">
+</a>
 
 ---
 
 ## For servers (FABRIC ONLY): players do not need to install this mod for themselves on version 1.3 or higher!
 ### For older versions (not including *1.21.1*), please scroll down to the bottom for information on how to setup your server.
+
+### Please report *any* bugs you may find <a href="https://github.com/Dillon8775/Survival-Fly/issues" target="_blank">here.</a>
 
 ---
 
