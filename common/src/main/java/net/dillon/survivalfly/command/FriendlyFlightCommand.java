@@ -2,6 +2,7 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -25,7 +26,7 @@ public class FriendlyFlightCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFriendlyFlightCommand() {
         return Commands.literal("friendlyflight")
-                .requires(source -> source.hasPermission(Commands.LEVEL_ADMINS))
+                .requires(PermissionUtil::hasAdminPermissions)
                 .executes(
                         context -> {
                             options().friendlyFlight = !options().friendlyFlight;

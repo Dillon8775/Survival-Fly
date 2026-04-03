@@ -29,6 +29,9 @@ dependencies {
     modImplementation libs.fabricLoader
     modImplementation libs.fabricApi
     modImplementation "com.terraformersmc:modmenu:11.0.4"
+
+    modCompileOnly "me.lucko:fabric-permissions-api:${fabric_permissions_api}"
+    compileOnly "net.luckperms:api:${luckperms_api}"
 }
 
 apply from: rootProject.file('repositories.gradle')

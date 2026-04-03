@@ -1,6 +1,8 @@
 package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.dillon.survivalfly.permission.Nodes;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -9,8 +11,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 
+import static net.dillon.survivalfly.permission.PermissionUtil.hasPermissionDefaultFallback;
 import static net.dillon.survivalfly.util.ModTexts.*;
-import static net.dillon.survivalfly.util.ModUtil.*;
+import static net.dillon.survivalfly.util.ModUtil.hasElytra;
+import static net.dillon.survivalfly.util.ModUtil.isFlyingAllowed;
 
 /**
  * A command to check the status of your flight ability.
@@ -24,7 +28,7 @@ public class FlightStatusCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightStatusCommand() {
         return Commands.literal("flightstatus")
-                .requires(source -> source.hasPermission(options().permissions.getId()))
+                .requires(commandSourceStack -> hasPermissionDefaultFallback(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
                 .executes(
                         context -> execute(
                                 context.getSource(),
@@ -33,7 +37,7 @@ public class FlightStatusCommand {
                 )
                 .then(
                         Commands.argument("target", EntityArgument.player())
-                                .requires(source -> source.hasPermission(Commands.LEVEL_ADMINS))
+                                .requires(PermissionUtil::hasAdminPermissions)
                                 .executes(context -> execute(
                                         context.getSource(),
                                         EntityArgument.getPlayer(context, "target")

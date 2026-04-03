@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -15,7 +16,7 @@ public class SurvivalFlyCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getHelpCommand() {
         return Commands.literal("survivalfly")
-                .requires(source -> source.hasPermission(Commands.LEVEL_ADMINS))
+                .requires(PermissionUtil::hasAdminPermissions)
                 .executes(
                         context -> {
                             context.getSource().sendSystemMessage(getMessage());
