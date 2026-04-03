@@ -99,6 +99,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         mainFile.displayName = "[${mc_version.substring(2)}] $mod_name ${mod_version}"
         mainFile.changelog = rootProject.file("${changelog_file}").text
         mainFile.addRequirement("balm")
+        mainFile.addOptional("luckperms")
         mainFile.addGameVersion(libs.minecraft.get().version)
         mainFile.releaseType = "release"
         project.findProperty("curseforge_environments")?.split(",")?.toList()?.each { mainFile.addEnvironment(it) }
@@ -121,6 +122,7 @@ modrinth {
     loaders = ['forge']
     dependencies {
         required.project "balm"
+        optional.project "luckperms"
     }
 }
 

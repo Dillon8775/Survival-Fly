@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 
 public enum Permissions implements StringRepresentable {
-    ANYONE(0, "regular", "survivalfly.options.permissions.regular"),
+    ANYONE(0, "anyone", "survivalfly.options.permissions.regular"),
     MODERATOR(1, "moderator", "survivalfly.options.permissions.moderator"),
     GAMEMASTER(2, "gamemaster", "survivalfly.options.permissions.gamemaster"),
     ADMIN(3, "admin", "survivalfly.options.permissions.admin");

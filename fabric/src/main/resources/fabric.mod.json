@@ -36,6 +36,9 @@
     "fabric-api": ">=${fabric_api_version}",
     "balm-fabric": ">=${balm_version}"
   },
+  "suggests": {
+    "luckperms": "*"
+  },
   "custom": {
     "modmenu": {
       "links": {

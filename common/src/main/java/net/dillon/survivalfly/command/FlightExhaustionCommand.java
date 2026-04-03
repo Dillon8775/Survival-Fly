@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.blay09.mods.balm.api.Balm;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
@@ -28,8 +29,9 @@ public class FlightExhaustionCommand {
                 .requires(PermissionUtil::hasAdminPermissions)
                 .executes(
                         context -> {
-                            options().flightExhaustion = !options().flightExhaustion;
-                            ModOptions.saveConfig();
+                            Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                                options().flightExhaustion = !options().flightExhaustion;
+                            });
                             if (options().flightExhaustion) {
                                 context.getSource().sendSystemMessage(FLIGHT_EXHAUSTION_ENABLED);
                                 context.getSource().sendSystemMessage(FLIGHT_EXHAUSTION_DESC);

@@ -2,6 +2,7 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.blay09.mods.balm.api.Balm;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.Permissions;
 import net.dillon.survivalfly.permission.PermissionUtil;
@@ -35,8 +36,9 @@ public class PermissionsCommand {
 
                                             try {
                                                 Permissions permission = Permissions.byName(input);
-                                                options().permissions = permission;
-                                                ModOptions.saveConfig();
+                                                Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                                                    options().permissions = permission;
+                                                });
                                                 context.getSource().sendSystemMessage(changedPermission(permission));
                                                 return permission.getId();
                                             } catch (NullPointerException | IllegalArgumentException o) {

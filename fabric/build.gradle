@@ -90,6 +90,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         mainFile.changelog = rootProject.file("${changelog_file}").text
         mainFile.addRequirement("fabric-api")
         mainFile.addRequirement("balm")
+        mainFile.addOptional("luckperms")
         mainFile.addGameVersion(libs.minecraft.get().version)
         mainFile.releaseType = "release"
         project.findProperty("curseforge_environments")?.split(",")?.toList()?.each { mainFile.addEnvironment(it) }
@@ -113,5 +114,6 @@ modrinth {
     dependencies {
         required.project "fabric-api"
         required.project "balm"
+        optional.project "luckperms"
     }
 }

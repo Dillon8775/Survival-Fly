@@ -1,5 +1,6 @@
 package net.dillon.survivalfly.option;
 
+import net.blay09.mods.balm.api.Balm;
 import net.dillon.survivalfly.util.ModTexts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
@@ -35,24 +36,32 @@ public class ModListOptions {
                 (optionText, value) -> value.getText(),
                 new OptionInstance.Enum<>(Arrays.asList(Permissions.values()), Permissions.Codec),
                 options().permissions,
-                value -> options().permissions = value);
+                value -> {
+                    Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                        config.permissions = value;
+                    });
+                });
     }
 
-    public static final OptionInstance<ConfigButton> CONFIG_BUTTON = new OptionInstance<>(
-            "survivalfly.options.config_button",
+    public static final OptionInstance<MenuButton> MENU_BUTTON = new OptionInstance<>(
+            "survivalfly.options.menu_button",
             option -> {
                 return switch (option) {
-                    case EVERYWHERE -> Tooltip.create(Component.translatable("survivalfly.options.config_button.everywhere.tooltip"));
-                    case BOTTOM_LEFT -> Tooltip.create(Component.translatable("survivalfly.options.config_button.bottom_left.tooltip"));
-                    case BOTTOM_RIGHT -> Tooltip.create(Component.translatable("survivalfly.options.config_button.bottom_right.tooltip"));
-                    case TITLE_ONLY -> Tooltip.create(Component.translatable("survivalfly.options.config_button.title_only.tooltip"));
-                    case OFF -> Tooltip.create(Component.translatable("survivalfly.options.config_button.off.tooltip"));
+                    case EVERYWHERE -> Tooltip.create(Component.translatable("survivalfly.options.menu_button.everywhere.tooltip"));
+                    case BOTTOM_LEFT -> Tooltip.create(Component.translatable("survivalfly.options.menu_button.bottom_left.tooltip"));
+                    case BOTTOM_RIGHT -> Tooltip.create(Component.translatable("survivalfly.options.menu_button.bottom_right.tooltip"));
+                    case TITLE_ONLY -> Tooltip.create(Component.translatable("survivalfly.options.menu_button.title_only.tooltip"));
+                    case OFF -> Tooltip.create(Component.translatable("survivalfly.options.menu_button.off.tooltip"));
                 };
             },
             (optionText, value) -> value.getText(),
-            new OptionInstance.Enum<>(Arrays.asList(ConfigButton.values()), ConfigButton.Codec),
-            options().configButton,
-            value -> options().configButton = value);
+            new OptionInstance.Enum<>(Arrays.asList(MenuButton.values()), MenuButton.Codec),
+            options().menuButton,
+            value -> {
+                Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                    config.menuButton = value;
+                });
+            });
 
     public static OptionInstance<Boolean> elytraFlight() {
         return OptionInstance.createBoolean("survivalfly.options.elytra_flight", OptionInstance.cachedConstantTooltip(
@@ -60,7 +69,11 @@ public class ModListOptions {
                         ? Component.translatable("survivalfly.options.elytra_flight.tooltip")
                         : Component.translatable("survivalfly.option_disabled")
                 ),
-                ON_OFF_TEXT, options().elytraFlight, value -> options().elytraFlight = value);
+                ON_OFF_TEXT, options().elytraFlight, value -> {
+                    Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                        config.elytraFlight = value;
+                    });
+                });
     }
 
     public static OptionInstance<Boolean> flightExhaustion() {
@@ -69,15 +82,28 @@ public class ModListOptions {
                         ? Component.translatable("survivalfly.options.flight_exhaustion.tooltip")
                         : Component.translatable("survivalfly.option_disabled")
                 ),
-                ON_OFF_TEXT, options().flightExhaustion, value -> options().flightExhaustion = value);
+                ON_OFF_TEXT, options().flightExhaustion, value -> {
+                    Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                        config.flightExhaustion = value;
+                    });
+                });
     }
 
-    public static OptionInstance<Boolean> friendlyFlight() {
-        return OptionInstance.createBoolean("survivalfly.options.friendly_flight", OptionInstance.cachedConstantTooltip(
-                Minecraft.getInstance().getCurrentServer() == null
-                        ? Component.translatable("survivalfly.options.friendly_flight.tooltip")
-                        : Component.translatable("survivalfly.option_disabled")
-                ),
-                ON_OFF_TEXT, options().friendlyFlight, value -> options().friendlyFlight = value);
-    }
+    public static final OptionInstance<FriendlyFlight> FRIENDLY_FLIGHT = new OptionInstance<>(
+            "survivalfly.options.friendly_flight",
+            option -> {
+                return switch (option) {
+                    case OFF -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.tooltip"));
+                    case PLAYERS_AND_MOBS -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.players_and_mobs.tooltip"));
+                    case PLAYERS_ONLY -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.players_only.tooltip"));
+                };
+            },
+            (optionText, value) -> value.getText(),
+            new OptionInstance.Enum<>(Arrays.asList(FriendlyFlight.values()), FriendlyFlight.Codec),
+            options().friendlyFlight,
+            value -> {
+                Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                    config.friendlyFlight = value;
+                });
+            });
 }
