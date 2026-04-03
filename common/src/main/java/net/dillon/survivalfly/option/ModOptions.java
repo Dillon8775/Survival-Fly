@@ -4,7 +4,7 @@ import net.blay09.mods.balm.api.config.reflection.Comment;
 import net.blay09.mods.balm.api.config.reflection.Config;
 import net.dillon.survivalfly.util.ModUtil;
 
-@Config(value = ModUtil.MOD_ID, type = "config")
+@Config(ModUtil.MOD_ID)
 public class ModOptions {
     @Comment("Default permission system for survival fly's commands (/flight, /flightstatus, and /flightspeed).\n# Allowed values: anyone, moderator, gamemaster, admin\n# Ignore this if you are using LuckPerms.")
     public Permissions permissions = Permissions.ANYONE;
