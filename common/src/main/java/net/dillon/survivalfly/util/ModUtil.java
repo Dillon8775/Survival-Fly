@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.util;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.minecraft.commands.CommandSourceStack;
@@ -31,7 +32,7 @@ public class ModUtil {
      * Returns the options.
      */
     public static ModOptions options() {
-        return ModOptions.OPTIONS;
+        return Balm.config().getActiveConfig(ModOptions.class);
     }
 
     /**

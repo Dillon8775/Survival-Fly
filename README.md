@@ -18,8 +18,8 @@
 
 ---
 
-## For servers (FABRIC ONLY): players do not need to install this mod for themselves on version 1.3 *(for mc26.1+)* or greater!
-### For *mc1.21.11* and below, please scroll down to the bottom for information on how to setup your server.
+## For servers (FABRIC ONLY): players do not need to install this mod for themselves on version 1.3 or higher!
+### For older versions (not including *1.21.1*), please scroll down to the bottom for information on how to setup your server.
 
 ---
 
@@ -93,8 +93,10 @@ Command Usage: /flightexhaustion
 
 ### OFF by default.
 
-Command Usage: /friendlyflight
+Command Usage: /friendlyflight *off / players_and_mobs / players_only*
 - Only operators can execute this command.
+- Setting to "players_and_mobs" will disable player flight from all entities.
+- Setting to "players_only" will only disable player flight from player attacks.
 
 #### (since: v1.3)
 
@@ -130,18 +132,36 @@ Note: Permission level "Regular" means that players can only use Survival Fly co
 
 ---
 
-# For older version players (*1.21.11* and below)
+# LuckPerms Integration
+
+## You *can* use [LuckPerms](https://modrinth.com/mod/luckperms) with this mod! (Fabric, NeoForged and Forge *only*)
+
+## Only compatible on *version 1.3* of the mod or higher.
+
+### Permission Nodes for Survival Fly
+- **"survivalfly.flight"** - Allows */flight* and */flightstatus* execution on *self.*
+- **"survivalfly.flight_speed"** - Allows */flightspeed* execution on *self.*
+
+### Note: LuckPerms is *optional!* Meaning, if you *don't* want to use LuckPerms:
+1. Command permissions are based on Survival Fly's built-in "permission" system, which you can view above.
+2. With LuckPerms installed, permissions are determined by the permission nodes, listed above.
+
+### Due to a [NeoForged 1.21.1 incompatibility issue w/ LuckPerms,](https://github.com/LuckPerms/LuckPerms/issues/3963) LuckPerms will *not* work with this version of Minecraft on NeoForged.
+
+---
+
+# For older version players (*1.21.11 [not including 1.21.1]*, and below)
 
 ### Players *should* install this mod for themselves client-side, otherwise they will not be able to read messages when executing commands.
 
 ### Commands will still work, but messages will be unreadable. This issue has been *fixed* in version 1.3 for Minecraft 26.1 *and above.*
 
 ### To change permission level for commands, locate the "survivalfly-config.json" file, and set the permission level to one of the following strings:
-- **"REGULAR"** *(now called "ANYONE" on mc26.1 and above)*
+- **"REGULAR"** *(now called "ANYONE" on version **1.3** and above)*
 - **"MODERATOR"**
 - **"GAMEMASTER"**
 - **"ADMIN"**
-- **"OWNER"** *(no longer exists in mc26.1 and above)*
+- **"OWNER"** *(no longer exists in version **1.3** and above)*
 
 ---
 

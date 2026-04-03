@@ -28,9 +28,9 @@ public class ButtonUtil {
      * @return the configuration button X position.
      */
     public static int getConfigButtonX(int width) {
-        if (options().configButton.left()) {
+        if (options().menuButton.left()) {
             return 8;
-        } else if (options().configButton.right()) {
+        } else if (options().menuButton.right()) {
             return width - 28;
         } else {
             return width / 2 + 106;
@@ -41,7 +41,7 @@ public class ButtonUtil {
      * @return the configuration button Y position.
      */
     public static int getConfigButtonY(int height) {
-        if (options().configButton.left() || options().configButton.right()) {
+        if (options().menuButton.left() || options().menuButton.right()) {
             return height - 29;
         } else {
             return height / 4 + 48 - 16 + (MultiLoader.getPlatform().isNeoForged() ? -6 : 0);

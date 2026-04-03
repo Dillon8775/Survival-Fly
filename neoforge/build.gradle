@@ -75,6 +75,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         mainFile.displayName = "[${mc_version.substring(2)}] $mod_name ${mod_version}"
         mainFile.changelog = rootProject.file("${changelog_file}").text
         mainFile.addRequirement("balm")
+        mainFile.addOptional("luckperms")
         def supportedVersions = supported_mc_versions
                 .split(",")
                 .collect { it.trim() }
@@ -107,6 +108,7 @@ modrinth {
     loaders = ['neoforge']
     dependencies {
         required.project "balm"
+        optional.project "luckperms"
     }
 }
 

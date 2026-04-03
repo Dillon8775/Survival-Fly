@@ -94,6 +94,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         mainFile.changelog = rootProject.file("${changelog_file}").text
         mainFile.addRequirement("fabric-api")
         mainFile.addRequirement("balm")
+        mainFile.addOptional("luckperms")
         def supportedVersions = supported_mc_versions
                 .split(",")
                 .collect { it.trim() }
@@ -125,5 +126,6 @@ modrinth {
     dependencies {
         required.project "fabric-api"
         required.project "balm"
+        optional.project "luckperms"
     }
 }

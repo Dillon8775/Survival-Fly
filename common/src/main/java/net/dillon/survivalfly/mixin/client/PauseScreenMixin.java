@@ -27,7 +27,7 @@ public class PauseScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void init(CallbackInfo ci) {
-        if (options().configButton.everywhere() && this.showPauseMenu) {
+        if (options().menuButton.everywhere() && this.showPauseMenu) {
             SpriteIconButton settingsButton = this.addRenderableWidget(ButtonUtil.initializeButton(this.minecraft, this));
             settingsButton.setPosition(getConfigButtonX(this.width), getConfigButtonY(this.height));
         }

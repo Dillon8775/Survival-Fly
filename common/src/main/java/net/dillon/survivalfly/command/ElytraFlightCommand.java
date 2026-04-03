@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
@@ -28,8 +29,9 @@ public class ElytraFlightCommand {
                 .requires(PermissionUtil::hasAdminPermissions)
                 .executes(
                         context -> {
-                            options().elytraFlight = !options().elytraFlight;
-                            ModOptions.saveConfig();
+                            Balm.config().updateLocalConfig(ModOptions.class, config -> {
+                                config.elytraFlight = !config.elytraFlight;
+                            });
                             if (options().elytraFlight) {
                                 context.getSource().sendSystemMessage(ELYTRA_FLIGHT_ENABLED);
                                 context.getSource().sendSystemMessage(ELYTRA_FLIGHT_DESC);

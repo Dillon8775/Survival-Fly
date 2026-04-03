@@ -59,6 +59,7 @@ As a part of this update, [Balm](https://modrinth.com/mod/balm) is now *required
     - The one downside to this is that creating translations for other languages is not currently possible.
 
 ## Option Changes
+- The config file is now a .toml file, named "survivalfly-config.toml" (all platforms).
 - Added the option to display the Survival Fly config button at the bottom left or right hand side of the pause screen.
 - Renamed "Permission Level" option to "Permissions".
 - Removed "Owner" permission level. "Admin" is now the highest permission level.
@@ -69,6 +70,7 @@ As a part of this update, [Balm](https://modrinth.com/mod/balm) is now *required
 
 ## Other Changes
 - (Fabric only) The mod now requires Fabric Loader version **0.18.5.**
+- Renamed "Config Button" option to "Menu Button".
 - Added config support for NeoForge.
 - Updated commands for new features.
 - Updated lang and text.

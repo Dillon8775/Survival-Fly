@@ -1,6 +1,9 @@
 package net.dillon.survivalfly.command;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.blay09.mods.balm.Balm;
+import net.dillon.survivalfly.option.FriendlyFlight;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
@@ -27,17 +30,32 @@ public class FriendlyFlightCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> getFriendlyFlightCommand() {
         return Commands.literal("friendlyflight")
                 .requires(PermissionUtil::hasAdminPermissions)
-                .executes(
-                        context -> {
-                            options().friendlyFlight = !options().friendlyFlight;
-                            ModOptions.saveConfig();
-                            if (options().friendlyFlight) {
-                                sendSourceMessage(context, FRIENDLY_FLIGHT_ENABLED);
-                                sendSourceMessage(context, FRIENDLY_FLIGHT_DESC);
-                            } else {
-                                sendSourceMessage(context, FRIENDLY_FLIGHT_DISABLED);
-                            }
-                            return 0;
-                        });
+                .then(
+                        Commands.argument("type", StringArgumentType.word())
+                                .suggests((context, builder) -> {
+                                    for (FriendlyFlight friendlyFlight : FriendlyFlight.values()) {
+                                        builder.suggest(friendlyFlight.getSerializedName());
+                                    }
+                                    return builder.buildFuture();
+                                }).executes(context -> {
+                                    String input = StringArgumentType.getString(context, "type");
+
+                                    try {
+                                        FriendlyFlight friendlyFlight = FriendlyFlight.byName(input);
+                                        Balm.config().updateLocalConfig(ModOptions.class, config -> {
+                                            config.friendlyFlight = friendlyFlight;
+                                        });
+                                        if (options().friendlyFlight.enabled()) {
+                                            sendSourceMessage(context, FRIENDLY_FLIGHT_ENABLED);
+                                            sendSourceMessage(context, FRIENDLY_FLIGHT_DESC);
+                                        } else {
+                                            sendSourceMessage(context, FRIENDLY_FLIGHT_DISABLED);
+                                        }
+                                        return friendlyFlight.getId();
+                                    } catch (NullPointerException | IllegalArgumentException o) {
+                                        context.getSource().sendFailure(Component.literal("Invalid type: " + input));
+                                        return 0;
+                                    }
+                                }));
     }
 }

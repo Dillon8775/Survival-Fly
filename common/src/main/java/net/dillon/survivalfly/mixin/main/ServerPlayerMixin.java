@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -80,7 +81,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
      */
     @Override
     public boolean flyingAllowed() {
-        return !options().friendlyFlight || this.damageTimeTicks == 0;
+        return !options().friendlyFlight.enabled() || this.damageTimeTicks == 0;
     }
 
     /**
@@ -101,7 +102,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
     private void readDamageTime(ValueInput input, CallbackInfo ci) {
         this.everEnabledFlight = input.getBooleanOr(EVER_ENABLED_FLIGHT_NAME, false);
         this.wantToFlyAgain = input.getBooleanOr(WANT_TO_FLY_AGAIN, false);
-        this.damageTimeTicks = input.getIntOr(DAMAGE_TIME_TICKS_NAME, -1);
+        this.damageTimeTicks = input.getIntOr(DAMAGE_TIME_TICKS_NAME, DEFAULT_DAMAGE_TIME_TICKS);
         this.playedBroken = input.getBooleanOr(PLAYED_BROKEN_NAME, false);
     }
 
@@ -111,11 +112,15 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
     @Inject(method = "hurtServer", at = @At("HEAD"))
     private void onDamageDisableFlight(ServerLevel level, DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
         ServerPlayer victimPlayer = (ServerPlayer)(Object)this;
-        if (!options().friendlyFlight || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
+        if (!options().friendlyFlight.enabled() || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
             return;
         }
 
         Entity attacker = source.getEntity();
+
+        if (!isInvalidPlayerGameMode(victimPlayer) && options().friendlyFlight.mobsAllowed() && attacker instanceof LivingEntity) {
+            stopFlightForPlayer(victimPlayer, false);
+        }
 
         if (attacker instanceof ServerPlayer attackerPlayer && !isInvalidPlayerGameMode(attackerPlayer)) {
             stopFlightForPlayer(attackerPlayer, true);
@@ -134,7 +139,10 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
         }
 
         // Friendly flight functionality (stops player flight if taking damage)
-        if (options().friendlyFlight) {
+        if (options().friendlyFlight.enabled()) {
+            if (this.damageTimeTicks == -1) {
+                this.damageTimeTicks = DEFAULT_DAMAGE_TIME_TICKS;
+            }
             if (this.damageTimeTicks > 0) {
                 if (player.getAbilities().mayfly) {
                     player.getAbilities().mayfly = false;
@@ -168,7 +176,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
         }
 
         // Stop further action, this prevents double jumping lol
-        if (options().friendlyFlight && this.damageTimeTicks > 0) {
+        if (options().friendlyFlight.enabled() && this.damageTimeTicks > 0) {
             return;
         }
 
