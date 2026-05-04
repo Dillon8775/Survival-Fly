@@ -40,7 +40,10 @@ public class ModOptionsScreen extends OptionsSubScreen {
                 ModListOptions.flightExhaustion().createButton(this.options),
                 ModListOptions.FRIENDLY_FLIGHT.createButton(this.options),
 
+                ModListOptions.crouchFlight().createButton(this.options),
                 ModListOptions.MENU_BUTTON.createButton(this.options),
+
+                ModListOptions.safeMode().createButton(this.options),
                 Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),
 
                 Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Survival-Fly/issues", false)).build()

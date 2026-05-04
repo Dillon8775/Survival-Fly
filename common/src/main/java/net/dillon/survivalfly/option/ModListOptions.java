@@ -89,14 +89,40 @@ public class ModListOptions {
                 });
     }
 
+    public static OptionInstance<Boolean> crouchFlight() {
+        return OptionInstance.createBoolean("survivalfly.options.crouch_flight", OptionInstance.cachedConstantTooltip(
+                        Component.translatable("survivalfly.options.crouch_flight.tooltip")
+                ),
+                ON_OFF_TEXT, options().crouchFlight, value -> {
+                    Balm.config().updateLocalConfig(ModOptions.class, config -> {
+                        config.crouchFlight = value;
+                    });
+                });
+    }
+
+    public static OptionInstance<Boolean> safeMode() {
+        return OptionInstance.createBoolean("survivalfly.options.safe_mode", OptionInstance.cachedConstantTooltip(
+                        Component.translatable("survivalfly.options.safe_mode.tooltip")
+                ),
+                ON_OFF_TEXT, options().safeMode, value -> {
+                    Balm.config().updateLocalConfig(ModOptions.class, config -> {
+                        config.safeMode = value;
+                    });
+                });
+    }
+
     public static final OptionInstance<FriendlyFlight> FRIENDLY_FLIGHT = new OptionInstance<>(
             "survivalfly.options.friendly_flight",
             option -> {
-                return switch (option) {
-                    case OFF -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.tooltip"));
-                    case PLAYERS_AND_MOBS -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.players_and_mobs.tooltip"));
-                    case PLAYERS_ONLY -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.players_only.tooltip"));
-                };
+                if (Minecraft.getInstance().getCurrentServer() == null) {
+                    return switch (option) {
+                        case OFF -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.tooltip"));
+                        case PLAYERS_AND_MOBS -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.players_and_mobs.tooltip"));
+                        case PLAYERS_ONLY -> Tooltip.create(Component.translatable("survivalfly.options.friendly_flight.players_only.tooltip"));
+                    };
+                } else {
+                    return Tooltip.create(Component.translatable("survivalfly.option_disabled"));
+                }
             },
             (optionText, value) -> value.getText(),
             new OptionInstance.Enum<>(Arrays.asList(FriendlyFlight.values()), FriendlyFlight.Codec),

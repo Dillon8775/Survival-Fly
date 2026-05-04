@@ -3,7 +3,9 @@ package net.dillon.survivalfly.event;
 import com.mojang.brigadier.CommandDispatcher;
 import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.command.*;
-import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.packet.ServerPacketHandlers;
+import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
 import net.dillon.survivalfly.util.ModUtil;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.commands.CommandBuildContext;
@@ -48,17 +50,30 @@ public class CommonEvents {
         ((PlayerAbilitiesExtension)player).setEverEnabledFlight(player.getAbilities().mayfly);
     }
 
+    /**
+     * Registers all survival fly packets.
+     */
     public static void registerPackets() {
         Balm.networking().allowClientAndServerOnly(ModUtil.MOD_ID);
 
         Balm.networking().registerServerboundPacket(
-                UpdateFlightSpeedC2SPayload.PACKET_TYPE,
-                UpdateFlightSpeedC2SPayload.class,
-                UpdateFlightSpeedC2SPayload.CODEC,
-                ModUtil::handleFlightSpeed
+                UpdateFlightSpeedC2SPacket.PACKET_TYPE,
+                UpdateFlightSpeedC2SPacket.class,
+                UpdateFlightSpeedC2SPacket.CODEC,
+                ServerPacketHandlers::handleUpdateFlightSpeed
+        );
+
+        Balm.networking().registerServerboundPacket(
+                UpdateFlightC2SPacket.PACKET_TYPE,
+                UpdateFlightC2SPacket.class,
+                UpdateFlightC2SPacket.CODEC,
+                ServerPacketHandlers::handleUpdateFlight
         );
     }
 
+    /**
+     * Registers all survival fly commands.
+     */
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(SurvivalFlyCommand.getHelpCommand());
         dispatcher.register(FlightCommand.getFlightCommand());

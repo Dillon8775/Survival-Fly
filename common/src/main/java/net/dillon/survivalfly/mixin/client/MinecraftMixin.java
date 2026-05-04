@@ -2,7 +2,7 @@ package net.dillon.survivalfly.mixin.client;
 
 import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.keybind.ModKeybinds;
-import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -27,7 +27,7 @@ public class MinecraftMixin {
     private void resetFlightSpeed(CallbackInfo ci) {
         // Reset flight speed if key was pressed and player has flying abilities
         while (ModKeybinds.RESET_FLIGHT_SPEED.consumeClick() && this.player.getAbilities().mayfly && this.player != null) {
-            Balm.networking().sendToServer(new UpdateFlightSpeedC2SPayload(DEFAULT_FLIGHT_SPEED));
+            Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(DEFAULT_FLIGHT_SPEED));
             this.player.sendOverlayMessage(Component.translatable("survivalfly.reset_flight_speed").withStyle(ChatFormatting.GREEN));
         }
     }

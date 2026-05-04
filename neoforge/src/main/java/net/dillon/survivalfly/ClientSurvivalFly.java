@@ -1,5 +1,6 @@
 package net.dillon.survivalfly;
 
+import net.dillon.survivalfly.keybind.ModKeybinds;
 import net.dillon.survivalfly.screen.ModOptionsScreen;
 import net.dillon.survivalfly.util.ModUtil;
 import net.neoforged.api.distmarker.Dist;
@@ -12,6 +13,8 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 public class ClientSurvivalFly {
 
     public ClientSurvivalFly(IEventBus modEventBus, ModContainer container) {
+        ModKeybinds.initKeybinds();
+
         container.registerExtensionPoint(
                 IConfigScreenFactory.class,
                 (mc, parent) -> new ModOptionsScreen(parent)

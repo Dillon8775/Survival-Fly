@@ -16,7 +16,6 @@ import net.minecraft.world.level.gamerules.GameRules;
 import java.util.Collection;
 import java.util.List;
 
-import static net.dillon.survivalfly.permission.PermissionUtil.hasPermissionDefaultFallback;
 import static net.dillon.survivalfly.util.ModTexts.*;
 import static net.dillon.survivalfly.util.ModUtil.hasElytra;
 import static net.dillon.survivalfly.util.ModUtil.isFlyingAllowed;
@@ -33,7 +32,7 @@ public class FlightCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightCommand() {
         return Commands.literal("flight")
-                .requires(commandSourceStack -> hasPermissionDefaultFallback(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
+                .requires(commandSourceStack -> PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
                 .executes(
                         context -> execute(
                                 context.getSource(),
@@ -42,13 +41,12 @@ public class FlightCommand {
                         )
                 )
                 .then(
-                        Commands.argument("target", EntityArgument.player())
-                                .requires(PermissionUtil::hasAdminPermissions)
+                        Commands.argument("target", EntityArgument.players())
+                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
                                 .executes(
-                                        context -> execute(
+                                        context -> executeToggle(
                                                 context.getSource(),
-                                                List.of(context.getSource().getPlayerOrException()),
-                                                !context.getSource().getPlayerOrException().getAbilities().mayfly
+                                                EntityArgument.getPlayers(context, "target")
                                         )
                                 )
                 )
@@ -61,7 +59,7 @@ public class FlightCommand {
                                 ))
                                 .then(
                                         Commands.argument("target", EntityArgument.players())
-                                                .requires(PermissionUtil::hasAdminPermissions)
+                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
                                                 .executes(
                                                         context -> execute(
                                                                 context.getSource(),
@@ -79,7 +77,7 @@ public class FlightCommand {
                                 ))
                                 .then(
                                         Commands.argument("target", EntityArgument.players())
-                                                .requires(PermissionUtil::hasAdminPermissions)
+                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
                                                 .executes(
                                                         context -> execute(
                                                                 context.getSource(), EntityArgument.getPlayers(context, "target"), false
@@ -124,7 +122,7 @@ public class FlightCommand {
     /**
      * Enables/disables fly for certain players.
      */
-    private static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, boolean value) {
+    public static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, boolean value) {
         int i = 0;
 
         for (ServerPlayer player : targets) {
@@ -148,6 +146,19 @@ public class FlightCommand {
             } else {
                 sendFeedback(source, player, false, value);
             }
+        }
+
+        return i;
+    }
+
+    /**
+     * Toggles fly for each target independently.
+     */
+    private static int executeToggle(CommandSourceStack source, Collection<ServerPlayer> targets) {
+        int i = 0;
+
+        for (ServerPlayer player : targets) {
+            i += execute(source, List.of(player), !player.getAbilities().mayfly);
         }
 
         return i;

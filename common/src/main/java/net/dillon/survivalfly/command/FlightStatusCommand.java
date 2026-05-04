@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 
-import static net.dillon.survivalfly.permission.PermissionUtil.hasPermissionDefaultFallback;
 import static net.dillon.survivalfly.util.ModTexts.*;
 import static net.dillon.survivalfly.util.ModUtil.hasElytra;
 import static net.dillon.survivalfly.util.ModUtil.isFlyingAllowed;
@@ -28,7 +27,7 @@ public class FlightStatusCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightStatusCommand() {
         return Commands.literal("flightstatus")
-                .requires(commandSourceStack -> hasPermissionDefaultFallback(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
+                .requires(commandSourceStack -> PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
                 .executes(
                         context -> execute(
                                 context.getSource(),
@@ -37,7 +36,7 @@ public class FlightStatusCommand {
                 )
                 .then(
                         Commands.argument("target", EntityArgument.player())
-                                .requires(PermissionUtil::hasAdminPermissions)
+                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
                                 .executes(context -> execute(
                                         context.getSource(),
                                         EntityArgument.getPlayer(context, "target")
