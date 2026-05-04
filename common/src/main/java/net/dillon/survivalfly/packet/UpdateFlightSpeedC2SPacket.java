@@ -9,14 +9,14 @@ import net.minecraft.resources.ResourceLocation;
 /**
  * The payload for sending {@code client to server} flight speed changes.
  */
-public record UpdateFlightSpeedC2SPayload(float speed) implements CustomPacketPayload {
+public record UpdateFlightSpeedC2SPacket(float speed) implements CustomPacketPayload {
     private static final ResourceLocation ID = ResourceLocation.parse("survivalfly:update_flight_speed");
-    public static final Type<UpdateFlightSpeedC2SPayload> PACKET_TYPE = new Type<>(ID);
-    public static final StreamCodec<RegistryFriendlyByteBuf, UpdateFlightSpeedC2SPayload> CODEC =
+    public static final Type<UpdateFlightSpeedC2SPacket> PACKET_TYPE = new Type<>(ID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, UpdateFlightSpeedC2SPacket> CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.FLOAT,
-                    UpdateFlightSpeedC2SPayload::speed,
-                    UpdateFlightSpeedC2SPayload::new
+                    UpdateFlightSpeedC2SPacket::speed,
+                    UpdateFlightSpeedC2SPacket::new
             );
 
     @Override

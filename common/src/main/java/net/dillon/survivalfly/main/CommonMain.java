@@ -11,7 +11,7 @@ import static net.dillon.survivalfly.util.ModUtil.info;
 /**
  * The main entrypoint for Survival Fly.
  */
-public class Main {
+public class CommonMain {
 
     public static void initialize(BalmRegistrars balmRegistrars) {
         registerPackets();

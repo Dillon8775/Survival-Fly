@@ -2,7 +2,7 @@ package net.dillon.survivalfly;
 
 import net.blay09.mods.balm.api.Balm;
 import net.blay09.mods.balm.api.EmptyLoadContext;
-import net.dillon.survivalfly.main.Main;
+import net.dillon.survivalfly.main.CommonMain;
 import net.dillon.survivalfly.screen.ModOptionsScreen;
 import net.dillon.survivalfly.util.ModUtil;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public final class SurvivalFly {
 
     public SurvivalFly(FMLJavaModLoadingContext context) {
-        Balm.initializeMod(ModUtil.MOD_ID, EmptyLoadContext.INSTANCE, Main::initialize);
+        Balm.initializeMod(ModUtil.MOD_ID, EmptyLoadContext.INSTANCE, CommonMain::initialize);
     }
 
     @Mod.EventBusSubscriber(modid = ModUtil.MOD_ID, value = Dist.CLIENT)

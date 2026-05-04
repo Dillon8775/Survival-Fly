@@ -89,6 +89,28 @@ public class ModListOptions {
                 });
     }
 
+    public static OptionInstance<Boolean> crouchFlight() {
+        return OptionInstance.createBoolean("survivalfly.options.crouch_flight", OptionInstance.cachedConstantTooltip(
+                        Component.translatable("survivalfly.options.crouch_flight.tooltip")
+                ),
+                ON_OFF_TEXT, options().crouchFlight, value -> {
+                    Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                        config.crouchFlight = value;
+                    });
+                });
+    }
+
+    public static OptionInstance<Boolean> safeMode() {
+        return OptionInstance.createBoolean("survivalfly.options.safe_mode", OptionInstance.cachedConstantTooltip(
+                        Component.translatable("survivalfly.options.safe_mode.tooltip")
+                ),
+                ON_OFF_TEXT, options().safeMode, value -> {
+                    Balm.getConfig().updateLocalConfig(ModOptions.class, config -> {
+                        config.safeMode = value;
+                    });
+                });
+    }
+
     public static final OptionInstance<FriendlyFlight> FRIENDLY_FLIGHT = new OptionInstance<>(
             "survivalfly.options.friendly_flight",
             option -> {

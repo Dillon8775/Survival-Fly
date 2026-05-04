@@ -12,6 +12,8 @@ public class ForgeClientEvents {
 
     @SubscribeEvent
     public static void registerForgeKeybindings(RegisterKeyMappingsEvent event) {
+        ModKeybinds.initKeybinds();
+
         event.register(ModKeybinds.RESET_FLIGHT_SPEED);
         event.register(ModKeybinds.CHANGE_FLIGHT_SPEED);
     }

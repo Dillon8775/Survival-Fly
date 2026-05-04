@@ -29,6 +29,13 @@ public class PermissionUtil {
     }
 
     /**
+     * @return if the source has node/default permission, or is a non-player source like a command block.
+     */
+    public static boolean hasPermissionDefaultFallbackOrCommandSource(CommandSourceStack commandSourceStack, ServerPlayer player, Nodes node) {
+        return hasPermissionDefaultFallback(commandSourceStack, player, node) || commandSourceStack.getEntity() == null;
+    }
+
+    /**
      * @return if the user has the permissions to execute a command.
      */
     private static boolean hasPermissionToExecute(ServerPlayer player, Nodes node, boolean fallback) {
@@ -51,6 +58,13 @@ public class PermissionUtil {
      */
     public static boolean hasAdminPermissions(CommandSourceStack commandSourceStack) {
         return hasPermissionLevel(commandSourceStack, Commands.LEVEL_ADMINS);
+    }
+
+    /**
+     * @return if the source has admin permissions, or is a non-player source like a command block.
+     */
+    public static boolean hasAdminPermissionsOrCommandSource(CommandSourceStack commandSourceStack) {
+        return hasAdminPermissions(commandSourceStack) || commandSourceStack.getEntity() == null;
     }
 
     /**

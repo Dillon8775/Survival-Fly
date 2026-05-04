@@ -6,6 +6,9 @@
   "survivalfly.gui.off": "OFF",
   "survivalfly.gui.report_bugs": "Report a bug...",
   "survivalfly.gui.ask_questions": "Ask questions...",
+  "survivalfly.gui.not_installed": "§cUnable to fetch the Survival Fly mod on this server.§r§f\n§aTo join this server, disable the \"Safe Mode\" option in Survival Fly options.\n§r§fPlease note: §o§cthis mod is §c§lnot a hack, §r§f§oand only works on servers that have this mod installed.",
+  "survivalfly.gui.crouch_flight_disabled": "§cWarning: Survival Fly is not installed on this server, therefor, §c§l\"Crouch Flight\" §r§f§chas been automatically disabled for your safety.",
+
   "survivalfly.options.permissions": "Permissions",
   "survivalfly.options.permissions.regular": "§aAnyone",
   "survivalfly.options.permissions.moderator": "§dModerator",
@@ -30,6 +33,8 @@
   "survivalfly.options.elytra_flight.tooltip": "Requires the player to wear an elytra to use flight. The elytra's durability will decrement based on the player's flight speed.",
   "survivalfly.options.flight_exhaustion": "Flight Exhaustion",
   "survivalfly.options.flight_exhaustion.tooltip": "Makes the player hungry when using flight.",
+  "survivalfly.options.crouch_flight": "Crouch Flight",
+  "survivalfly.options.crouch_flight.tooltip": "Allows crouching while flying without descending (CTRL + SHIFT).",
   "survivalfly.options.friendly_flight": "Friendly Flight",
   "survivalfly.options.friendly_flight.off": "§cOFF",
   "survivalfly.options.friendly_flight.tooltip": "Prevents the player from using flight if they have taken any damage within 20 seconds.",
@@ -37,9 +42,12 @@
   "survivalfly.options.friendly_flight.players_and_mobs.tooltip": "Prevent flight from player and mob damage.",
   "survivalfly.options.friendly_flight.players_only": "§aPlayers Only",
   "survivalfly.options.friendly_flight.players_only.tooltip": "Prevent flight from player damage.",
+  "survivalfly.options.safe_mode": "Safe Mode",
+  "survivalfly.options.safe_mode.tooltip": "Prevents joining servers that do not have this mod installed.\n\n§cPlease note that this mod is §c§lnot a hack, §r§f§cand only works on servers that have this mod installed. You should not attempt to cheat on a server with this mod.",
   "survivalfly.option_disabled": "This option is determined by the server.",
 
   "key.category.survivalfly.survival_fly": "Survival Fly",
+  "key.survivalfly.toggle_flight": "Toggle Flight",
   "survivalfly.change_flight_speed": "Change Flight Speed",
   "survivalfly.reset_flight_speed": "Reset Flight Speed",
   "survivalfly.current_flight_speed": "Flight Speed: %s"

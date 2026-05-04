@@ -2,7 +2,7 @@ package net.dillon.survivalfly.mixin.client;
 
 import net.blay09.mods.balm.api.Balm;
 import net.dillon.survivalfly.keybind.ModKeybinds;
-import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
+import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -46,7 +46,7 @@ public class MouseMixin {
     @Inject(method = "onScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Abilities;setFlyingSpeed(F)V", shift = At.Shift.AFTER))
     private void updateFlightSpeed(long window, double horizontal, double vertical, CallbackInfo ci) {
         float speed = this.minecraft.player.getAbilities().getFlyingSpeed();
-        Balm.getNetworking().sendToServer(new UpdateFlightSpeedC2SPayload(speed));
+        Balm.getNetworking().sendToServer(new UpdateFlightSpeedC2SPacket(speed));
         this.minecraft.player.displayClientMessage(Component.translatable("survivalfly.current_flight_speed", decimalAsPercentage(speed)).withStyle(ChatFormatting.GREEN).append("%"), true);
     }
 }

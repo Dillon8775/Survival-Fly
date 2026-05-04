@@ -3,12 +3,10 @@ package net.dillon.survivalfly.util;
 import com.mojang.brigadier.context.CommandContext;
 import net.blay09.mods.balm.api.Balm;
 import net.dillon.survivalfly.option.ModOptions;
-import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPayload;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
@@ -45,6 +43,7 @@ public class ModUtil {
     /**
      * Sends a warning message to console.
      */
+    @Deprecated
     public static void warn(String message) {
         LOGGER.warn(message);
     }
@@ -102,16 +101,6 @@ public class ModUtil {
      */
     public static void sendSourceMessage(CommandContext<CommandSourceStack> source, Component text) {
         source.getSource().sendSystemMessage(text);
-    }
-
-    /**
-     * Handles flight speed changing.
-     */
-    public static void handleFlightSpeed(Player player, UpdateFlightSpeedC2SPayload payload) {
-        float speed = payload.speed();
-
-        player.getAbilities().setFlyingSpeed(speed);
-        player.onUpdateAbilities();
     }
 
     /**
