@@ -16,9 +16,9 @@ import net.minecraft.world.level.gamerules.GameRules;
 import java.util.Collection;
 import java.util.List;
 
+import static net.dillon.survivalfly.helper.ModHelper.hasElytra;
+import static net.dillon.survivalfly.helper.ModHelper.isFlyingAllowed;
 import static net.dillon.survivalfly.util.ModTexts.*;
-import static net.dillon.survivalfly.util.ModUtil.hasElytra;
-import static net.dillon.survivalfly.util.ModUtil.isFlyingAllowed;
 
 /**
  * The functionality for the {@code /flight} command.

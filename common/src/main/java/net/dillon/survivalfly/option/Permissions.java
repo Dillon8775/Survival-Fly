@@ -1,36 +1,30 @@
 package net.dillon.survivalfly.option;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 
 public enum Permissions implements StringRepresentable {
-    ANYONE(0, "anyone", "survivalfly.options.permissions.regular"),
-    MODERATOR(1, "moderator", "survivalfly.options.permissions.moderator"),
-    GAMEMASTER(2, "gamemaster", "survivalfly.options.permissions.gamemaster"),
-    ADMIN(3, "admin", "survivalfly.options.permissions.admin");
+    ANYONE(0, "§aAnyone"),
+    MODERATOR(1, "§dModerator"),
+    GAMEMASTER(2, "§5Gamemaster"),
+    ADMIN(3, "§cAdmin");
 
-    public static final Codec<Permissions> Codec = StringRepresentable.fromEnum(Permissions::values);
+    public static final Codec<Permissions> CODEC = StringRepresentable.fromEnum(Permissions::values);
     private final int ordinal;
     private final String name;
-    private final Component translationKey;
 
-    Permissions(final int ordinal, final String name, final String translationKey) {
+    Permissions(final int ordinal, final String name) {
         this.ordinal = ordinal;
         this.name = name;
-        this.translationKey = Component.translatable(translationKey);
     }
 
     public int getId() {
         return this.ordinal;
     }
 
+    @Override
     public String getSerializedName() {
         return this.name;
-    }
-
-    public Component getText() {
-        return this.translationKey;
     }
 
     public static Permissions byName(String name) {

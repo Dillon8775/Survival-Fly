@@ -6,7 +6,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 
-import static net.dillon.survivalfly.util.ModUtil.options;
+import static net.dillon.survivalfly.helper.ModHelper.options;
 
 /**
  * Handles client-side packet related things.
@@ -19,7 +19,7 @@ public class ClientPacketHandlers {
     public static void disconnectSafeMode(Connection connection, LocalPlayer localPlayer) {
         boolean disconnected = false;
         if (options().safeMode) {
-            connection.disconnect(Component.translatable("survivalfly.gui.not_installed"));
+            connection.disconnect(Component.translatable("survivalfly.not_installed"));
             disconnected = true;
         }
         if (!disconnected) {
@@ -27,7 +27,7 @@ public class ClientPacketHandlers {
                 options.crouchFlight = false;
             });
             if (localPlayer != null) {
-                localPlayer.sendSystemMessage(Component.translatable("survivalfly.gui.crouch_flight_disabled"));
+                localPlayer.sendSystemMessage(Component.translatable("survivalfly.crouch_flight_disabled"));
             }
         }
     }

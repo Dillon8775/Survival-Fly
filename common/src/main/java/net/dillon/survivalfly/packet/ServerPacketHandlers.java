@@ -8,6 +8,8 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
+
 /**
  * Handles server-packet related things.
  */
@@ -17,7 +19,7 @@ public class ServerPacketHandlers {
      * Handles updating the player's flight.
      */
     public static void handleUpdateFlight(Player player, UpdateFlightC2SPacket packet) {
-        if (!(player instanceof ServerPlayer serverPlayer)) {
+        if (!modEnabled() || !(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
 
@@ -30,6 +32,10 @@ public class ServerPacketHandlers {
      * Handles flight speed changing.
      */
     public static void handleUpdateFlightSpeed(Player player, UpdateFlightSpeedC2SPacket payload) {
+        if (!modEnabled()) {
+            return;
+        }
+
         float speed = payload.speed();
 
         player.getAbilities().setFlyingSpeed(speed);

@@ -7,7 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.dillon.survivalfly.util.ModUtil.options;
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
+import static net.dillon.survivalfly.helper.ModHelper.options;
 
 @Mixin(Player.class)
 public class PlayerMixin {
@@ -17,6 +18,10 @@ public class PlayerMixin {
      */
     @Inject(method = "getDesiredPose", at = @At("RETURN"), cancellable = true)
     private void allowCrouchPoseWhileFlying(CallbackInfoReturnable<Pose> cir) {
+        if (!modEnabled()) {
+            return;
+        }
+
         Player player = (Player)(Object)this;
         if (options().crouchFlight && player.getAbilities().flying && player.isShiftKeyDown()) {
             cir.setReturnValue(Pose.CROUCHING);

@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.dillon.survivalfly.util.ModUtil.*;
+import static net.dillon.survivalfly.helper.ModHelper.*;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player implements PlayerAbilitiesExtension {
@@ -112,7 +112,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
     @Inject(method = "hurtServer", at = @At("HEAD"))
     private void onDamageDisableFlight(ServerLevel level, DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
         ServerPlayer victimPlayer = (ServerPlayer)(Object)this;
-        if (!options().friendlyFlight.enabled() || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
+        if (!modEnabled() || !options().friendlyFlight.enabled() || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
             return;
         }
 
@@ -134,7 +134,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
     @Inject(method = "tick", at = @At("TAIL"))
     private void addSideEffects(CallbackInfo ci) {
         ServerPlayer player = (ServerPlayer)(Object)this;
-        if (isInvalidPlayerGameMode(player)) {
+        if (!modEnabled() || isInvalidPlayerGameMode(player)) {
             return;
         }
 

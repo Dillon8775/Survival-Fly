@@ -1,7 +1,7 @@
 package net.dillon.survivalfly.mixin.client;
 
 import net.blay09.mods.balm.Balm;
-import net.dillon.survivalfly.keybind.ModKeybinds;
+import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -16,7 +16,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.dillon.survivalfly.util.ModUtil.decimalAsPercentage;
+import static net.dillon.survivalfly.helper.ModHelper.decimalAsPercentage;
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
 @Mixin(MouseHandler.class)
 public class MouseMixin {
@@ -28,9 +29,13 @@ public class MouseMixin {
      */
     @Redirect(method = "onScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"))
     private boolean allowAnyGamemode(LocalPlayer clientPlayer) {
+        if (!modEnabled()) {
+            return clientPlayer.isSpectator();
+        }
+
         // ensure that player has permission to change flight speed
         if (clientPlayer.getAbilities().mayfly) {
-            if (!ModKeybinds.CHANGE_FLIGHT_SPEED.isDown()) { // if ALT key isn't pressed OR player doesn't have flying abilities, fallback to vanilla logic
+            if (!ModKeyMappings.CHANGE_FLIGHT_SPEED.isDown()) { // if ALT key isn't pressed OR player doesn't have flying abilities, fallback to vanilla logic
                 return clientPlayer.isSpectator();
             }
 
@@ -45,6 +50,10 @@ public class MouseMixin {
      */
     @Inject(method = "onScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Abilities;setFlyingSpeed(F)V", shift = At.Shift.AFTER))
     private void updateFlightSpeed(long window, double horizontal, double vertical, CallbackInfo ci) {
+        if (!modEnabled()) {
+            return;
+        }
+
         float speed = this.minecraft.player.getAbilities().getFlyingSpeed();
         Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(speed));
         this.minecraft.player.sendOverlayMessage(Component.translatable("survivalfly.current_flight_speed", decimalAsPercentage(speed)).withStyle(ChatFormatting.GREEN).append("%"));

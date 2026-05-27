@@ -5,9 +5,7 @@
   "client": [
     "client.LocalPlayerMixin",
     "client.MinecraftMixin",
-    "client.MouseMixin",
-    "client.PauseScreenMixin",
-    "client.TitleScreenMixin"
+    "client.MouseMixin"
   ],
   "mixins": [
     "main.GameTypeMixin",

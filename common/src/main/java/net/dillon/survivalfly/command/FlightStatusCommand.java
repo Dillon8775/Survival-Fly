@@ -11,9 +11,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 
+import static net.dillon.survivalfly.helper.ModHelper.hasElytra;
+import static net.dillon.survivalfly.helper.ModHelper.isFlyingAllowed;
 import static net.dillon.survivalfly.util.ModTexts.*;
-import static net.dillon.survivalfly.util.ModUtil.hasElytra;
-import static net.dillon.survivalfly.util.ModUtil.isFlyingAllowed;
 
 /**
  * A command to check the status of your flight ability.

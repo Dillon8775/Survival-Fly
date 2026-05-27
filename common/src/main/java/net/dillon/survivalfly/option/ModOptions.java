@@ -2,15 +2,15 @@ package net.dillon.survivalfly.option;
 
 import net.blay09.mods.balm.platform.config.reflection.Comment;
 import net.blay09.mods.balm.platform.config.reflection.Config;
-import net.dillon.survivalfly.util.ModUtil;
+import net.dillon.survivalfly.helper.ModHelper;
 
-@Config(ModUtil.MOD_ID)
+@Config(ModHelper.MOD_ID)
 public class ModOptions {
+    @Comment("Enables the Survival Fly mod.")
+    public boolean enableMod = true;
+
     @Comment("Default permission system for survival fly's commands (/flight, /flightstatus, and /flightspeed).\n# Allowed values: anyone, moderator, gamemaster, admin\n# Ignore this if you are using LuckPerms.")
     public Permissions permissions = Permissions.ANYONE;
-
-    @Comment("Determines where to display the Survival Fly menu (or configuration) button.\n# Allowed values: everywhere, bottom_left, bottom_right, title_only, off")
-    public MenuButton menuButton = MenuButton.EVERYWHERE;
 
     @Comment("Requires the player to wear an elytra to use flight. The elytra's durability will decrement based on the player's flight speed.")
     public boolean elytraFlight = false;

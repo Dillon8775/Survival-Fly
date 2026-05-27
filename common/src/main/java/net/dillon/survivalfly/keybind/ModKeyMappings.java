@@ -9,16 +9,28 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
+
 /**
  * Keybindings for the {@code SurvivalFly} mod.
  */
-public class ModKeybinds {
+public class ModKeyMappings {
     private static final KeyMapping.Category SURVIVAL_FLY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("survivalfly", "survival_fly"));
+
+    /**
+     * Initializes Survival Fly keybinds.
+     */
+    public static void initKeybinds() {
+    }
 
     public static final ManagedKeyMapping TOGGLE_FLIGHT = Kuma.createKeyMapping(Identifier.fromNamespaceAndPath("survivalfly", "toggle_flight"))
             .overrideCategory(SURVIVAL_FLY)
             .withDefault(InputBinding.key(InputConstants.KEY_F, KeyModifiers.of(KeyModifier.CONTROL, KeyModifier.ALT)))
             .handleWorldInput(event -> {
+                if (!modEnabled()) {
+                    return false;
+                }
+
                 Balm.networking().sendToServer(new UpdateFlightC2SPacket(!Minecraft.getInstance().player.getAbilities().mayfly));
                 return true;
             })
@@ -37,10 +49,4 @@ public class ModKeybinds {
             GLFW.GLFW_KEY_LEFT_ALT,
             SURVIVAL_FLY
     );
-
-    /**
-     * Initializes Survival Fly keybinds.
-     */
-    public static void initKeybinds() {
-    }
 }

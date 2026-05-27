@@ -1,8 +1,10 @@
-package net.dillon.survivalfly.util;
+package net.dillon.survivalfly.helper;
 
 import com.mojang.brigadier.context.CommandContext;
 import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.util.ModTexts;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,7 +18,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Utility class for the {@code Survival Fly} mod.
  */
-public class ModUtil {
+public class ModHelper {
     public static final String MOD_ID = "survivalfly";
     public static final float DEFAULT_FLIGHT_SPEED = 0.05F;
     public static final int DEFAULT_DAMAGE_TIME_TICKS = 400;
@@ -61,6 +63,13 @@ public class ModUtil {
      */
     public static ItemStack getChestSlot(ServerPlayer player) {
         return player.getItemBySlot(EquipmentSlot.CHEST);
+    }
+
+    /**
+     * Checks if any of the mod's features should function.
+     */
+    public static boolean modEnabled() {
+        return options().enableMod;
     }
 
     /**

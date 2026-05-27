@@ -1,10 +1,10 @@
 package net.dillon.survivalfly.screen;
 
-import net.dillon.survivalfly.option.ModListOptions;
+import net.dillon.survivalfly.config.ConfigurationScreen;
+import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.platform.MultiLoader;
-import net.dillon.survivalfly.util.ModUtil;
+import net.dillon.survivalfly.platform.VersionType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -22,53 +22,43 @@ import java.util.List;
 /**
  * The options screen for configurating the {@code /fly} command.
  */
-public class ModOptionsScreen extends OptionsSubScreen {
-    private final Options options = Minecraft.getInstance().options;
+public class MainMenuScreen extends OptionsSubScreen {
 
-    public ModOptionsScreen(Screen parent) {
+    public MainMenuScreen(Screen parent) {
         super(parent, Minecraft.getInstance().options, Component.translatable("survivalfly.title.options"));
     }
 
     @Override
     protected void init() {
         super.init();
-
         List<AbstractWidget> options = new ArrayList<>(List.of(
-                ModListOptions.permissions().createButton(this.options),
-                ModListOptions.elytraFlight().createButton(this.options),
+                Button.builder(Component.translatable("survivalfly.gui.configure"), button -> {
+                    this.minecraft.setScreen(ConfigurationScreen.configScreen().generateScreen(this));
+                }).build(),
 
-                ModListOptions.flightExhaustion().createButton(this.options),
-                ModListOptions.FRIENDLY_FLIGHT.createButton(this.options),
-
-                ModListOptions.crouchFlight().createButton(this.options),
-                ModListOptions.MENU_BUTTON.createButton(this.options),
-
-                ModListOptions.safeMode().createButton(this.options),
                 Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),
 
                 Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Survival-Fly/issues", false)).build()
         ));
-
-        if (!(this.minecraft.getCurrentServer() == null)) {
-            for (int i = 0; i < 4; i++) {
-                options.get(i).active = false;
-            }
-        }
 
         this.list.addSmall(options);
     }
 
     @Override
     public void onClose() {
-        ModUtil.debug("Flushed changes.");
+        ModHelper.debug("Flushed changes.");
         super.onClose();
     }
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float deltaTicks) {
         super.extractRenderState(graphics, mouseX, mouseY, deltaTicks);
-        graphics.centeredText(this.font, Component.literal(MultiLoader.getPlatform().getModVersion()), this.width - 20, this.height - 21, CommonColors.WHITE);
-        graphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.parse("survivalfly:textures/gui/sprites/survivalfly.png"), this.width - 50, this.height - 26, 0.0F, 0.0F, 18, 18, 18, 18);
+        int textWidth = this.width - 20;
+        int textHeight = this.height - 21;
+        int imageWidth = this.width - (MultiLoader.getPlatform().getVersionType() == VersionType.RELEASE ? 50 : 53);
+        int imageHeight = this.height - 26;
+        graphics.centeredText(this.font, MultiLoader.getPlatform().getModVersion(), textWidth, textHeight, CommonColors.WHITE);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath("survivalfly", "textures/gui/sprites/survivalfly.png"), imageWidth, imageHeight, 0.0F, 0.0F, 18, 18, 18, 18);
     }
 
     @Override

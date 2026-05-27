@@ -11,10 +11,10 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 
+import static net.dillon.survivalfly.helper.ModHelper.options;
+import static net.dillon.survivalfly.helper.ModHelper.sendSourceMessage;
 import static net.dillon.survivalfly.util.ModTexts.DISABLED_UPPERCASE;
 import static net.dillon.survivalfly.util.ModTexts.ENABLED_UPPERCASE;
-import static net.dillon.survivalfly.util.ModUtil.options;
-import static net.dillon.survivalfly.util.ModUtil.sendSourceMessage;
 
 /**
  * The functionality for the {@code /friendlyflight} command.

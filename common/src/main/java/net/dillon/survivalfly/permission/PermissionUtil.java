@@ -6,7 +6,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permission;
 import net.minecraft.server.permissions.PermissionLevel;
 
-import static net.dillon.survivalfly.util.ModUtil.options;
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
+import static net.dillon.survivalfly.helper.ModHelper.options;
 
 /**
  * Permission utility class for Survival Fly.
@@ -26,6 +27,10 @@ public class PermissionUtil {
      * @return if the player has permission to execute a command, with the default fallback.
      */
     public static boolean hasPermissionDefaultFallback(CommandSourceStack commandSourceStack, ServerPlayer player, Nodes node) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         return hasPermissionToExecute(player, node, hasCurrentPermissionId(commandSourceStack));
     }
 
@@ -33,6 +38,10 @@ public class PermissionUtil {
      * @return if the source has node/default permission, or is a non-player source like a command block.
      */
     public static boolean hasPermissionDefaultFallbackOrCommandSource(CommandSourceStack commandSourceStack, ServerPlayer player, Nodes node) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         return hasPermissionDefaultFallback(commandSourceStack, player, node) || commandSourceStack.getEntity() == null;
     }
 
@@ -40,6 +49,10 @@ public class PermissionUtil {
      * @return if the user has the permissions to execute a command.
      */
     private static boolean hasPermissionToExecute(ServerPlayer player, Nodes node, boolean fallback) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         if (player == null) {
             return fallback;
         }
@@ -51,6 +64,10 @@ public class PermissionUtil {
      * @return if the player's permission level is above or equal to the default set permissions id.
      */
     private static boolean hasCurrentPermissionId(CommandSourceStack commandSourceStack) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         return hasPermissionLevel(commandSourceStack, getPermissionLevel(options().permissions.getId()));
     }
 
@@ -58,6 +75,10 @@ public class PermissionUtil {
      * @return if the player's permission level is above or equal to {@link PermissionLevel#ADMINS}.
      */
     public static boolean hasAdminPermissions(CommandSourceStack commandSourceStack) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         return hasPermissionLevel(commandSourceStack, PermissionLevel.ADMINS);
     }
 
@@ -65,6 +86,10 @@ public class PermissionUtil {
      * @return if the source has admin permissions, or is a non-player source like a command block.
      */
     public static boolean hasAdminPermissionsOrCommandSource(CommandSourceStack commandSourceStack) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         return hasAdminPermissions(commandSourceStack) || commandSourceStack.getEntity() == null;
     }
 
@@ -72,6 +97,10 @@ public class PermissionUtil {
      * @return if the player's permission level is equivalent to the passed in value.
      */
     private static boolean hasPermissionLevel(CommandSourceStack commandSourceStack, PermissionLevel level) {
+        if (!modEnabled()) {
+            return false;
+        }
+
         return commandSourceStack.permissions().hasPermission(new Permission.HasCommandLevel(level));
     }
 }

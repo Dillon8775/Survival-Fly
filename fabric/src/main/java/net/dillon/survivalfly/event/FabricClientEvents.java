@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.event;
 
-import net.dillon.survivalfly.keybind.ModKeybinds;
+import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.ClientPacketHandlers;
 import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
 import net.fabricmc.api.EnvType;
@@ -13,10 +13,10 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 public class FabricClientEvents {
 
     public static void registerKeybinds() {
-        ModKeybinds.initKeybinds();
+        ModKeyMappings.initKeybinds();
 
-        KeyMappingHelper.registerKeyMapping(ModKeybinds.CHANGE_FLIGHT_SPEED);
-        KeyMappingHelper.registerKeyMapping(ModKeybinds.RESET_FLIGHT_SPEED);
+        KeyMappingHelper.registerKeyMapping(ModKeyMappings.CHANGE_FLIGHT_SPEED);
+        KeyMappingHelper.registerKeyMapping(ModKeyMappings.RESET_FLIGHT_SPEED);
     }
 
     public static void registerConnectionChecks() {

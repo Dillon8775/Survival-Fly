@@ -3,22 +3,27 @@ package net.dillon.survivalfly.platform;
 import net.blay09.mods.balm.Balm;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.io.File;
-
 public interface PlatformHelper {
 
     /**
      * @return the mod version.
      */
     default String getModVersion() {
-        return "1.3.1";
+        return "1.3.2";
     }
 
     /**
-     * @return if the platform is on NeoForged.
+     * @return the version type.
      */
-    default boolean isNeoForged() {
-        return Balm.platform().name().equals("neoforge");
+    default VersionType getVersionType() {
+        return VersionType.PATCH;
+    }
+
+    /**
+     * @return if {@code YACL} is loaded.
+     */
+    default boolean isYaclLoaded() {
+        return Balm.platform().isModLoaded("yet_another_config_lib_v3");
     }
 
     /**
@@ -42,9 +47,4 @@ public interface PlatformHelper {
      * @return if the player can execute commands with {@code LuckPerms} (platform specific).
      */
     boolean hasPermissionOnPlatform(ServerPlayer player, String node, boolean fallback);
-
-    /**
-     * Gets the config directory for the supported platform.
-     */
-    File getConfigDir(String fileName);
 }

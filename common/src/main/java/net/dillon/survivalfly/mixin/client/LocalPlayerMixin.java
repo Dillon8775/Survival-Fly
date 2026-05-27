@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.dillon.survivalfly.util.ModUtil.options;
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
+import static net.dillon.survivalfly.helper.ModHelper.options;
 
 @Mixin(LocalPlayer.class)
 public class LocalPlayerMixin {
@@ -30,6 +31,10 @@ public class LocalPlayerMixin {
      */
     @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Input;shift()Z", ordinal = 2))
     private boolean survivalfly$preventCrouchDescentWhileFlying(Input input) {
+        if (!modEnabled()) {
+            return input.shift();
+        }
+
         LocalPlayer player = (LocalPlayer)(Object)this;
         if (this.isPlayerTryingToCrouchFlight(player, true)) {
             return false;
@@ -42,6 +47,10 @@ public class LocalPlayerMixin {
      */
     @Inject(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/LocalPlayer;crouching:Z", opcode = 181, shift = At.Shift.AFTER))
     private void survivalfly$showCrouchPoseWhileFlying(CallbackInfo ci) {
+        if (!modEnabled()) {
+            return;
+        }
+
         LocalPlayer player = (LocalPlayer)(Object)this;
         if (this.isPlayerTryingToCrouchFlight(player, false)) {
             this.crouching = true;

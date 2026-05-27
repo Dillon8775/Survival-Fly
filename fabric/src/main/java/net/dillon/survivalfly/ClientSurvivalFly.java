@@ -1,6 +1,10 @@
 package net.dillon.survivalfly;
 
+import net.blay09.mods.balm.Balm;
+import net.blay09.mods.balm.fabric.platform.runtime.FabricLoadContext;
 import net.dillon.survivalfly.event.FabricClientEvents;
+import net.dillon.survivalfly.helper.ModHelper;
+import net.dillon.survivalfly.main.ClientMain;
 import net.fabricmc.api.ClientModInitializer;
 
 public class ClientSurvivalFly implements ClientModInitializer {
@@ -9,5 +13,7 @@ public class ClientSurvivalFly implements ClientModInitializer {
     public void onInitializeClient() {
         FabricClientEvents.registerKeybinds();
         FabricClientEvents.registerConnectionChecks();
+
+        Balm.initializeMod(ModHelper.MOD_ID, FabricLoadContext.INSTANCE, ClientMain::cInitialize);
     }
 }

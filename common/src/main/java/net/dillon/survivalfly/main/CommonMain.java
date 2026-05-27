@@ -6,7 +6,7 @@ import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.platform.MultiLoader;
 
 import static net.dillon.survivalfly.event.CommonEvents.registerPackets;
-import static net.dillon.survivalfly.util.ModUtil.info;
+import static net.dillon.survivalfly.helper.ModHelper.info;
 
 /**
  * The main entrypoint for Survival Fly.

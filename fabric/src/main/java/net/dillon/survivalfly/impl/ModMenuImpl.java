@@ -2,7 +2,7 @@ package net.dillon.survivalfly.impl;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import net.dillon.survivalfly.screen.ModOptionsScreen;
+import net.dillon.survivalfly.screen.MainMenuScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -14,6 +14,6 @@ public class ModMenuImpl implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return ModOptionsScreen::new;
+        return MainMenuScreen::new;
     }
 }
