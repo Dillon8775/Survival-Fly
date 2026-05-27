@@ -164,4 +164,8 @@ Note: Permission level "Regular" means that players can only use Survival Fly co
 
 ---
 
+# Requires [Balm](https://modrinth.com/mod/balm/versions) and [YetAnotherConfigLib](https://modrinth.com/mod/yacl/versions)!
+
+---
+
 Created by Dillon8775. All rights reserved unless explicitly stated.

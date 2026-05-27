@@ -26,9 +26,4 @@ public class NeoForgePlatformHelper implements PlatformHelper {
         Tristate result = user.getCachedData().getPermissionData().checkPermission(node);
         return result == Tristate.UNDEFINED ? fallback : result.asBoolean();
     }
-
-    @Override
-    public File getConfigDir(String fileName) {
-        return new File(FMLPaths.CONFIGDIR.get().resolve(fileName).toString());
-    }
 }
