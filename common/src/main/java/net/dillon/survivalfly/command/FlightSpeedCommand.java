@@ -32,7 +32,7 @@ public class FlightSpeedCommand {
                 .then(
                         Commands.literal("set")
                                 .then(
-                                        Commands.argument(SPEED_ARGUMENT_NAME, IntegerArgumentType.integer(0, 100))
+                                        Commands.argument(SPEED_ARGUMENT_NAME, IntegerArgumentType.integer(0, 10000))
                                                 .executes(context -> execute(
                                                         context.getSource(),
                                                         List.of(context.getSource().getPlayerOrException()),
