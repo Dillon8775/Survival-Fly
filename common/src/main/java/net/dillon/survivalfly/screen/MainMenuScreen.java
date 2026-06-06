@@ -36,12 +36,12 @@ public class MainMenuScreen extends OptionsSubScreen {
         List<AbstractWidget> options = new ArrayList<>(List.of(
                 Button.builder(Component.translatable("survivalfly.gui.configure"), button -> {
                     if (!MultiLoader.getPlatform().isYaclLoaded()) {
-                        this.minecraft.getToastManager().addToast(new SystemToast(
+                        this.minecraft.gui.toastManager().addToast(new SystemToast(
                                 SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                                 Component.translatable("survivalfly.toast.title.yacl").withStyle(ChatFormatting.RED),
                                 Component.translatable("survivalfly.toast.yacl")));
                     } else {
-                        this.minecraft.setScreen(ConfigurationScreen.configScreen().generateScreen(this));
+                        this.minecraft.gui.setScreen(ConfigurationScreen.configScreen().generateScreen(this));
                     }
                 }).build(),
 
