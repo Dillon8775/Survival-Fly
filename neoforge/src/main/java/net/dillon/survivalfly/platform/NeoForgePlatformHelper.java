@@ -5,9 +5,6 @@ import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.util.Tristate;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.fml.loading.FMLPaths;
-
-import java.io.File;
 
 public class NeoForgePlatformHelper implements PlatformHelper {
 

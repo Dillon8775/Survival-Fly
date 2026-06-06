@@ -4,10 +4,12 @@ import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.platform.MultiLoader;
 import net.dillon.survivalfly.platform.VersionType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
@@ -33,7 +35,14 @@ public class MainMenuScreen extends OptionsSubScreen {
         super.init();
         List<AbstractWidget> options = new ArrayList<>(List.of(
                 Button.builder(Component.translatable("survivalfly.gui.configure"), button -> {
-                    this.minecraft.setScreen(ConfigurationScreen.configScreen().generateScreen(this));
+                    if (!MultiLoader.getPlatform().isYaclLoaded()) {
+                        this.minecraft.getToastManager().addToast(new SystemToast(
+                                SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
+                                Component.translatable("survivalfly.toast.title.yacl").withStyle(ChatFormatting.RED),
+                                Component.translatable("survivalfly.toast.yacl")));
+                    } else {
+                        this.minecraft.setScreen(ConfigurationScreen.configScreen().generateScreen(this));
+                    }
                 }).build(),
 
                 Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),

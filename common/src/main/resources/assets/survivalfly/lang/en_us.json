@@ -35,6 +35,9 @@
   "survivalfly.reset_flight_speed": "Reset Flight Speed",
   "survivalfly.current_flight_speed": "Flight Speed: %s",
 
+  "survivalfly.toast.title.yacl": "YetAnotherConfigLib Required",
+  "survivalfly.toast.yacl": "Please download YetAnotherConfigLib (YACL) to configure Survival Fly.",
+
   "survivalfly.not_installed": "§cUnable to fetch the Survival Fly mod on this server.§r§f\n§aTo join this server, disable the \"Safe Mode\" option in Survival Fly options.\n§r§fPlease note: §o§cthis mod is §c§lnot a hack, §r§f§oand only works on servers that have this mod installed.",
   "survivalfly.crouch_flight_disabled": "§cWarning: Survival Fly is not installed on this server, therefor, §c§l\"Crouch Flight\" §r§f§chas been automatically disabled for your safety."
 }
