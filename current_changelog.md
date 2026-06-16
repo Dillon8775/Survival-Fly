@@ -1,4 +1,4 @@
-# Version 1.3.3 | 2026-??-??
+# Version 1.3.3 | 2026-06-16
 
 ## Changes
 - Update to 26.2.
