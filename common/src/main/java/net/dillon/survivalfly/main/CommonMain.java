@@ -3,7 +3,7 @@ package net.dillon.survivalfly.main;
 import net.blay09.mods.balm.Balm;
 import net.blay09.mods.balm.core.BalmRegistrars;
 import net.dillon.survivalfly.option.ModOptions;
-import net.dillon.survivalfly.platform.MultiLoader;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 
 import static net.dillon.survivalfly.event.CommonEvents.registerPackets;
 import static net.dillon.survivalfly.helper.ModHelper.info;
@@ -18,6 +18,6 @@ public class CommonMain {
 
         Balm.config().registerConfig(ModOptions.class);
 
-        info("Survival Fly version " + MultiLoader.getPlatform().getModVersion() + " (for " + Balm.platform().name() + ") loaded successfully!");
+        info("Survival Fly version " + SurvivalFlyPlatforms.getPlatform().modVersion() + " (for " + Balm.platform().name() + ") loaded successfully!");
     }
 }

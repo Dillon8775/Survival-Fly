@@ -3,9 +3,9 @@ package net.dillon.survivalfly.command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.util.SimplePermissions;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.Permissions;
-import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -20,7 +20,7 @@ public class PermissionsCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getPermissionsCommand() {
         return Commands.literal("permissions")
-                .requires(PermissionUtil::hasAdminPermissions)
+                .requires(SimplePermissions::admin)
                 .then(
                         Commands.literal("set")
                                 .then(Commands.argument("permission", StringArgumentType.word())

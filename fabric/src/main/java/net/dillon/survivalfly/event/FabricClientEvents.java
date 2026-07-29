@@ -2,12 +2,11 @@ package net.dillon.survivalfly.event;
 
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.ClientPacketHandlers;
-import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 @Environment(EnvType.CLIENT)
 public class FabricClientEvents {
@@ -21,7 +20,7 @@ public class FabricClientEvents {
 
     public static void registerConnectionChecks() {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            if (!ClientPlayNetworking.canSend(UpdateFlightC2SPacket.PACKET_TYPE)) {
+            if (!SurvivalFlyPlatforms.getClientPlatform().canSendPacket(client.player)) {
                 ClientPacketHandlers.disconnectSafeMode(handler.getConnection(), client.player);
             }
         });

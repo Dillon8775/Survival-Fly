@@ -2,8 +2,8 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.util.SimplePermissions;
 import net.dillon.survivalfly.option.ModOptions;
-import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -26,7 +26,7 @@ public class ElytraFlightCommand {
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getElytraFlightCommand() {
         return Commands.literal("elytraflight")
-                .requires(PermissionUtil::hasAdminPermissions)
+                .requires(SimplePermissions::admin)
                 .executes(
                         context -> {
                             Balm.config().updateLocalConfig(ModOptions.class, config -> {

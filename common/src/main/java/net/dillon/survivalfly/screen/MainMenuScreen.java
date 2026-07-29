@@ -2,8 +2,8 @@ package net.dillon.survivalfly.screen;
 
 import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModHelper;
-import net.dillon.survivalfly.platform.MultiLoader;
-import net.dillon.survivalfly.platform.VersionType;
+import net.dillon.survivalfly.platform.ModReferences;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -35,7 +35,7 @@ public class MainMenuScreen extends OptionsSubScreen {
         super.init();
         List<AbstractWidget> options = new ArrayList<>(List.of(
                 Button.builder(Component.translatable("survivalfly.gui.configure"), button -> {
-                    if (!MultiLoader.getPlatform().isYaclLoaded()) {
+                    if (!ModReferences.isModLoaded(ModReferences.YACL)) {
                         this.minecraft.gui.toastManager().addToast(new SystemToast(
                                 SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                                 Component.translatable("survivalfly.toast.title.yacl").withStyle(ChatFormatting.RED),
@@ -64,9 +64,9 @@ public class MainMenuScreen extends OptionsSubScreen {
         super.extractRenderState(graphics, mouseX, mouseY, deltaTicks);
         int textWidth = this.width - 20;
         int textHeight = this.height - 21;
-        int imageWidth = this.width - (MultiLoader.getPlatform().getVersionType() == VersionType.RELEASE ? 50 : 53);
+        int imageWidth = this.width - SurvivalFlyPlatforms.getPlatform().logoWidth().getWidthModifier();
         int imageHeight = this.height - 26;
-        graphics.centeredText(this.font, MultiLoader.getPlatform().getModVersion(), textWidth, textHeight, CommonColors.WHITE);
+        graphics.centeredText(this.font, SurvivalFlyPlatforms.getPlatform().modVersion(), textWidth, textHeight, CommonColors.WHITE);
         graphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath("survivalfly", "textures/gui/sprites/survivalfly.png"), imageWidth, imageHeight, 0.0F, 0.0F, 18, 18, 18, 18);
     }
 

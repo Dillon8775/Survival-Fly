@@ -3,16 +3,10 @@ package net.dillon.survivalfly.event;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 @EventBusSubscriber(modid = ModHelper.MOD_ID)
 public class NeoForgedCommonEvents {
-
-    @SubscribeEvent
-    public static void register(RegisterCommandsEvent dispatcher) {
-        CommonEvents.registerCommands(dispatcher.getDispatcher(), dispatcher.getBuildContext());
-    }
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {

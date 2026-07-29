@@ -1,15 +1,11 @@
 package net.dillon.survivalfly.event;
 
-import com.mojang.brigadier.CommandDispatcher;
 import net.blay09.mods.balm.Balm;
-import net.dillon.survivalfly.command.*;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.packet.ServerPacketHandlers;
 import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
-import net.minecraft.commands.CommandBuildContext;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -83,19 +79,5 @@ public class CommonEvents {
                 UpdateFlightC2SPacket.CODEC,
                 ServerPacketHandlers::handleUpdateFlight
         );
-    }
-
-    /**
-     * Registers all survival fly commands.
-     */
-    public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
-        dispatcher.register(SurvivalFlyCommand.getHelpCommand());
-        dispatcher.register(FlightCommand.getFlightCommand());
-        dispatcher.register(FlightStatusCommand.getFlightStatusCommand());
-        dispatcher.register(FlightSpeedCommand.getFlightSpeedCommand());
-        dispatcher.register(ElytraFlightCommand.getElytraFlightCommand());
-        dispatcher.register(FlightExhaustionCommand.getFlightExhaustionCommand());
-        dispatcher.register(FriendlyFlightCommand.getFriendlyFlightCommand());
-        dispatcher.register(PermissionsCommand.getPermissionsCommand());
     }
 }

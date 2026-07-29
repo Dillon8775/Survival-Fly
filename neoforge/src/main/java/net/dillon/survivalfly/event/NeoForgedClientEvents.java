@@ -3,13 +3,12 @@ package net.dillon.survivalfly.event;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.ClientPacketHandlers;
-import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.network.registration.NetworkRegistry;
 
 @EventBusSubscriber(modid = ModHelper.MOD_ID, value = Dist.CLIENT)
 public class NeoForgedClientEvents {
@@ -24,7 +23,7 @@ public class NeoForgedClientEvents {
 
     @SubscribeEvent
     public static void onClientLoggingIn(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (!NetworkRegistry.hasChannel(event.getPlayer().connection, UpdateFlightC2SPacket.ID)) {
+        if (!SurvivalFlyPlatforms.getClientPlatform().canSendPacket(event.getPlayer())) {
             ClientPacketHandlers.disconnectSafeMode(event.getConnection(), event.getPlayer());
         }
     }

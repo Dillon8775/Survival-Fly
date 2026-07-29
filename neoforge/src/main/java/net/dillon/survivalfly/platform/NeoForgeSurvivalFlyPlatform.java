@@ -6,10 +6,10 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.util.Tristate;
 import net.minecraft.server.level.ServerPlayer;
 
-public class NeoForgePlatformHelper implements PlatformHelper {
+public class NeoForgeSurvivalFlyPlatform extends SurvivalFlyPlatform {
 
     @Override
-    public boolean hasPermissionOnPlatform(ServerPlayer player, String node, boolean fallback) {
+    boolean hasPermissionOnPlatform(ServerPlayer player, String node, boolean fallback) {
         LuckPerms lp = LuckPermsProvider.get();
         User user = lp.getUserManager().getUser(player.getUUID());
 

@@ -8,9 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
  * Texts for {@code Survival Fly.}
  */
 public class ModTexts {
-    public static final Component BLANK = Component.literal("");
-    public static final Component ON = Component.translatable("survivalfly.gui.on").withStyle(ChatFormatting.GREEN);
-    public static final Component OFF = Component.translatable("survivalfly.gui.off").withStyle(ChatFormatting.RED);
     public static final Component ENABLED_UPPERCASE = Component.literal("Enabled").withStyle(ChatFormatting.GREEN);
     public static final Component ENABLED_LOWERCASE = Component.literal("enabled").withStyle(ChatFormatting.GREEN);
     public static final Component DISABLED_UPPERCASE = Component.literal("Disabled").withStyle(ChatFormatting.RED);

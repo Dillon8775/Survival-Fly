@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.permission;
 
-import net.dillon.survivalfly.platform.MultiLoader;
+import net.dillon.dillonlib.util.SimplePermissions;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permission;
@@ -57,7 +58,7 @@ public class PermissionUtil {
             return fallback;
         }
 
-        return MultiLoader.getPlatform().hasPermission(player, node.getNode(), fallback);
+        return SurvivalFlyPlatforms.getPlatform().hasPermission(player, node.getNode(), fallback);
     }
 
     /**
@@ -72,17 +73,6 @@ public class PermissionUtil {
     }
 
     /**
-     * @return if the player's permission level is above or equal to {@link PermissionLevel#ADMINS}.
-     */
-    public static boolean hasAdminPermissions(CommandSourceStack commandSourceStack) {
-        if (!modEnabled()) {
-            return false;
-        }
-
-        return hasPermissionLevel(commandSourceStack, PermissionLevel.ADMINS);
-    }
-
-    /**
      * @return if the source has admin permissions, or is a non-player source like a command block.
      */
     public static boolean hasAdminPermissionsOrCommandSource(CommandSourceStack commandSourceStack) {
@@ -90,7 +80,7 @@ public class PermissionUtil {
             return false;
         }
 
-        return hasAdminPermissions(commandSourceStack) || commandSourceStack.getEntity() == null;
+        return SimplePermissions.admin(commandSourceStack) || SimplePermissions.notPlayer(commandSourceStack);
     }
 
     /**

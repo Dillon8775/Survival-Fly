@@ -20,13 +20,13 @@ import org.slf4j.LoggerFactory;
  */
 public class ModHelper {
     public static final String MOD_ID = "survivalfly";
+    public static final Logger LOGGER = LoggerFactory.getLogger("Survival Fly");
     public static final float DEFAULT_FLIGHT_SPEED = 0.05F;
     public static final int DEFAULT_DAMAGE_TIME_TICKS = 400;
     public static final String EVER_ENABLED_FLIGHT_NAME = "EverEnabledFlight";
     public static final String WANT_TO_FLY_AGAIN = "WantToFlyAgain";
     public static final String DAMAGE_TIME_TICKS_NAME = "DamageTimeTicks";
     public static final String PLAYED_BROKEN_NAME = "PlayedBroken";
-    private static final Logger LOGGER = LoggerFactory.getLogger("Survival Fly");
 
     /**
      * Returns the options.
