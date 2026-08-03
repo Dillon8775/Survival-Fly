@@ -5,6 +5,8 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.annotation.Dill;
+import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.survivalfly.option.FriendlyFlight;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.Permissions;
@@ -16,6 +18,7 @@ import static net.dillon.survivalfly.helper.ModHelper.options;
 /**
  * The main configuration screen for Survival Fly.
  */
+@Dill(DillType.CLIENT)
 public class ConfigurationScreen {
 
     public static YetAnotherConfigLib configScreen() {

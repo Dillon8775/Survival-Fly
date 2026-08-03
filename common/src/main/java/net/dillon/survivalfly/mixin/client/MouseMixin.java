@@ -1,6 +1,8 @@
 package net.dillon.survivalfly.mixin.client;
 
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.annotation.Dill;
+import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
 import net.minecraft.ChatFormatting;
@@ -19,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.dillon.survivalfly.helper.ModHelper.decimalAsPercentage;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
+@Dill(DillType.CLIENT)
 @Mixin(MouseHandler.class)
 public class MouseMixin {
     @Shadow @Final

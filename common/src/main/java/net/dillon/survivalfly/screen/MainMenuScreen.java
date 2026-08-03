@@ -1,5 +1,7 @@
 package net.dillon.survivalfly.screen;
 
+import net.dillon.dillonlib.annotation.Dill;
+import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.platform.ModReferences;
@@ -24,6 +26,7 @@ import java.util.List;
 /**
  * The options screen for configurating the {@code /fly} command.
  */
+@Dill(DillType.CLIENT)
 public class MainMenuScreen extends OptionsSubScreen {
 
     public MainMenuScreen(Screen parent) {

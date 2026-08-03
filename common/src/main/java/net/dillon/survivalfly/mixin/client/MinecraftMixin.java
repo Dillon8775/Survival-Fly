@@ -1,5 +1,7 @@
 package net.dillon.survivalfly.mixin.client;
 
+import net.dillon.dillonlib.annotation.Dill;
+import net.dillon.dillonlib.annotation.DillType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
+@Dill(DillType.CLIENT)
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
     @Shadow
