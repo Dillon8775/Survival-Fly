@@ -2,6 +2,7 @@ package net.dillon.survivalfly.main;
 
 import net.blay09.mods.balm.Balm;
 import net.blay09.mods.balm.core.BalmRegistrars;
+import net.dillon.survivalfly.option.ModClientOptions;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 
@@ -17,6 +18,7 @@ public class CommonMain {
         registerPackets();
 
         Balm.config().registerConfig(ModOptions.class);
+        Balm.config().registerConfig(ModClientOptions.class);
 
         info("Survival Fly version " + SurvivalFlyPlatforms.getPlatform().modVersion() + " (for " + Balm.platform().name() + ") loaded successfully!");
     }

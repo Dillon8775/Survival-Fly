@@ -8,11 +8,13 @@ import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.survivalfly.option.FriendlyFlight;
+import net.dillon.survivalfly.option.ModClientOptions;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.option.Permissions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
+import static net.dillon.survivalfly.helper.ModHelper.coptions;
 import static net.dillon.survivalfly.helper.ModHelper.options;
 
 /**
@@ -105,6 +107,20 @@ public class ConfigurationScreen {
                                                                 .build()
                                                 )
                                                 .collapsed(onServer)
+                                                .build()
+                                )
+                                .group(
+                                        OptionGroup.createBuilder()
+                                                .name(Component.translatable("survivalfly.options.client"))
+                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.client.description")))
+                                                .option(
+                                                        Option.<Boolean>createBuilder()
+                                                                .name(Component.translatable("survivalfly.options.server_warnings"))
+                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.server_warnings.description")))
+                                                                .binding(true, () -> coptions().serverWarnings, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.serverWarnings = v))
+                                                                .controller(BooleanControllerBuilder::create)
+                                                                .build()
+                                                )
                                                 .build()
                                 )
                                 .build()

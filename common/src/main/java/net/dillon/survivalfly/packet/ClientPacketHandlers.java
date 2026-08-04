@@ -6,6 +6,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 
+import static net.dillon.survivalfly.helper.ModHelper.coptions;
 import static net.dillon.survivalfly.helper.ModHelper.options;
 
 /**
@@ -18,6 +19,11 @@ public class ClientPacketHandlers {
      */
     public static void disconnectSafeMode(Connection connection, LocalPlayer localPlayer) {
         boolean disconnected = false;
+
+        if (!coptions().serverWarnings) {
+            return;
+        }
+
         if (options().safeMode) {
             connection.disconnect(Component.translatable("survivalfly.not_installed"));
             disconnected = true;

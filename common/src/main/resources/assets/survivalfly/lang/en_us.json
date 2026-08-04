@@ -28,6 +28,10 @@
   "survivalfly.options.elytra_flight.description": "Requires the player to wear an elytra to use flight. The elytra's durability will decrement based on the player's flight speed.",
   "survivalfly.options.flight_exhaustion": "Flight Exhaustion",
   "survivalfly.options.flight_exhaustion.description": "Makes the player hungry when using flight.",
+  "survivalfly.options.client": "Client",
+  "survivalfly.options.client.description": "Configure client-side options for Survival Fly",
+  "survivalfly.options.server_warnings": "Server Warnings",
+  "survivalfly.options.server_warnings.description": "Sends warning messages to the player upon joining a server that does not have Survival Fly installed.",
 
   "key.category.survivalfly.survival_fly": "Survival Fly",
   "key.survivalfly.toggle_flight": "Toggle Flight",

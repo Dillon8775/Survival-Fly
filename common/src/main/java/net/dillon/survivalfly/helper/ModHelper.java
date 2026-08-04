@@ -2,6 +2,7 @@ package net.dillon.survivalfly.helper;
 
 import com.mojang.brigadier.context.CommandContext;
 import net.blay09.mods.balm.Balm;
+import net.dillon.survivalfly.option.ModClientOptions;
 import net.dillon.survivalfly.option.ModOptions;
 import net.dillon.survivalfly.util.ModTexts;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
@@ -33,6 +34,13 @@ public class ModHelper {
      */
     public static ModOptions options() {
         return Balm.config().getActiveConfig(ModOptions.class);
+    }
+
+    /**
+     * Returns the client options.
+     */
+    public static ModClientOptions coptions() {
+        return Balm.config().getActiveConfig(ModClientOptions.class);
     }
 
     /**
