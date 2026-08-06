@@ -2,8 +2,10 @@ package net.dillon.survivalfly.helper;
 
 import com.mojang.brigadier.context.CommandContext;
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.util.UpdateChecker;
 import net.dillon.survivalfly.option.ModClientOptions;
 import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.dillon.survivalfly.util.ModTexts;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.commands.CommandSourceStack;
@@ -22,6 +24,10 @@ import org.slf4j.LoggerFactory;
 public class ModHelper {
     public static final String MOD_ID = "survivalfly";
     public static final Logger LOGGER = LoggerFactory.getLogger("Survival Fly");
+    public static final boolean HAS_UPDATE = UpdateChecker.hasUpdate(UpdateChecker.checkForUpdate(
+            "survival-fly",
+            SurvivalFlyPlatforms.getPlatform().modVersion()
+    ));
     public static final float DEFAULT_FLIGHT_SPEED = 0.05F;
     public static final int DEFAULT_DAMAGE_TIME_TICKS = 400;
     public static final String EVER_ENABLED_FLIGHT_NAME = "EverEnabledFlight";

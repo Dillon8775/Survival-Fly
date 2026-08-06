@@ -22,8 +22,6 @@ public class NeoForgedClientEvents {
 
     @SubscribeEvent
     public static void onClientLoggingIn(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (!SurvivalFlyPlatforms.getClientPlatform().canSendPacket(event.getPlayer())) {
-            ClientPacketHandlers.disconnectSafeMode(event.getConnection(), event.getPlayer());
-        }
+        ClientEvents.onPlayerJoin(event.getConnection(), event.getPlayer());
     }
 }
