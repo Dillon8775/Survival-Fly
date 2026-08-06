@@ -14,7 +14,7 @@ import java.util.*;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
 /**
- * Common-side events for Survival Fly.
+ * Common events for Survival Fly.
  */
 public class CommonEvents {
     private static final Set<UUID> FLYING_PLAYERS = new HashSet<>();

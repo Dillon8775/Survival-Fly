@@ -10,7 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 
 /**
- * Client-side events for Survival Fly.
+ * Client events for Survival Fly.
  */
 public class ClientEvents {
 
