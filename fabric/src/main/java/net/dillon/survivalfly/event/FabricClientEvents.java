@@ -15,7 +15,6 @@ public class FabricClientEvents {
         ModKeyMappings.initKeybinds();
 
         KeyMappingHelper.registerKeyMapping(ModKeyMappings.CHANGE_FLIGHT_SPEED);
-        KeyMappingHelper.registerKeyMapping(ModKeyMappings.RESET_FLIGHT_SPEED);
     }
 
     public static void registerConnectionChecks() {

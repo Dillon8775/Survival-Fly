@@ -17,7 +17,6 @@ public class NeoForgedClientEvents {
     public static void registerNeoForgedKeybindings(RegisterKeyMappingsEvent event) {
         ModKeyMappings.initKeybinds();
 
-        event.register(ModKeyMappings.RESET_FLIGHT_SPEED);
         event.register(ModKeyMappings.CHANGE_FLIGHT_SPEED);
     }
 

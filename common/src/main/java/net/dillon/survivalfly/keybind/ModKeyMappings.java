@@ -5,12 +5,18 @@ import net.blay09.mods.balm.Balm;
 import net.blay09.mods.kuma.api.*;
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
+import net.dillon.dillonlib.factory.ClientFactories;
 import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
+import static net.dillon.dillonlib.task.ClientTasks.executeIfClientPlayer;
+import static net.dillon.survivalfly.helper.ModHelper.DEFAULT_FLIGHT_SPEED;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
 /**
@@ -39,11 +45,17 @@ public class ModKeyMappings {
             })
             .build();
 
-    public static final KeyMapping RESET_FLIGHT_SPEED = new KeyMapping(
+    public static final KeyMapping RESET_FLIGHT_SPEED = ClientFactories.createKeyMapping(
             "survivalfly.reset_flight_speed",
             InputConstants.Type.KEYSYM,
+            SURVIVAL_FLY,
             GLFW.GLFW_KEY_B,
-            SURVIVAL_FLY
+            player -> {
+                if (player != null && player.getAbilities().mayfly) {
+                    Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(DEFAULT_FLIGHT_SPEED));
+                    player.sendOverlayMessage(Component.translatable("survivalfly.reset_flight_speed").withStyle(ChatFormatting.GREEN));
+                }
+            }
     );
 
     public static final KeyMapping CHANGE_FLIGHT_SPEED = new KeyMapping(
