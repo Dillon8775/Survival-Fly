@@ -81,6 +81,8 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         }
         mainFile.releaseType = "release"
         project.findProperty("curseforge_environments")?.split(",")?.toList()?.each { mainFile.addEnvironment(it) }
+        mainFile.addEnvironment("Client")
+        mainFile.addEnvironment("Server")
     }
 }
 
@@ -105,7 +107,7 @@ modrinth {
         required.project "fabric-api"
         required.project "balm"
         required.project "yacl"
-        required.project "dillonlib"
+        required.project "dillon-lib"
         optional.project "luckperms"
     }
 }
