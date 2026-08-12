@@ -23,7 +23,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.dillon.survivalfly.helper.ModConstants.*;
 import static net.dillon.survivalfly.helper.ModHelper.*;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player implements PlayerAbilitiesExtension {
@@ -81,7 +83,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
      */
     @Override
     public boolean flyingAllowed() {
-        return !options().friendlyFlight.enabled() || this.damageTimeTicks == 0;
+        return !common().friendlyFlight.enabled() || this.damageTimeTicks == 0;
     }
 
     /**
@@ -112,13 +114,13 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
     @Inject(method = "hurtServer", at = @At("HEAD"))
     private void onDamageDisableFlight(ServerLevel level, DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
         ServerPlayer victimPlayer = (ServerPlayer)(Object)this;
-        if (!modEnabled() || !options().friendlyFlight.enabled() || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
+        if (!modEnabled() || !common().friendlyFlight.enabled() || isInvalidPlayerGameMode(victimPlayer) || !isPvpAllowed()) {
             return;
         }
 
         Entity attacker = source.getEntity();
 
-        if (!isInvalidPlayerGameMode(victimPlayer) && options().friendlyFlight.mobsAllowed() && attacker instanceof LivingEntity) {
+        if (!isInvalidPlayerGameMode(victimPlayer) && common().friendlyFlight.mobsAllowed() && attacker instanceof LivingEntity) {
             stopFlightForPlayer(victimPlayer, false);
         }
 
@@ -139,7 +141,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
         }
 
         // Friendly flight functionality (stops player flight if taking damage)
-        if (options().friendlyFlight.enabled()) {
+        if (common().friendlyFlight.enabled()) {
             if (this.damageTimeTicks == -1) {
                 this.damageTimeTicks = DEFAULT_DAMAGE_TIME_TICKS;
             }
@@ -170,18 +172,18 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
         }
 
         // Exhaust player when flying
-        if (options().flightExhaustion && hasElytra(player) && player.getAbilities().flying) {
+        if (common().flightExhaustion && hasElytra(player) && player.getAbilities().flying) {
             float exhaustion = flightSpeedMultiplier * movementSpeed;
             player.causeFoodExhaustion(exhaustion / 100);
         }
 
         // Stop further action, this prevents double jumping lol
-        if (options().friendlyFlight.enabled() && this.damageTimeTicks > 0) {
+        if (common().friendlyFlight.enabled() && this.damageTimeTicks > 0) {
             return;
         }
 
         // Elytra flight functionality (requires player to wear elytra to fly)
-        if (options().elytraFlight) {
+        if (common().elytraFlight) {
             ItemStack chestSlot = player.getItemBySlot(EquipmentSlot.CHEST);
             boolean validDurability = chestSlot.getDamageValue() != chestSlot.getMaxDamage() - 1;
             boolean isElytra = chestSlot.is(Items.ELYTRA);

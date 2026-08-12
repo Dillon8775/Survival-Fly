@@ -13,10 +13,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
 
-import static net.dillon.dillonlib.task.ClientTasks.executeIfClientPlayer;
-import static net.dillon.survivalfly.helper.ModHelper.DEFAULT_FLIGHT_SPEED;
+import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_FLIGHT_SPEED;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
 /**
@@ -47,9 +45,9 @@ public class ModKeyMappings {
 
     public static final KeyMapping RESET_FLIGHT_SPEED = ClientFactories.createKeyMapping(
             "survivalfly.reset_flight_speed",
-            InputConstants.Type.KEYSYM,
+            InputConstants.Type.KEYBOARD,
             SURVIVAL_FLY,
-            GLFW.GLFW_KEY_B,
+            InputConstants.KEY_B,
             player -> {
                 if (player != null && player.getAbilities().mayfly) {
                     Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(DEFAULT_FLIGHT_SPEED));
@@ -60,8 +58,8 @@ public class ModKeyMappings {
 
     public static final KeyMapping CHANGE_FLIGHT_SPEED = new KeyMapping(
             "survivalfly.change_flight_speed",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_LEFT_ALT,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.KEY_LALT,
             SURVIVAL_FLY
     );
 }

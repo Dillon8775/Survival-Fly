@@ -8,7 +8,7 @@ import net.dillon.dillonlib.platform.info.LogoWidth;
 import net.dillon.dillonlib.platform.info.PlatformName;
 import net.dillon.dillonlib.platform.info.PlatformRelease;
 import net.dillon.survivalfly.command.*;
-import net.dillon.survivalfly.helper.ModHelper;
+import net.dillon.survivalfly.helper.ModConstants;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
@@ -46,17 +46,17 @@ public abstract class SurvivalFlyPlatform extends ModPlatform {
 
     @Override
     public String modId() {
-        return ModHelper.MOD_ID;
+        return ModConstants.MOD_ID;
     }
 
     @Override
     public @NotNull Logger logger() {
-        return ModHelper.LOGGER;
+        return ModConstants.LOGGER;
     }
 
     @Override
     public String modVersion() {
-        return Platforms.getCommonPlatform().commonModVersion(ModHelper.MOD_ID);
+        return Platforms.getCommonPlatform().commonModVersion(ModConstants.MOD_ID);
     }
 
     @Override

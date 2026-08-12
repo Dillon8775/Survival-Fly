@@ -1,7 +1,7 @@
 package net.dillon.survivalfly.event;
 
 import net.blay09.mods.balm.Balm;
-import net.dillon.survivalfly.helper.ModHelper;
+import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.packet.ServerPacketHandlers;
 import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
@@ -43,7 +43,7 @@ public class CommonEvents {
             FLYING_PLAYERS.remove(player.getUUID());
         }
         if (FLIGHT_SPEED.containsKey(player.getUUID())) {
-            player.getAbilities().setFlyingSpeed(FLIGHT_SPEED.getOrDefault(player.getUUID(), ModHelper.DEFAULT_FLIGHT_SPEED));
+            player.getAbilities().setFlyingSpeed(FLIGHT_SPEED.getOrDefault(player.getUUID(), ModConstants.DEFAULT_FLIGHT_SPEED));
             FLIGHT_SPEED.remove(player.getUUID());
         }
 
@@ -64,7 +64,7 @@ public class CommonEvents {
      * Registers all survival fly packets.
      */
     public static void registerPackets() {
-        Balm.networking().allowClientAndServerOnly(ModHelper.MOD_ID);
+        Balm.networking().allowClientAndServerOnly(ModConstants.MOD_ID);
 
         Balm.networking().registerServerboundPacket(
                 UpdateFlightSpeedC2SPacket.PACKET_TYPE,

@@ -8,7 +8,7 @@ import net.minecraft.server.permissions.Permission;
 import net.minecraft.server.permissions.PermissionLevel;
 
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
-import static net.dillon.survivalfly.helper.ModHelper.options;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 /**
  * Permission utility class for Survival Fly.
@@ -69,7 +69,7 @@ public class PermissionUtil {
             return false;
         }
 
-        return hasPermissionLevel(commandSourceStack, getPermissionLevel(options().permissions.getId()));
+        return hasPermissionLevel(commandSourceStack, getPermissionLevel(common().permissions.getId()));
     }
 
     /**

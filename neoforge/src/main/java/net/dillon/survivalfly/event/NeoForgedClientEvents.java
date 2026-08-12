@@ -2,8 +2,6 @@ package net.dillon.survivalfly.event;
 
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
-import net.dillon.survivalfly.packet.ClientPacketHandlers;
-import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
-import static net.dillon.survivalfly.helper.ModHelper.options;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 @Mixin(Player.class)
 public class PlayerMixin {
@@ -23,7 +23,7 @@ public class PlayerMixin {
         }
 
         Player player = (Player)(Object)this;
-        if (options().crouchFlight && player.getAbilities().flying && player.isShiftKeyDown()) {
+        if (common().crouchFlight && player.getAbilities().flying && player.isShiftKeyDown()) {
             cir.setReturnValue(Pose.CROUCHING);
         }
     }

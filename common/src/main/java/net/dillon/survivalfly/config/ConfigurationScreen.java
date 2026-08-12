@@ -7,15 +7,12 @@ import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
-import net.dillon.survivalfly.option.FriendlyFlight;
-import net.dillon.survivalfly.option.ModClientOptions;
-import net.dillon.survivalfly.option.ModOptions;
-import net.dillon.survivalfly.option.Permissions;
+import net.dillon.survivalfly.option.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
-import static net.dillon.survivalfly.helper.ModHelper.coptions;
-import static net.dillon.survivalfly.helper.ModHelper.options;
+import static net.dillon.survivalfly.option.OptionInstances.client;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 /**
  * The main configuration screen for Survival Fly.
@@ -40,7 +37,7 @@ public class ConfigurationScreen {
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.enable_mod"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.enable_mod.description")))
-                                                                .binding(true, () -> options().enableMod, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.enableMod = v))
+                                                                .binding(true, () -> common().enableMod, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.enableMod = v))
                                                                 .controller(TickBoxControllerBuilder::create)
                                                                 .build()
                                                 )
@@ -48,7 +45,7 @@ public class ConfigurationScreen {
                                                         Option.<Permissions>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.permissions"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.permissions.description")))
-                                                                .binding(Permissions.ANYONE, () -> options().permissions, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.permissions = v))
+                                                                .binding(Permissions.ANYONE, () -> common().permissions, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.permissions = v))
                                                                 .controller(o -> EnumControllerBuilder.create(o)
                                                                         .enumClass(Permissions.class)
                                                                         .formatValue(v -> Component.literal(v.getSerializedName())))
@@ -59,7 +56,7 @@ public class ConfigurationScreen {
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.crouch_flight"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.crouch_flight.description")))
-                                                                .binding(false, () -> options().crouchFlight, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.crouchFlight = v))
+                                                                .binding(false, () -> common().crouchFlight, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.crouchFlight = v))
                                                                 .controller(BooleanControllerBuilder::create)
                                                                 .build()
                                                 )
@@ -67,7 +64,7 @@ public class ConfigurationScreen {
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.safe_mode"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.safe_mode.description")))
-                                                                .binding(true, () -> options().safeMode, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.safeMode = v))
+                                                                .binding(true, () -> common().safeMode, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.safeMode = v))
                                                                 .controller(TickBoxControllerBuilder::create)
                                                                 .build()
                                                 )
@@ -81,7 +78,7 @@ public class ConfigurationScreen {
                                                         Option.<FriendlyFlight>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.friendly_flight"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.friendly_flight.description")))
-                                                                .binding(FriendlyFlight.OFF, () -> options().friendlyFlight, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.friendlyFlight = v))
+                                                                .binding(FriendlyFlight.OFF, () -> common().friendlyFlight, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.friendlyFlight = v))
                                                                 .controller(o -> EnumControllerBuilder.create(o)
                                                                         .enumClass(FriendlyFlight.class)
                                                                         .formatValue(v -> Component.literal(v.getSerializedName())))
@@ -92,7 +89,7 @@ public class ConfigurationScreen {
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.elytra_flight"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.elytra_flight.description")))
-                                                                .binding(false, () -> options().elytraFlight, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.elytraFlight = v))
+                                                                .binding(false, () -> common().elytraFlight, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.elytraFlight = v))
                                                                 .controller(BooleanControllerBuilder::create)
                                                                 .available(!onServer)
                                                                 .build()
@@ -101,7 +98,7 @@ public class ConfigurationScreen {
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.flight_exhaustion"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.flight_exhaustion.description")))
-                                                                .binding(false, () -> options().flightExhaustion, v -> Balm.config().updateLocalConfig(ModOptions.class, config -> config.flightExhaustion = v))
+                                                                .binding(false, () -> common().flightExhaustion, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.flightExhaustion = v))
                                                                 .controller(BooleanControllerBuilder::create)
                                                                 .available(!onServer)
                                                                 .build()
@@ -114,10 +111,20 @@ public class ConfigurationScreen {
                                                 .name(Component.translatable("survivalfly.options.client"))
                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.client.description")))
                                                 .option(
+                                                        Option.<MenuButton>createBuilder()
+                                                                .name(Component.translatable("survivalfly.options.menu_button"))
+                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.menu_button.description")))
+                                                                .binding(MenuButton.TITLE_ONLY, () -> client().menuButton, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.menuButton = v))
+                                                                .controller(o -> EnumControllerBuilder.create(o)
+                                                                        .enumClass(MenuButton.class)
+                                                                        .formatValue(v -> Component.literal(v.getSerializedName())))
+                                                                .build()
+                                                )
+                                                .option(
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.server_warnings"))
                                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.server_warnings.description")))
-                                                                .binding(true, () -> coptions().serverWarnings, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.serverWarnings = v))
+                                                                .binding(true, () -> client().serverWarnings, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.serverWarnings = v))
                                                                 .controller(BooleanControllerBuilder::create)
                                                                 .build()
                                                 )

@@ -1,5 +1,6 @@
 {
   "survivalfly.title.options": "Survival Fly",
+  "survivalfly.title.menu": "Survival Fly Main Menu",
 
   "survivalfly.gui.options.tooltip": "Configure Survival Fly...",
   "survivalfly.gui.on": "ON",
@@ -7,6 +8,7 @@
   "survivalfly.gui.configure": "Configure...",
   "survivalfly.gui.report_bugs": "Report a bug...",
   "survivalfly.gui.ask_questions": "Ask questions...",
+  "survivalfly.gui.update_available": "A newer version of Survival Fly is available",
 
   "survivalfly.options.title.surival_fly": "Survival Fly",
   "survivalfly.options.tooltip": "Configure all Survival Fly features!",
@@ -32,6 +34,8 @@
   "survivalfly.options.client.description": "Configure client-side options for Survival Fly",
   "survivalfly.options.server_warnings": "Server Warnings",
   "survivalfly.options.server_warnings.description": "Sends warning messages to the player upon joining a server that does not have Survival Fly installed.",
+  "survivalfly.options.menu_button": "Menu Button",
+  "survivalfly.options.menu_button.description": "Determines where the Survival Fly menu button should display.\n\nEverywhere → §7in the default position on the pause screen and title screen§r§f\n\nTitle Only → §7only on the title screen§r§f\n\nOFF → §7do not display the menu button at all. You should only disable this if you have another way of accessing the menu, via Mod Menu or (Neo)Forge's mod list.",
 
   "key.category.survivalfly.survival_fly": "Survival Fly",
   "key.survivalfly.toggle_flight": "Toggle Flight",

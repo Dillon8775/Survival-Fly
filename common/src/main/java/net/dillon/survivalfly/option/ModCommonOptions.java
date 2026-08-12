@@ -2,10 +2,10 @@ package net.dillon.survivalfly.option;
 
 import net.blay09.mods.balm.platform.config.reflection.Comment;
 import net.blay09.mods.balm.platform.config.reflection.Config;
-import net.dillon.survivalfly.helper.ModHelper;
+import net.dillon.survivalfly.helper.ModConstants;
 
-@Config(ModHelper.MOD_ID)
-public class ModOptions {
+@Config(ModConstants.MOD_ID)
+public class ModCommonOptions {
     @Comment("Enables the Survival Fly mod.")
     public boolean enableMod = true;
 

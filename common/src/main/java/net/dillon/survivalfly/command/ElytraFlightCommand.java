@@ -3,13 +3,13 @@ package net.dillon.survivalfly.command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.util.SimplePermissions;
-import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.option.ModCommonOptions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 
-import static net.dillon.survivalfly.helper.ModHelper.options;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 import static net.dillon.survivalfly.util.ModTexts.DISABLED_UPPERCASE;
 import static net.dillon.survivalfly.util.ModTexts.ENABLED_UPPERCASE;
 
@@ -29,10 +29,10 @@ public class ElytraFlightCommand {
                 .requires(SimplePermissions::admin)
                 .executes(
                         context -> {
-                            Balm.config().updateLocalConfig(ModOptions.class, config -> {
+                            Balm.config().updateLocalConfig(ModCommonOptions.class, config -> {
                                 config.elytraFlight = !config.elytraFlight;
                             });
-                            if (options().elytraFlight) {
+                            if (common().elytraFlight) {
                                 context.getSource().sendSystemMessage(ELYTRA_FLIGHT_ENABLED);
                                 context.getSource().sendSystemMessage(ELYTRA_FLIGHT_DESC);
                             } else {

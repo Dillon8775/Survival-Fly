@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
-import static net.dillon.survivalfly.helper.ModHelper.options;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 @Dill(DillType.CLIENT)
 @Mixin(LocalPlayer.class)
@@ -26,7 +26,7 @@ public class LocalPlayerMixin {
      */
     @Unique
     private boolean isPlayerTryingToCrouchFlight(LocalPlayer player, boolean includeSprint) {
-        return options().crouchFlight && player.getAbilities().flying && player.isShiftKeyDown() && (!includeSprint || player.input.keyPresses.sprint());
+        return common().crouchFlight && player.getAbilities().flying && player.isShiftKeyDown() && (!includeSprint || player.input.keyPresses.sprint());
     }
 
     /**

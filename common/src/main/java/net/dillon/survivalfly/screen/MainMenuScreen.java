@@ -2,8 +2,9 @@ package net.dillon.survivalfly.screen;
 
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
+import net.dillon.dillonlib.task.ClientTasks;
 import net.dillon.survivalfly.config.ConfigurationScreen;
-import net.dillon.survivalfly.helper.ModHelper;
+import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.platform.ModReferences;
 import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.ChatFormatting;
@@ -15,13 +16,14 @@ import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.CommonColors;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.dillon.survivalfly.helper.ModConstants.HAS_UPDATE;
+import static net.dillon.survivalfly.helper.ModConstants.VERSION;
 
 /**
  * The options screen for configurating the {@code /fly} command.
@@ -58,19 +60,22 @@ public class MainMenuScreen extends OptionsSubScreen {
 
     @Override
     public void onClose() {
-        ModHelper.debug("Flushed changes.");
+        ModConstants.LOGGER.debug("Flushed changes.");
         super.onClose();
     }
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float deltaTicks) {
         super.extractRenderState(graphics, mouseX, mouseY, deltaTicks);
-        int textWidth = this.width - 20;
-        int textHeight = this.height - 21;
-        int imageWidth = this.width - SurvivalFlyPlatforms.getPlatform().logoWidth().getWidthModifier();
-        int imageHeight = this.height - 26;
-        graphics.centeredText(this.font, SurvivalFlyPlatforms.getPlatform().modVersion(), textWidth, textHeight, CommonColors.WHITE);
-        graphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath("survivalfly", "textures/gui/sprites/survivalfly.png"), imageWidth, imageHeight, 0.0F, 0.0F, 18, 18, 18, 18);
+
+        ClientTasks.drawModInfo(
+                graphics,
+                this,
+                VERSION,
+                SurvivalFlyPlatforms.getPlatform().logoWidth().getWidthModifier(),
+                Identifier.fromNamespaceAndPath("survivalfly", "textures/gui/sprites/survivalfly.png"),
+                HAS_UPDATE
+        );
     }
 
     @Override

@@ -2,6 +2,10 @@
   "required": true,
   "package": "net.dillon.survivalfly.mixin",
   "compatibilityLevel": "JAVA_25",
+  "minVersion": "0.8",
+  "mixinextras": {
+    "minVersion": "0.5.4"
+  },
   "client": [
     "client.LocalPlayerMixin",
     "client.MouseMixin"

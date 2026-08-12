@@ -4,7 +4,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.util.SimplePermissions;
-import net.dillon.survivalfly.option.ModOptions;
+import net.dillon.survivalfly.option.ModCommonOptions;
 import net.dillon.survivalfly.option.Permissions;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -34,7 +34,7 @@ public class PermissionsCommand {
 
                                             try {
                                                 Permissions permission = Permissions.byName(input);
-                                                Balm.config().updateLocalConfig(ModOptions.class, config -> {
+                                                Balm.config().updateLocalConfig(ModCommonOptions.class, config -> {
                                                     config.permissions = permission;
                                                 });
                                                 context.getSource().sendSystemMessage(changedPermission(permission));

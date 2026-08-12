@@ -1,11 +1,6 @@
 package net.dillon.survivalfly.helper;
 
 import com.mojang.brigadier.context.CommandContext;
-import net.blay09.mods.balm.Balm;
-import net.dillon.dillonlib.util.UpdateChecker;
-import net.dillon.survivalfly.option.ModClientOptions;
-import net.dillon.survivalfly.option.ModOptions;
-import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.dillon.survivalfly.util.ModTexts;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.commands.CommandSourceStack;
@@ -15,61 +10,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_DAMAGE_TIME_TICKS;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 /**
  * Utility class for the {@code Survival Fly} mod.
  */
 public class ModHelper {
-    public static final String MOD_ID = "survivalfly";
-    public static final Logger LOGGER = LoggerFactory.getLogger("Survival Fly");
-    public static final boolean HAS_UPDATE = UpdateChecker.hasUpdate(UpdateChecker.checkForUpdate(
-            "survival-fly",
-            SurvivalFlyPlatforms.getPlatform().modVersion()
-    ));
-    public static final float DEFAULT_FLIGHT_SPEED = 0.05F;
-    public static final int DEFAULT_DAMAGE_TIME_TICKS = 400;
-    public static final String EVER_ENABLED_FLIGHT_NAME = "EverEnabledFlight";
-    public static final String WANT_TO_FLY_AGAIN = "WantToFlyAgain";
-    public static final String DAMAGE_TIME_TICKS_NAME = "DamageTimeTicks";
-    public static final String PLAYED_BROKEN_NAME = "PlayedBroken";
-
-    /**
-     * Returns the options.
-     */
-    public static ModOptions options() {
-        return Balm.config().getActiveConfig(ModOptions.class);
-    }
-
-    /**
-     * Returns the client options.
-     */
-    public static ModClientOptions coptions() {
-        return Balm.config().getActiveConfig(ModClientOptions.class);
-    }
-
-    /**
-     * Sends a message to console.
-     */
-    public static void info(String message) {
-        LOGGER.info(message);
-    }
-
-    /**
-     * Sends a warning message to console.
-     */
-    @Deprecated
-    public static void warn(String message) {
-        LOGGER.warn(message);
-    }
-
-    /**
-     * Sends a {@code debug} message to the console.
-     */
-    public static void debug(String message) {
-        LOGGER.debug(message);
-    }
 
     /**
      * @return the current elytra stack from the player.
@@ -83,7 +31,7 @@ public class ModHelper {
      * Checks if any of the mod's features should function.
      */
     public static boolean modEnabled() {
-        return options().enableMod;
+        return common().enableMod;
     }
 
     /**
@@ -91,7 +39,7 @@ public class ModHelper {
      */
     public static boolean hasElytra(ServerPlayer player) {
         ItemStack item = getChestSlot(player);
-        return !options().elytraFlight || (item.is(Items.ELYTRA) && item.getDamageValue() != item.getMaxDamage() - 1);
+        return !common().elytraFlight || (item.is(Items.ELYTRA) && item.getDamageValue() != item.getMaxDamage() - 1);
     }
 
     /**

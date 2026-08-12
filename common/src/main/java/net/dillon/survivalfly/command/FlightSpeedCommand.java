@@ -14,6 +14,7 @@ import net.minecraft.world.level.gamerules.GameRules;
 import java.util.Collection;
 import java.util.List;
 
+import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_FLIGHT_SPEED;
 import static net.dillon.survivalfly.helper.ModHelper.*;
 import static net.dillon.survivalfly.util.ModTexts.getPlayerName;
 
