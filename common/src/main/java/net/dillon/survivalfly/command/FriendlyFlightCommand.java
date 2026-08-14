@@ -34,7 +34,7 @@ public class FriendlyFlightCommand {
                         Commands.argument("type", StringArgumentType.word())
                                 .suggests((context, builder) -> {
                                     for (FriendlyFlight friendlyFlight : FriendlyFlight.values()) {
-                                        builder.suggest(friendlyFlight.getRawName());
+                                        builder.suggest(friendlyFlight.getSerializedName());
                                     }
                                     return builder.buildFuture();
                                 }).executes(context -> {
@@ -51,7 +51,7 @@ public class FriendlyFlightCommand {
                                         } else {
                                             sendSourceMessage(context, FRIENDLY_FLIGHT_DISABLED);
                                         }
-                                        return friendlyFlight.getId();
+                                        return friendlyFlight.getOrdinal();
                                     } catch (NullPointerException | IllegalArgumentException o) {
                                         context.getSource().sendFailure(Component.literal("Invalid type: " + input));
                                         return 0;

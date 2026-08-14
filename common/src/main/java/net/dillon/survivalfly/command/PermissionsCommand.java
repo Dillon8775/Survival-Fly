@@ -38,7 +38,7 @@ public class PermissionsCommand {
                                                     config.permissions = permission;
                                                 });
                                                 context.getSource().sendSystemMessage(changedPermission(permission));
-                                                return permission.getId();
+                                                return permission.getOrdinal();
                                             } catch (NullPointerException | IllegalArgumentException o) {
                                                 context.getSource().sendFailure(Component.literal("Invalid permission: " + input));
                                                 return 0;

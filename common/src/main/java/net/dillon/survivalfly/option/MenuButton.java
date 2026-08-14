@@ -1,18 +1,18 @@
 package net.dillon.survivalfly.option;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 
 public enum MenuButton implements StringRepresentable {
-    EVERYWHERE("Everywhere"),
-    TITLE_ONLY("Title Only"),
-    OFF("OFF");
+    EVERYWHERE("everywhere", "survivalfly.options.menu_button.everywhere"),
+    TITLE_ONLY("title_only", "survivalfly.options.menu_button.title_only"),
+    OFF("off", "survivalfly.options.menu_button.off");
 
-    public static final Codec<MenuButton> CODEC = StringRepresentable.fromEnum(MenuButton::values);
     private final String name;
+    private final String translationKey;
 
-    MenuButton(final String name) {
+    MenuButton(final String name, final String translationKey) {
         this.name = name;
+        this.translationKey = translationKey;
     }
 
     public boolean enabled() {
@@ -26,5 +26,9 @@ public enum MenuButton implements StringRepresentable {
     @Override
     public String getSerializedName() {
         return this.name;
+    }
+
+    public String getTranslationKey() {
+        return this.translationKey;
     }
 }
