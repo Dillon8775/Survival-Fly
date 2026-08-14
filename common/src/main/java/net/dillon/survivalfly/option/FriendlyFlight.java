@@ -4,17 +4,19 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 
 public enum FriendlyFlight implements StringRepresentable {
-    OFF(0, "OFF"),
-    PLAYERS_AND_MOBS(1, "§bPlayers §r§f& §r§aMobs"),
-    PLAYERS_ONLY(2, "§aPlayers Only");
+    OFF(0, "OFF", "off"),
+    PLAYERS_AND_MOBS(1, "§bPlayers §r§f& §r§aMobs", "players_and_mobs"),
+    PLAYERS_ONLY(2, "§aPlayers Only", "players_only");
 
     public static final Codec<FriendlyFlight> CODEC = StringRepresentable.fromEnum(FriendlyFlight::values);
     private final int ordinal;
     private final String name;
+    private final String rawName;
 
-    FriendlyFlight(final int ordinal, final String name) {
+    FriendlyFlight(final int ordinal, final String name, final String rawName) {
         this.ordinal = ordinal;
         this.name = name;
+        this.rawName = rawName;
     }
 
     public boolean enabled() {
@@ -34,9 +36,13 @@ public enum FriendlyFlight implements StringRepresentable {
         return this.name;
     }
 
+    public String getRawName() {
+        return this.rawName;
+    }
+
     public static FriendlyFlight byName(String name) {
         for (FriendlyFlight friendlyFlight : values()) {
-            if (friendlyFlight.getSerializedName().equalsIgnoreCase(name)) {
+            if (friendlyFlight.getRawName().equalsIgnoreCase(name)) {
                 return friendlyFlight;
             }
         }

@@ -34,7 +34,7 @@ public class FriendlyFlightCommand {
                         Commands.argument("type", StringArgumentType.word())
                                 .suggests((context, builder) -> {
                                     for (FriendlyFlight friendlyFlight : FriendlyFlight.values()) {
-                                        builder.suggest(friendlyFlight.getSerializedName());
+                                        builder.suggest(friendlyFlight.getRawName());
                                     }
                                     return builder.buildFuture();
                                 }).executes(context -> {
