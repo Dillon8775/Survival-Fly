@@ -2,9 +2,12 @@ package net.dillon.survivalfly.screen;
 
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
+import net.dillon.dillonlib.core.DillonLibModReferences;
 import net.dillon.dillonlib.task.ClientTasks;
+import net.dillon.dillonlib.util.KeybindScrollHelper;
 import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModConstants;
+import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.platform.ModReferences;
 import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.ChatFormatting;
@@ -16,12 +19,14 @@ import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
+import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.dillon.dillonlib.task.ClientTasks.openScreen;
 import static net.dillon.survivalfly.helper.ModConstants.HAS_UPDATE;
 import static net.dillon.survivalfly.helper.ModConstants.VERSION;
 
@@ -32,22 +37,21 @@ import static net.dillon.survivalfly.helper.ModConstants.VERSION;
 public class MainMenuScreen extends OptionsSubScreen {
 
     public MainMenuScreen(Screen parent) {
-        super(parent, Minecraft.getInstance().options, Component.translatable("survivalfly.title.options"));
+        super(parent, Minecraft.getInstance().options, Component.translatable("survivalfly.title"));
     }
 
     @Override
     protected void init() {
         super.init();
         List<AbstractWidget> options = new ArrayList<>(List.of(
-                Button.builder(Component.translatable("survivalfly.gui.configure"), button -> {
-                    if (!ModReferences.isModLoaded(ModReferences.YACL)) {
-                        this.minecraft.gui.toastManager().addToast(new SystemToast(
-                                SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
-                                Component.translatable("survivalfly.toast.title.yacl").withStyle(ChatFormatting.RED),
-                                Component.translatable("survivalfly.toast.yacl")));
-                    } else {
-                        this.minecraft.gui.setScreen(ConfigurationScreen.configScreen().generateScreen(this));
-                    }
+                Button.builder(Component.translatable("survivalfly.gui.configure"), button -> ClientTasks.tryOpenYaclScreen(
+                        () -> ConfigurationScreen.configScreen().generateScreen(this),
+                        Component.translatable("survivalfly.title")
+                )).build(),
+
+                Button.builder(Component.translatable("survivalfly.gui.keybinds"), button -> {
+                    KeybindScrollHelper.request(ModKeyMappings.SURVIVAL_FLY);
+                    openScreen(new KeyBindsScreen(this, Minecraft.getInstance().options));
                 }).build(),
 
                 Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),
@@ -56,12 +60,6 @@ public class MainMenuScreen extends OptionsSubScreen {
         ));
 
         this.list.addSmall(options);
-    }
-
-    @Override
-    public void onClose() {
-        ModConstants.LOGGER.debug("Flushed changes.");
-        super.onClose();
     }
 
     @Override

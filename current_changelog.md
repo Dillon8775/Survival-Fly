@@ -5,6 +5,7 @@
 - Now requires [DillonLib](https://modrinth.com/mod/dillon-lib) version 1.1 or higher.
 - Now uses mixin extras 0.5.4 or above.
 - Added Survival Fly menu button to title screen and pause screen.
+- Added Keybinds button to mod's main menu.
 - Backend optimizations.
 
 ## Bugs Fixed

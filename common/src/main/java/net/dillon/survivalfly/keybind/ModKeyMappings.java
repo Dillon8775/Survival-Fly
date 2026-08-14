@@ -22,7 +22,7 @@ import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
  */
 @Dill(DillType.CLIENT)
 public class ModKeyMappings {
-    private static final KeyMapping.Category SURVIVAL_FLY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("survivalfly", "survival_fly"));
+    public static final KeyMapping.Category SURVIVAL_FLY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("survivalfly", "survival_fly"));
 
     /**
      * Initializes Survival Fly keybinds.

@@ -17,7 +17,7 @@ public class ClientEvents {
     public static void onPlayerJoin(Connection connection, LocalPlayer player) {
         if (ModConstants.HAS_UPDATE) {
             CommonTasks.sendUpdateMessage(player,
-                    Component.translatable("survivalfly.title.options"),
+                    Component.translatable("survivalfly.title"),
                     "https://modrinth.com/mod/survival-fly/versions",
                     TextColor.WHITE.getValue());
         }

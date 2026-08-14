@@ -2,6 +2,7 @@ package net.dillon.survivalfly.platform;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.core.DillonLibModReferences;
 import net.dillon.dillonlib.platform.ModPlatform;
 import net.dillon.dillonlib.platform.Platforms;
 import net.dillon.dillonlib.platform.info.LogoWidth;
@@ -21,7 +22,7 @@ public abstract class SurvivalFlyPlatform extends ModPlatform {
      * @return If the player has permission to execute a command.
      */
     public boolean hasPermission(ServerPlayer player, String node, boolean fallback) {
-        if (ModReferences.isModLoaded(ModReferences.LUCKPERMS)) {
+        if (DillonLibModReferences.isModLoaded(ModReferences.LUCKPERMS)) {
             return this.hasPermissionOnPlatform(player, node, fallback);
         }
         return fallback;
