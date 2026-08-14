@@ -8,4 +8,5 @@
 - Backend optimizations.
 
 ## Bugs Fixed
-- ([Link](https://discord.com/channels/1420957089479655598/1422979589340401674/1537633975755997334)) Cannot execute the /friendlyflight command due to illegal characters.
+- ([Link](https://discord.com/channels/1420957089479655598/1422979589340401674/1537633975755997334)) Cannot execute certain Survival Fly commands due to illegal characters.
+- Configuration issues due to Balm.

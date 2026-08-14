@@ -69,7 +69,7 @@ public class PermissionUtil {
             return false;
         }
 
-        return hasPermissionLevel(commandSourceStack, getPermissionLevel(options().permissions.getId()));
+        return hasPermissionLevel(commandSourceStack, getPermissionLevel(options().permissions.getOrdinal()));
     }
 
     /**

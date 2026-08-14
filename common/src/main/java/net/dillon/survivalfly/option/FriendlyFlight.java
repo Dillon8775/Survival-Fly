@@ -1,22 +1,20 @@
 package net.dillon.survivalfly.option;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 
 public enum FriendlyFlight implements StringRepresentable {
-    OFF(0, "OFF", "off"),
-    PLAYERS_AND_MOBS(1, "§bPlayers §r§f& §r§aMobs", "players_and_mobs"),
-    PLAYERS_ONLY(2, "§aPlayers Only", "players_only");
+    OFF(0, "off", "survivalfly.options.friendly_flight.off"),
+    PLAYERS_AND_MOBS(1, "players_and_mobs", "survivalfly.options.friendly_flight.players_and_mobs"),
+    PLAYERS_ONLY(2, "players_only", "survivalfly.options.friendly_flight.players_only");
 
-    public static final Codec<FriendlyFlight> CODEC = StringRepresentable.fromEnum(FriendlyFlight::values);
     private final int ordinal;
     private final String name;
-    private final String rawName;
+    private final String translationKey;
 
-    FriendlyFlight(final int ordinal, final String name, final String rawName) {
+    FriendlyFlight(final int ordinal, final String name, final String translationKey) {
         this.ordinal = ordinal;
         this.name = name;
-        this.rawName = rawName;
+        this.translationKey = translationKey;
     }
 
     public boolean enabled() {
@@ -27,7 +25,7 @@ public enum FriendlyFlight implements StringRepresentable {
         return this == PLAYERS_AND_MOBS;
     }
 
-    public int getId() {
+    public int getOrdinal() {
         return this.ordinal;
     }
 
@@ -36,13 +34,13 @@ public enum FriendlyFlight implements StringRepresentable {
         return this.name;
     }
 
-    public String getRawName() {
-        return this.rawName;
+    public String getTranslationKey() {
+        return this.translationKey;
     }
 
     public static FriendlyFlight byName(String name) {
         for (FriendlyFlight friendlyFlight : values()) {
-            if (friendlyFlight.getRawName().equalsIgnoreCase(name)) {
+            if (friendlyFlight.getSerializedName().equalsIgnoreCase(name)) {
                 return friendlyFlight;
             }
         }
