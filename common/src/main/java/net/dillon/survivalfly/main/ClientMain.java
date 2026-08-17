@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import java.util.Map;
 
 import static net.dillon.dillonlib.task.ClientTasks.openScreen;
+import static net.dillon.survivalfly.debug.ModDebugScreenEntries.registerDebugEntries;
 
 /**
  * The client entrypoint for Survival Fly.
@@ -21,6 +22,7 @@ import static net.dillon.dillonlib.task.ClientTasks.openScreen;
 public class ClientMain {
 
     public static void cInitialize(BalmRegistrars balmRegistrars) {
+        registerDebugEntries();
     }
 
     public static UpdatableSpriteButton menuButton(Screen parent) {

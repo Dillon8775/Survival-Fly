@@ -5,13 +5,16 @@ import net.dillon.survivalfly.util.ModTexts;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 
 import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_DAMAGE_TIME_TICKS;
+import static net.dillon.survivalfly.helper.ModConstants.MOD_ID;
 import static net.dillon.survivalfly.option.OptionInstances.common;
 
 /**
@@ -20,18 +23,25 @@ import static net.dillon.survivalfly.option.OptionInstances.common;
 public class ModHelper {
 
     /**
+     * Checks if any of the mod's features should function.
+     */
+    public static boolean modEnabled() {
+        return common().enableMod;
+    }
+
+    /**
+     * @return a {@code Survival Fly} identifier.
+     */
+    public static Identifier ofSurvivalFly(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    /**
      * @return the current elytra stack from the player.
 
      */
     public static ItemStack getChestSlot(ServerPlayer player) {
         return player.getItemBySlot(EquipmentSlot.CHEST);
-    }
-
-    /**
-     * Checks if any of the mod's features should function.
-     */
-    public static boolean modEnabled() {
-        return common().enableMod;
     }
 
     /**
@@ -47,6 +57,15 @@ public class ModHelper {
      */
     public static boolean isFlyingAllowed(ServerPlayer player) {
         return ((PlayerAbilitiesExtension)player).flyingAllowed();
+    }
+
+    /**
+     * @return the player's flight speed as a decimal string.
+     */
+    public static String flyingSpeedAsDecimalString(Player player) {
+        int f = decimalAsPercentage(player.getAbilities().getFlyingSpeed());
+        String speed = f == 25 ? "Default" : String.valueOf(f);
+        return speed + "%";
     }
 
     /**

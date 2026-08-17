@@ -5,6 +5,7 @@ import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.dillonlib.task.ClientTasks;
 import net.dillon.dillonlib.util.KeybindScrollHelper;
 import net.dillon.survivalfly.config.ConfigurationScreen;
+import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.client.Minecraft;
@@ -16,7 +17,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class MainMenuScreen extends OptionsSubScreen {
                 this,
                 VERSION,
                 SurvivalFlyPlatforms.getPlatform().logoWidth().getWidthModifier(),
-                Identifier.fromNamespaceAndPath("survivalfly", "textures/gui/sprites/survivalfly.png"),
+                ModConstants.LOGO,
                 HAS_UPDATE
         );
     }
