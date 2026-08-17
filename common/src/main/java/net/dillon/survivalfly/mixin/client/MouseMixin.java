@@ -6,6 +6,7 @@ import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.player.LocalPlayer;
@@ -59,6 +60,6 @@ public class MouseMixin {
         LocalPlayer player = this.minecraft.player;
         float speed = player.getAbilities().getFlyingSpeed();
         Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(speed));
-        player.sendOverlayMessage(Component.translatable("survivalfly.current_flight_speed", ModHelper.flyingSpeedAsDecimalString(player)));
+        player.sendOverlayMessage(Component.translatable("survivalfly.current_flight_speed", ModHelper.flyingSpeedAsDecimalString(player)).withStyle(ChatFormatting.GREEN));
     }
 }
