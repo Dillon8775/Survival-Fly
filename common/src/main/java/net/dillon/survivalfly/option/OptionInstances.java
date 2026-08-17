@@ -2,6 +2,8 @@ package net.dillon.survivalfly.option;
 
 import net.blay09.mods.balm.Balm;
 
+import java.util.function.Consumer;
+
 /**
  * Getters for all Survival Fly's option instances.
  */
@@ -19,5 +21,19 @@ public class OptionInstances {
      */
     public static ModClientOptions client() {
         return Balm.config().getActiveConfig(ModClientOptions.class);
+    }
+
+    /**
+     * Updates common options.
+     */
+    public static void updateCommon(Consumer<ModCommonOptions> modCommonOptionsConsumer) {
+        Balm.config().updateLocalConfig(ModCommonOptions.class, modCommonOptionsConsumer);
+    }
+
+    /**
+     * Updates client options.
+     */
+    public static void updateClient(Consumer<ModClientOptions> modClientOptionsConsumer) {
+        Balm.config().updateLocalConfig(ModClientOptions.class, modClientOptionsConsumer);
     }
 }
