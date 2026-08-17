@@ -64,8 +64,7 @@ public class ModHelper {
      */
     public static String flyingSpeedAsDecimalString(Player player) {
         int f = decimalAsPercentage(player.getAbilities().getFlyingSpeed());
-        String speed = f == 25 ? "Default" : String.valueOf(f);
-        return speed + "%";
+        return f == 25 ? "Default" : f + "%";
     }
 
     /**
