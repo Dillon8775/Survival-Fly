@@ -2,13 +2,13 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.util.SimplePermissions;
-import net.dillon.survivalfly.option.ModCommonOptions;
 import net.dillon.survivalfly.option.Permissions;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+
+import static net.dillon.survivalfly.option.OptionInstances.updateCommon;
 
 /**
  * The functionality for the {@code /permissions} command.
@@ -34,8 +34,8 @@ public class PermissionsCommand {
 
                                             try {
                                                 Permissions permission = Permissions.byName(input);
-                                                Balm.config().updateLocalConfig(ModCommonOptions.class, config -> {
-                                                    config.permissions = permission;
+                                                updateCommon(common -> {
+                                                    common.permissions = permission;
                                                 });
                                                 context.getSource().sendSystemMessage(changedPermission(permission));
                                                 return permission.getOrdinal();

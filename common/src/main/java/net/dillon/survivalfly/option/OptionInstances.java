@@ -26,14 +26,14 @@ public class OptionInstances {
     /**
      * Updates common options.
      */
-    public static void updateCommon(Consumer<ModCommonOptions> modCommonOptionsConsumer) {
-        Balm.config().updateLocalConfig(ModCommonOptions.class, modCommonOptionsConsumer);
+    public static void updateCommon(Consumer<ModCommonOptions> common) {
+        Balm.config().updateLocalConfig(ModCommonOptions.class, common);
     }
 
     /**
      * Updates client options.
      */
-    public static void updateClient(Consumer<ModClientOptions> modClientOptionsConsumer) {
-        Balm.config().updateLocalConfig(ModClientOptions.class, modClientOptionsConsumer);
+    public static void updateClient(Consumer<ModClientOptions> client) {
+        Balm.config().updateLocalConfig(ModClientOptions.class, client);
     }
 }

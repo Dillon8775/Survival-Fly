@@ -11,4 +11,7 @@ public class ModClientOptions {
 
     @Comment("Determines where to display the Survival Fly menu button.")
     public MenuButton menuButton = MenuButton.TITLE_ONLY;
+
+    @Comment("Prevents players from joining a server that doesn't have the mod installed.")
+    public boolean safeMode = true;
 }

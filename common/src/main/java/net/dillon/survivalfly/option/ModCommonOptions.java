@@ -23,7 +23,4 @@ public class ModCommonOptions {
 
     @Comment("Prevents the player from using flight if they have taken any damage within 20 seconds.\n# Allowed values: off, players_and_mobs, players_only")
     public FriendlyFlight friendlyFlight = FriendlyFlight.OFF;
-
-    @Comment("Prevents players from joining a server that doesn't have the mod installed.")
-    public boolean safeMode = true;
 }

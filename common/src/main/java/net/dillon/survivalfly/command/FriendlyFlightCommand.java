@@ -2,10 +2,8 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.util.SimplePermissions;
 import net.dillon.survivalfly.option.FriendlyFlight;
-import net.dillon.survivalfly.option.ModCommonOptions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -13,6 +11,7 @@ import net.minecraft.network.chat.Component;
 
 import static net.dillon.survivalfly.helper.ModHelper.sendSourceMessage;
 import static net.dillon.survivalfly.option.OptionInstances.common;
+import static net.dillon.survivalfly.option.OptionInstances.updateCommon;
 import static net.dillon.survivalfly.util.ModTexts.DISABLED_UPPERCASE;
 import static net.dillon.survivalfly.util.ModTexts.ENABLED_UPPERCASE;
 
@@ -42,8 +41,8 @@ public class FriendlyFlightCommand {
 
                                     try {
                                         FriendlyFlight friendlyFlight = FriendlyFlight.byName(input);
-                                        Balm.config().updateLocalConfig(ModCommonOptions.class, config -> {
-                                            config.friendlyFlight = friendlyFlight;
+                                        updateCommon(common -> {
+                                            common.friendlyFlight = friendlyFlight;
                                         });
                                         if (common().friendlyFlight.enabled()) {
                                             sendSourceMessage(context, FRIENDLY_FLIGHT_ENABLED);
