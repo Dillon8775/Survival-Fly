@@ -18,7 +18,6 @@ public abstract class ClientSurvivalFlyPlatform extends ClientModPlatform {
                 new PlatformMenuButton(
                         client().menuButton.enabled(),
                         client().menuButton.everywhere(),
-                        ModConstants.HAS_UPDATE,
                         ClientMain.menuButton(getScreen()),
                         spriteIconButton -> {})
         );
