@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.dillon.dillonlib.task.ClientTasks.openDebugEntriesScreen;
 import static net.dillon.dillonlib.task.ClientTasks.openScreen;
 import static net.dillon.survivalfly.helper.ModConstants.HAS_UPDATE;
 import static net.dillon.survivalfly.helper.ModConstants.VERSION;
@@ -50,6 +51,8 @@ public class MainMenuScreen extends OptionsSubScreen {
                 }).build(),
 
                 Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),
+
+                Button.builder(Component.translatable("survivalfly.gui.debug_entries"), button -> openDebugEntriesScreen("survivalfly")).build(),
 
                 Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Survival-Fly/issues", false)).build()
         ));

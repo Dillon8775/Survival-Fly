@@ -7,6 +7,7 @@
   "survivalfly.gui.off": "OFF",
   "survivalfly.gui.configure": "Configure...",
   "survivalfly.gui.keybinds": "Keybinds...",
+  "survivalfly.gui.debug_entries": "Debug Entries...",
   "survivalfly.gui.report_bugs": "Report a bug...",
   "survivalfly.gui.ask_questions": "Ask questions...",
   "survivalfly.gui.update_available": "A newer version of Survival Fly is available",
