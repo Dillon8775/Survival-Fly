@@ -32,7 +32,7 @@ public class ModHelper {
     /**
      * @return a {@code Survival Fly} identifier.
      */
-    public static Identifier ofSurvivalFly(String path) {
+    public static Identifier survivalFlyIdentifier(String path) {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 

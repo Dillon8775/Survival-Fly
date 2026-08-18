@@ -5,6 +5,7 @@
 
 ## 26.3 Changes
 - Added a flight speed debug entry.
+- Added a debug entry which displays if the player can fly or not.
 - Changing flight speed to 25% now displays as "default".
 - "Safe Mode" option is now a client-side option.
 - Optimized configuration screen.

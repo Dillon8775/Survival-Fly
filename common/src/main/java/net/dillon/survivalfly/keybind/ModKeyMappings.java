@@ -15,14 +15,14 @@ import net.minecraft.network.chat.Component;
 
 import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_FLIGHT_SPEED;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
-import static net.dillon.survivalfly.helper.ModHelper.ofSurvivalFly;
+import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 
 /**
  * Keybindings for the {@code SurvivalFly} mod.
  */
 @Dill(DillType.CLIENT)
 public class ModKeyMappings {
-    public static final KeyMapping.Category SURVIVAL_FLY = KeyMapping.Category.register(ofSurvivalFly("survival_fly"));
+    public static final KeyMapping.Category SURVIVAL_FLY = KeyMapping.Category.register(survivalFlyIdentifier("survival_fly"));
 
     /**
      * Initializes Survival Fly keybinds.
@@ -30,7 +30,7 @@ public class ModKeyMappings {
     public static void initKeybinds() {
     }
 
-    public static final ManagedKeyMapping TOGGLE_FLIGHT = Kuma.createKeyMapping(ofSurvivalFly("toggle_flight"))
+    public static final ManagedKeyMapping TOGGLE_FLIGHT = Kuma.createKeyMapping(survivalFlyIdentifier("toggle_flight"))
             .overrideCategory(SURVIVAL_FLY)
             .withDefault(InputBinding.key(InputConstants.KEY_F, KeyModifiers.of(KeyModifier.CONTROL, KeyModifier.ALT)))
             .handleWorldInput(event -> {

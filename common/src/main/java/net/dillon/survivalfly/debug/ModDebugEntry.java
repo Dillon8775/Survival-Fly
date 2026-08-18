@@ -3,6 +3,8 @@ package net.dillon.survivalfly.debug;
 import net.minecraft.client.gui.components.debug.DebugEntryCategory;
 import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 
+import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
+
 /**
  * An abstract Quality of Queso {@link DebugScreenEntry}.
  */
@@ -13,7 +15,7 @@ public abstract class ModDebugEntry implements DebugScreenEntry {
      */
     @Override
     public boolean isAllowed(boolean reducedDebugInfo) {
-        return true;
+        return modEnabled();
     }
 
     /**
