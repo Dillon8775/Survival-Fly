@@ -59,7 +59,7 @@ public class MainMenuScreen extends OptionsSubScreen {
                         Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false))
                                 .build(),
 
-                        Button.builder(Component.translatable("survivalfly.menu.debug_huds"), button -> openDebugEntriesScreen("survivalfly"))
+                        Button.builder(Component.translatable("survivalfly.menu.debug_huds"), button -> openDebugEntriesScreen(this, "survivalfly"))
                                 .build(),
 
                         Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Survival-Fly/issues", false))
