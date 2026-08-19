@@ -7,3 +7,4 @@
 - Changing flight speed to 25% now displays as "default".
 - "Safe Mode" option is now a client-side option.
 - Optimized translations.
+- Closing the debug options screen when opening it from the Survival Fly main menu now properly sets the screen back to the main menu.
