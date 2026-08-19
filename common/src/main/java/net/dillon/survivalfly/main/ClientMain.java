@@ -34,7 +34,7 @@ public class ClientMain {
                         ModConstants.HAS_UPDATE,
                         Component.translatable("survivalfly.gui.update_available")
                 ),
-                Component.translatable("survivalfly.title.menu"),
+                Component.translatable("survivalfly.menu.title"),
                 true);
     }
 }
