@@ -6,5 +6,5 @@ dependencies {
     implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-neoforge"
     implementation "maven.modrinth:dillon-lib:${project.mc_version}-${project.dillonlib_version}-neoforge"
 
-    compileOnly "net.luckperms:api:${luckperms_api}"
+    compileOnly "net.luckperms:api:${luckperms_version}"
 }

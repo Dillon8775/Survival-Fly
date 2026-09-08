@@ -12,5 +12,5 @@ dependencies {
     implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     implementation "net.litetex.mcm:dev-auth-neo:${project.devauth_neo_version}"
 
-    compileOnly "me.lucko:fabric-permissions-api:${fabric_permissions_api}"
+    compileOnly "me.lucko:fabric-permissions-api:${fabric_permissions_api_version}"
 }
