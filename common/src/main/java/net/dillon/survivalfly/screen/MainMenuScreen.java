@@ -17,6 +17,7 @@ import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
 
+import java.net.URI;
 import java.util.List;
 
 import static net.dillon.dillonlib.task.ClientTasks.openDebugEntriesScreen;
@@ -56,13 +57,13 @@ public class MainMenuScreen extends OptionsSubScreen {
         this.list.addHeader(Component.translatable("survivalfly.menu.resources_and_utilities"));
         this.list.addSmall(
                 List.of(
-                        Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false))
+                        Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create("https://discord.gg/vfqEAn4YFy"), false))
                                 .build(),
 
                         Button.builder(Component.translatable("survivalfly.menu.debug_huds"), button -> openDebugEntriesScreen(this, "survivalfly"))
                                 .build(),
 
-                        Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Survival-Fly/issues", false))
+                        Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create("https://github.com/Dillon8775/Survival-Fly/issues"), false))
                                 .build()
                 )
         );
