@@ -3,6 +3,7 @@
 ## Changes
 - Update to 26.3.
 - Now requires [Fabric Loader version 0.19.5](https://fabricmc.net/use/installer/) or greater.
+- Now requires [DillonLib](https://modrinth.com/mod/dillon-lib) version 1.1 or higher.
 - Revamped the main menu screen and configuration screen.
 - Added a flight speed debug entry.
 - Added a debug entry which displays if the player can fly or not.
