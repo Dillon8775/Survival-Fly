@@ -1,4 +1,4 @@
-# Version 1.3.7
+# Version 1.3.6
 
 ## Changes
 - Update to 26.3.
