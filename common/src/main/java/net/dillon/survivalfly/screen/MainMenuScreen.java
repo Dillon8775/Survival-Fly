@@ -4,10 +4,10 @@ import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.dillonlib.task.ClientTasks;
 import net.dillon.dillonlib.util.KeybindScrollHelper;
+import net.dillon.dillonlib.util.Links;
 import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
-import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -57,13 +57,13 @@ public class MainMenuScreen extends OptionsSubScreen {
         this.list.addHeader(Component.translatable("survivalfly.menu.resources_and_utilities"));
         this.list.addSmall(
                 List.of(
-                        Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create("https://discord.gg/vfqEAn4YFy"), false))
+                        Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.DILLONS_DISCORD), false))
                                 .build(),
 
                         Button.builder(Component.translatable("survivalfly.menu.debug_huds"), button -> openDebugEntriesScreen(this, "survivalfly"))
                                 .build(),
 
-                        Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create("https://github.com/Dillon8775/Survival-Fly/issues"), false))
+                        Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.githubIssues("Dillon8775/Survival-Fly")), false))
                                 .build()
                 )
         );
@@ -77,7 +77,6 @@ public class MainMenuScreen extends OptionsSubScreen {
                 graphics,
                 this,
                 VERSION,
-                SurvivalFlyPlatforms.getPlatform().logoWidth().getWidthModifier(),
                 ModConstants.LOGO,
                 HAS_UPDATE
         );
