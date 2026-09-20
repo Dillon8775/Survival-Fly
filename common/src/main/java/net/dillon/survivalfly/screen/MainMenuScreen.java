@@ -28,7 +28,7 @@ import static net.dillon.survivalfly.helper.ModConstants.VERSION;
 public class MainMenuScreen extends DillonLibScreen {
 
     public MainMenuScreen(Screen parent) {
-        super(parent, Component.translatable("survivalfly.menu.title"));
+        super(parent, Component.translatable("survivalfly.title"));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MainMenuScreen extends DillonLibScreen {
                 Component.translatable("survivalfly.header.settings"),
                 Button.builder(Component.translatable("survivalfly.menu.configure"), button -> ClientTasks.tryOpenYaclScreen(
                         () -> ConfigurationScreen.configScreen().generateScreen(this),
-                        Component.translatable("survivalfly.title")
+                        Component.translatable("survivalfly")
                 )).build(),
 
                 Button.builder(Component.translatable("survivalfly.menu.keybinds"), button -> {

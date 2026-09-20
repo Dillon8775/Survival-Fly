@@ -32,9 +32,9 @@ public class ClientMain {
                 (button) -> openScreen(new MainMenuScreen(parent)),
                 Map.of(
                         ModConstants.HAS_UPDATE,
-                        Component.translatable("survivalfly.gui.update_available")
+                        Component.translatable("survivalfly.update_available")
                 ),
-                Component.translatable("survivalfly.menu.title"),
+                Component.translatable("survivalfly.title"),
                 true);
     }
 }

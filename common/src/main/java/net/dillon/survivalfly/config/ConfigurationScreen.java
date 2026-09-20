@@ -27,7 +27,7 @@ public class ConfigurationScreen {
         boolean onServer = Minecraft.getInstance().getCurrentServer() != null;
 
         return YetAnotherConfigLib.createBuilder()
-                .title(Component.translatable("survivalfly.title"))
+                .title(Component.translatable("survivalfly"))
                 .category(
                         ConfigCategory.createBuilder()
                                 .name(Component.translatable("survivalfly.options.main"))

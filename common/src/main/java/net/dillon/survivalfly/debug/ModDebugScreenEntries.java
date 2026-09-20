@@ -11,7 +11,7 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
  * All mod debug entries.
  */
 public class ModDebugScreenEntries {
-    public static final DebugEntryCategory SURVIVAL_FLY = new DebugEntryCategory(Component.translatable("survivalfly.title"), 5.0F);
+    public static final DebugEntryCategory SURVIVAL_FLY = new DebugEntryCategory(Component.translatable("survivalfly"), 5.0F);
     public static final Identifier FLIGHT_STATUS_GROUP = survivalFlyIdentifier("flight_status_group");
 
     /**
