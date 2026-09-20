@@ -24,9 +24,6 @@ import static net.dillon.dillonlib.task.ClientTasks.openScreen;
 import static net.dillon.survivalfly.helper.ModConstants.HAS_UPDATE;
 import static net.dillon.survivalfly.helper.ModConstants.VERSION;
 
-/**
- * The options screen for configurating the mod in a singleplayer world.
- */
 @Dill(DillType.CLIENT)
 public class MainMenuScreen extends DillonLibScreen {
 
@@ -48,7 +45,7 @@ public class MainMenuScreen extends DillonLibScreen {
     @Override
     protected void widgets() {
         this.createHeader(
-                Component.translatable("survivalfly.menu.settings"),
+                Component.translatable("survivalfly.header.settings"),
                 Button.builder(Component.translatable("survivalfly.menu.configure"), button -> ClientTasks.tryOpenYaclScreen(
                         () -> ConfigurationScreen.configScreen().generateScreen(this),
                         Component.translatable("survivalfly.title")
@@ -61,14 +58,14 @@ public class MainMenuScreen extends DillonLibScreen {
         );
 
         this.createHeader(
-                Component.translatable("survivalfly.menu.resources_and_utilities"),
-                Button.builder(Component.translatable("survivalfly.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.DILLONS_DISCORD), false))
+                Component.translatable("survivalfly.header.resources_and_utilities"),
+                Button.builder(Component.translatable("survivalfly.menu.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.DILLONS_DISCORD), false))
                         .build(),
 
                 Button.builder(Component.translatable("survivalfly.menu.debug_huds"), button -> openDebugEntriesScreen(this, "survivalfly"))
                         .build(),
 
-                Button.builder(Component.translatable("survivalfly.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.githubIssues("Dillon8775/Survival-Fly")), false))
+                Button.builder(Component.translatable("survivalfly.menu.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.githubIssues("Dillon8775/Survival-Fly")), false))
                         .build()
         );
     }

@@ -3,18 +3,15 @@
   "survivalfly.gui.update_available": "A newer version of Survival Fly is available",
 
   "survivalfly.menu.title": "Survival Fly Main Menu",
-  "survivalfly.menu.settings": "§l§nSettings",
-  "survivalfly.menu.resources_and_utilities": "§l§nResources & Utilities",
+
+  "survivalfly.header.settings": "§l§nSettings",
+  "survivalfly.header.resources_and_utilities": "§l§nResources & Utilities",
 
   "survivalfly.menu.configure": "Configure Survival Fly...",
   "survivalfly.menu.keybinds": "Keybinds...",
-
   "survivalfly.menu.debug_huds": "Debug HUDs...",
-  "survivalfly.gui.ask_questions": "Ask questions...",
-  "survivalfly.gui.report_bugs": "Report a bug...",
-
-  "survivalfly.gui.on": "ON",
-  "survivalfly.gui.off": "OFF",
+  "survivalfly.menu.ask_questions": "Ask questions...",
+  "survivalfly.menu.report_bugs": "Report a bug...",
 
   "survivalfly.options.main": "General",
   "survivalfly.options.main.description": "Configure general/client-side Survival Fly features.",
@@ -60,9 +57,6 @@
   "survivalfly.change_flight_speed": "Change Flight Speed",
   "survivalfly.reset_flight_speed": "Reset Flight Speed",
   "survivalfly.current_flight_speed": "Flight Speed: %s",
-
-  "survivalfly.toast.title.yacl": "YetAnotherConfigLib Required",
-  "survivalfly.toast.yacl": "Please download YetAnotherConfigLib (YACL) to configure Survival Fly.",
 
   "survivalfly.not_installed": "§cUnable to fetch the Survival Fly mod on this server.§r§f\n§aTo join this server, disable the \"Safe Mode\" option in Survival Fly options.\n§r§fPlease note: §o§cthis mod is §c§lnot a hack, §r§f§oand only works on servers that have this mod installed.",
   "survivalfly.crouch_flight_disabled": "§cWarning: Survival Fly is not installed on this server, therefor, §c§l\"Crouch Flight\" §r§f§chas been automatically disabled for your safety."
