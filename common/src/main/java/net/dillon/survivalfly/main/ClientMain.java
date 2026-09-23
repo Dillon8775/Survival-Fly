@@ -25,7 +25,7 @@ public class ClientMain {
         registerDebugEntries();
     }
 
-    public static UpdatableSpriteButton menuButton(Screen parent) {
+    public static UpdatableSpriteButton createMenuButton(Screen parent) {
         return ClientTasks.createMenuButton(
                 "Survival Fly Main Menu",
                 ModConstants.LOGO,

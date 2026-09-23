@@ -9,7 +9,7 @@ dependencies {
     }
 
     compileOnly "net.dillon.dillonlib:dillonlib-common-mc26.3:unspecified"
-    compileOnly ("dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric") {
-        transitive = false
-    }
+//    compileOnly ("dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric") {
+//        transitive = false
+//    }
 }

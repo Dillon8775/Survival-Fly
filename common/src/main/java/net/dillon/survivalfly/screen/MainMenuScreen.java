@@ -47,10 +47,8 @@ public class MainMenuScreen extends DillonLibMenuScreen {
     public void widgets() {
         this.createHeader(
                 Component.translatable("survivalfly.header.settings"),
-                Button.builder(Component.translatable("survivalfly.menu.configure"), button -> ClientTasks.tryOpenYaclScreen(
-                        () -> ConfigurationScreen.configScreen().generateScreen(this),
-                        Component.translatable("survivalfly")
-                )).build(),
+                Button.builder(Component.translatable("survivalfly.menu.configure"), button -> openScreen(ConfigurationScreen.configScreen(this))
+                ).build(),
 
                 Button.builder(Component.translatable("survivalfly.menu.keybinds"), button -> {
                     KeybindScrollHelper.request(ModKeyMappings.SURVIVAL_FLY);

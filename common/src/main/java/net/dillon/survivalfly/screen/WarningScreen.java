@@ -42,8 +42,14 @@ public class WarningScreen extends BasicDillonLibScreen {
 
         this.proceed = this.addRenderableWidget(
                 Button.builder(Component.translatable("dillonlib.proceed"), b -> {
-                            openScreen(new TitleScreen());
-                            updateClient(c -> c.seenWarningMessage = true);
+                            updateClient(c -> {
+                                if (!c.seenWarningMessage) {
+                                    openScreen(new TitleScreen());
+                                } else {
+                                    this.onClose();
+                                }
+                                c.seenWarningMessage = true;
+                            });
                         })
                         .bounds(builder().captureWidth(), builder().captureHeight(), 200, 20)
                         .build()
@@ -52,7 +58,7 @@ public class WarningScreen extends BasicDillonLibScreen {
 
     @Override
     protected void drawGraphics(GuiGraphicsExtractor graphics) {
-        builder().textTitle(graphics);
+        builder().textTitleGraphicsHeight(graphics);
 
         builder().graphicsWidthCenter().apply();
         builder().graphicsWidthLeft(32).apply();

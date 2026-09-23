@@ -7,8 +7,8 @@ dependencies {
         changing = balm_version.contains('SNAPSHOT')
     }
 
+    // implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
     implementation "net.dillon.dillonlib:dillonlib-fabric-mc26.3:unspecified"
-    implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
     implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     implementation "net.litetex.mcm:dev-auth-neo:${project.devauth_neo_version}"
 
