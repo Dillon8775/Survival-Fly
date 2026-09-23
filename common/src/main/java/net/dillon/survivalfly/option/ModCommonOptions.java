@@ -12,6 +12,9 @@ public class ModCommonOptions {
     @Comment("Default permission system for survival fly's commands (/flight, /flightstatus, and /flightspeed).\n# Allowed values: anyone, moderator, gamemaster, admin\n# Ignore this if you are using LuckPerms.")
     public Permissions permissions = Permissions.ANYONE;
 
+    @Comment("Allows all players to toggle flight speed. This value is irrelevant if the player has the flight_speed permission node (via LuckPerms) or if the player is an operator.")
+    public boolean flightSpeedModification = true;
+
     @Comment("Requires the player to wear an elytra to use flight. The elytra's durability will decrement based on the player's flight speed.")
     public boolean elytraFlight = false;
 

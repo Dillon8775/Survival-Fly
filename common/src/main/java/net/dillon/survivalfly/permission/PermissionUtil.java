@@ -62,6 +62,17 @@ public class PermissionUtil {
     }
 
     /**
+     * @return if the player is allowed to execute the flight speed command.
+     */
+    public static boolean hasPermissionToChangeFlightSpeed(CommandSourceStack commandSourceStack) {
+        if (PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT_SPEED)) {
+            return true;
+        }
+
+        return common().flightSpeedModification || PermissionUtil.hasAdminPermissionsOrCommandSource(commandSourceStack);
+    }
+
+    /**
      * @return if the player's permission level is above or equal to the default set permissions id.
      */
     private static boolean hasCurrentPermissionId(CommandSourceStack commandSourceStack) {

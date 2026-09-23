@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.packet;
+package net.dillon.survivalfly.packet.serverbound;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

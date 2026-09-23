@@ -2,6 +2,7 @@ package net.dillon.survivalfly;
 
 import net.blay09.mods.balm.Balm;
 import net.blay09.mods.balm.neoforge.platform.runtime.NeoForgeLoadContext;
+import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.dillon.survivalfly.main.ClientMain;
@@ -12,7 +13,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
-@Mod(value = ModHelper.MOD_ID, dist = Dist.CLIENT)
+@Mod(value = ModConstants.MOD_ID, dist = Dist.CLIENT)
 public class ClientSurvivalFly {
 
     public ClientSurvivalFly(IEventBus modEventBus, ModContainer container) {
@@ -24,6 +25,6 @@ public class ClientSurvivalFly {
         );
 
         final var context = new NeoForgeLoadContext(container, modEventBus);
-        Balm.initializeMod(ModHelper.MOD_ID, context, ClientMain::cInitialize);
+        Balm.initializeMod(ModConstants.MOD_ID, context, ClientMain::cInitialize);
     }
 }

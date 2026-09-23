@@ -1,7 +1,7 @@
 package net.dillon.survivalfly.platform.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.packet.serverbound.UpdateFlightC2SPacket;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.KeyMapping;

@@ -2,7 +2,8 @@ package net.dillon.survivalfly.screen;
 
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
-import net.dillon.dillonlib.screen.DillonLibScreen;
+import net.dillon.dillonlib.screen.DillonLibMenuScreen;
+import net.dillon.dillonlib.screen.ScreenBuilder;
 import net.dillon.dillonlib.task.ClientTasks;
 import net.dillon.dillonlib.util.KeybindScrollHelper;
 import net.dillon.dillonlib.util.Links;
@@ -25,10 +26,10 @@ import static net.dillon.survivalfly.helper.ModConstants.HAS_UPDATE;
 import static net.dillon.survivalfly.helper.ModConstants.VERSION;
 
 @Dill(DillType.CLIENT)
-public class MainMenuScreen extends DillonLibScreen {
+public class MainMenuScreen extends DillonLibMenuScreen {
 
     public MainMenuScreen(Screen parent) {
-        super(parent, Component.translatable("survivalfly.title"));
+        super(parent, Component.translatable("survivalfly.title"), ScreenBuilder::ofBottomCentered);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class MainMenuScreen extends DillonLibScreen {
     }
 
     @Override
-    protected void widgets() {
+    public void widgets() {
         this.createHeader(
                 Component.translatable("survivalfly.header.settings"),
                 Button.builder(Component.translatable("survivalfly.menu.configure"), button -> ClientTasks.tryOpenYaclScreen(
@@ -66,6 +67,9 @@ public class MainMenuScreen extends DillonLibScreen {
                         .build(),
 
                 Button.builder(Component.translatable("survivalfly.menu.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.githubIssues("Dillon8775/Survival-Fly")), false))
+                        .build(),
+
+                Button.builder(Component.translatable("survivalfly.menu.disclaimer"), button -> openScreen(new WarningScreen(this)))
                         .build()
         );
     }

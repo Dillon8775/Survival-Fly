@@ -6,6 +6,9 @@ import net.dillon.survivalfly.helper.ModConstants;
 
 @Config(value = ModConstants.MOD_ID, type = "client")
 public class ModClientOptions {
+    @Comment("Determines if the user needs to see the warning screen or not.")
+    public boolean seenWarningMessage = false;
+
     @Comment("Sends warning messages to the player when joining servers without Survival Fly installed.")
     public boolean serverWarnings = true;
 

@@ -102,6 +102,7 @@ modrinth {
         required.project "dillon-lib"
         optional.project "luckperms"
     }
+    environment = "server_only_client_optional"
 }
 
 // Implement mcgradleconventions loader attribute

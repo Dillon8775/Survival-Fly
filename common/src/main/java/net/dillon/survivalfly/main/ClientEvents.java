@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.event;
+package net.dillon.survivalfly.main;
 
 import net.dillon.dillonlib.task.CommonTasks;
 import net.dillon.survivalfly.helper.ModConstants;

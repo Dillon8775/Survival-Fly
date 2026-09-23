@@ -2,7 +2,6 @@ package net.dillon.survivalfly.command;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.dillon.survivalfly.permission.Nodes;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -16,6 +15,8 @@ import java.util.List;
 
 import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_FLIGHT_SPEED;
 import static net.dillon.survivalfly.helper.ModHelper.*;
+import static net.dillon.survivalfly.option.OptionInstances.common;
+import static net.dillon.survivalfly.option.OptionInstances.updateCommon;
 import static net.dillon.survivalfly.util.ModTexts.getPlayerName;
 
 public class FlightSpeedCommand {
@@ -23,13 +24,25 @@ public class FlightSpeedCommand {
     private static final Component CANNOT_CHANGE_FLIGHT_SPEED_SELF = Component.literal("Cannot change flight speed because you don't have flying abilities.");
     private static final Component NO_ELYTRA_FLIGHT_SPEED_SELF = Component.literal("Cannot change flight speed because you don't have an elytra equipped.");
     private static final Component FLIGHT_SPEED_NOT_ALLOWED_SELF = Component.literal("Cannot change flight speed because you have taken damage within the last 20 seconds.");
+    private static final Component FLIGHT_SPEED_ALLOWED = Component.literal("Flight speed modification for all players is now allowed, regardless of if they are an operator or have the LuckPerms permission node.");
+    private static final Component FLIGHT_SPEED_DISALLOWED = Component.literal("Flight speed modification for all players is now disabled, unless they have the LuckPerms permission node \"flight_speed\", or they are a server operator.");
 
     /**
      * @return the {@code /flightspeed} command.
      */
     public static LiteralArgumentBuilder<CommandSourceStack> getFlightSpeedCommand() {
         return Commands.literal("flightspeed")
-                .requires(commandSourceStack -> PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT_SPEED))
+                .requires(PermissionUtil::hasPermissionToChangeFlightSpeed)
+                .then(
+                        Commands.literal("allowmodification")
+                                .executes(context -> {
+                                    updateCommon(common -> {
+                                        common.flightSpeedModification = !common.flightSpeedModification;
+                                    });
+                                    sendSourceMessage(context, common().flightSpeedModification ? FLIGHT_SPEED_ALLOWED : FLIGHT_SPEED_DISALLOWED);
+                                    return 1;
+                                })
+                )
                 .then(
                         Commands.literal("set")
                                 .then(

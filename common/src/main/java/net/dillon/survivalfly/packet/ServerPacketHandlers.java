@@ -1,8 +1,13 @@
 package net.dillon.survivalfly.packet;
 
 import net.dillon.survivalfly.command.FlightCommand;
+import net.dillon.survivalfly.helper.ModHelper;
+import net.dillon.survivalfly.packet.serverbound.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
 import net.dillon.survivalfly.permission.Nodes;
 import net.dillon.survivalfly.permission.PermissionUtil;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -32,13 +37,16 @@ public class ServerPacketHandlers {
      * Handles flight speed changing.
      */
     public static void handleUpdateFlightSpeed(Player player, UpdateFlightSpeedC2SPacket payload) {
-        if (!modEnabled()) {
+        if (!modEnabled() || !(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
 
-        float speed = payload.speed();
+        if (PermissionUtil.hasPermissionToChangeFlightSpeed(serverPlayer.createCommandSourceStack())) {
+            float speed = payload.speed();
 
-        player.getAbilities().setFlyingSpeed(speed);
-        player.onUpdateAbilities();
+            serverPlayer.getAbilities().setFlyingSpeed(speed);
+            serverPlayer.onUpdateAbilities();
+            serverPlayer.sendOverlayMessage(Component.translatable("survivalfly.current_flight_speed", ModHelper.flyingSpeedAsDecimalString(player)).withStyle(ChatFormatting.GREEN));
+        }
     }
 }

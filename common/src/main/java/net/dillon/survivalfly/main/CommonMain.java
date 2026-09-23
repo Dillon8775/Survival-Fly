@@ -7,7 +7,7 @@ import net.dillon.survivalfly.option.ModClientOptions;
 import net.dillon.survivalfly.option.ModCommonOptions;
 import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 
-import static net.dillon.survivalfly.event.CommonEvents.registerPackets;
+import static net.dillon.survivalfly.main.CommonEvents.registerPackets;
 
 /**
  * The main entrypoint for Survival Fly.

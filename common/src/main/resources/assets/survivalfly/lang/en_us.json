@@ -1,6 +1,7 @@
 {
   "survivalfly": "Survival Fly",
   "survivalfly.update_available": "A newer version of Survival Fly is available",
+  "survivalfly.warning": "§cPlease note that this mod is §c§lnot a hack, §r§f§cand only works on servers that have this mod installed. You should not attempt to cheat on a server with this mod.",
 
   "survivalfly.title": "Survival Fly Main Menu",
 
@@ -12,17 +13,18 @@
   "survivalfly.menu.debug_huds": "Debug HUDs...",
   "survivalfly.menu.ask_questions": "Ask questions...",
   "survivalfly.menu.report_bugs": "Report a bug...",
+  "survivalfly.menu.disclaimer": "Disclaimer...",
 
   "survivalfly.options.main": "General",
   "survivalfly.options.main.description": "Configure general/client-side Survival Fly features.",
   "survivalfly.options.general": "General",
   "survivalfly.options.general.description": "Configure general Survival Fly settings.",
   "survivalfly.options.enable_mod": "Enable Mod",
-  "survivalfly.options.enable_mod.description": "Enables the Survival Fly mod (for your client/singleplayer/LAN worlds).\n\n§cPlease note that this mod is not a hack/cheat, it only works if this mod is installed on the server-side.",
+  "survivalfly.options.enable_mod.description": "Enables the Survival Fly mod (for your client/singleplayer/LAN worlds).",
   "survivalfly.options.crouch_flight": "Crouch Flight",
   "survivalfly.options.crouch_flight.description": "Allows crouching while flying without descending (CTRL + SHIFT).\n\n§cThis feature §c§odoes work on servers §r§cthat don't have the mod installed, but please be careful and read the server rules before using this feature.",
   "survivalfly.options.safe_mode": "Safe Mode",
-  "survivalfly.options.safe_mode.description": "Prevents joining servers that do not have this mod installed.\n\n§cPlease note that this mod is §c§lnot a hack, §r§f§cand only works on servers that have this mod installed. You should not attempt to cheat on a server with this mod.",
+  "survivalfly.options.safe_mode.description": "Prevents joining servers that do not have this mod installed.",
 
   "survivalfly.options.client": "Client",
   "survivalfly.options.client.description": "Configure client-side options for Survival Fly.",

@@ -7,8 +7,9 @@
     "minVersion": "0.5.4"
   },
   "client": [
+    "client.GuiMixin",
     "client.LocalPlayerMixin",
-    "client.MouseMixin"
+    "client.MouseHandlerMixin"
   ],
   "mixins": [
     "main.GameTypeMixin",

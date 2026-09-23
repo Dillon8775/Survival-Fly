@@ -1,10 +1,10 @@
-package net.dillon.survivalfly.event;
+package net.dillon.survivalfly.main;
 
 import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.packet.ServerPacketHandlers;
-import net.dillon.survivalfly.packet.UpdateFlightC2SPacket;
-import net.dillon.survivalfly.packet.UpdateFlightSpeedC2SPacket;
+import net.dillon.survivalfly.packet.serverbound.UpdateFlightC2SPacket;
+import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
