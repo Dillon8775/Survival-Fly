@@ -53,7 +53,7 @@
 <ul>
     <li>Changes the <code>player's flight speed.</code></li>
     <li><b>Command Usages:</b> <code>/flightspeed <i>set speed% `target(s)`</i></code>, <code>/flightspeed <i>get `target</i></code>, <code>/flightspeed <i>reset `target(s)`</i></code></li>
-    <li>Use <code>/flightspeed allowmodification</code> to toggle whether all players should be able to change their flight speed. If they are a server operator or have a LuckPerms permission node (see below), this doesn't matter.</li>
+    <li>Use <code>/flightspeed allowmodification</code> to toggle whether all players should be able to change their flight speed. If they are a server operator or have a LuckPerms permission node (see below), this doesn't matter <code>(feature only available in version 1.3.7 and above)</code>.</li>
     <li>You can also use <code>ALT + SCROLL</code> to change flight speed, and press <code>B</code> to reset your flight speed <code>(client-side installation required).</code></li>
     <li>Only server operators can change the flight speed for other players.</li>
     <li><code>Exclusive to version 1.2 and above.</code></li>
