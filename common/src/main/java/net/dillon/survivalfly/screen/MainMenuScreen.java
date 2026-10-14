@@ -6,19 +6,15 @@ import net.dillon.dillonlib.screen.DillonLibMenuScreen;
 import net.dillon.dillonlib.screen.ScreenBuilder;
 import net.dillon.dillonlib.task.ClientTasks;
 import net.dillon.dillonlib.util.KeybindScrollHelper;
-import net.dillon.dillonlib.util.Links;
 import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
-
-import java.net.URI;
 
 import static net.dillon.dillonlib.task.ClientTasks.openDebugEntriesScreen;
 import static net.dillon.dillonlib.task.ClientTasks.openScreen;
@@ -58,13 +54,7 @@ public class MainMenuScreen extends DillonLibMenuScreen {
 
         this.createHeader(
                 Component.translatable("survivalfly.header.resources_and_utilities"),
-                Button.builder(Component.translatable("survivalfly.menu.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.DILLONS_DISCORD), false))
-                        .build(),
-
                 Button.builder(Component.translatable("survivalfly.menu.debug_huds"), button -> openDebugEntriesScreen(this, "survivalfly"))
-                        .build(),
-
-                Button.builder(Component.translatable("survivalfly.menu.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create(Links.githubIssues("Dillon8775/Survival-Fly")), false))
                         .build(),
 
                 Button.builder(Component.translatable("survivalfly.menu.disclaimer"), button -> openScreen(new WarningScreen(this)))

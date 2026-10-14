@@ -11,8 +11,6 @@
   "survivalfly.menu.configure": "Configure Survival Fly...",
   "survivalfly.menu.keybinds": "Keybinds...",
   "survivalfly.menu.debug_huds": "Debug HUDs...",
-  "survivalfly.menu.ask_questions": "Ask questions...",
-  "survivalfly.menu.report_bugs": "Report a bug...",
   "survivalfly.menu.disclaimer": "Disclaimer...",
 
   "survivalfly.configuration.common.title": "Common",
