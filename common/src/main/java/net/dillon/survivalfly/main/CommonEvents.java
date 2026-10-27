@@ -1,16 +1,24 @@
 package net.dillon.survivalfly.main;
 
 import net.blay09.mods.balm.Balm;
+import net.dillon.dillonlib.task.CommonTasks;
+import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.packet.ServerPacketHandlers;
+import net.dillon.survivalfly.packet.clientbound.SendServerOptionsS2CPacket;
+import net.dillon.survivalfly.packet.serverbound.RequestServerConfigC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
+import net.dillon.survivalfly.packet.serverbound.UpdateServerOptionsC2SPacket;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
 
+import static net.dillon.dillonlib.task.ClientTasks.openScreen;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
 /**
@@ -57,6 +65,13 @@ public class CommonEvents {
             return;
         }
 
+        if (!ModConstants.HAS_UPDATE) {
+            CommonTasks.sendUpdateMessage(player,
+                    Component.translatable("survivalfly"),
+                    "https://modrinth.com/mod/survival-fly/versions",
+                    TextColor.WHITE.getValue());
+        }
+
         ((PlayerAbilitiesExtension)player).setEverEnabledFlight(player.getAbilities().mayfly);
     }
 
@@ -78,6 +93,29 @@ public class CommonEvents {
                 UpdateFlightC2SPacket.class,
                 UpdateFlightC2SPacket.CODEC,
                 ServerPacketHandlers::handleUpdateFlight
+        );
+
+        Balm.networking().registerServerboundPacket(
+                RequestServerConfigC2SPacket.PACKET_TYPE,
+                RequestServerConfigC2SPacket.class,
+                RequestServerConfigC2SPacket.CODEC,
+                ServerPacketHandlers::handleRequestServerConfig
+        );
+
+        Balm.networking().registerServerboundPacket(
+                UpdateServerOptionsC2SPacket.PACKET_TYPE,
+                UpdateServerOptionsC2SPacket.class,
+                UpdateServerOptionsC2SPacket.CODEC,
+                ServerPacketHandlers::handleUpdateServerConfig
+        );
+
+        Balm.networking().registerClientboundPacket(
+                SendServerOptionsS2CPacket.PACKET_TYPE,
+                SendServerOptionsS2CPacket.class,
+                SendServerOptionsS2CPacket.CODEC,
+                (player, server) -> {
+                    openScreen(ConfigurationScreen.configScreen(server.to(), server.hasPermission()).generateScreen(null));
+                }
         );
     }
 }

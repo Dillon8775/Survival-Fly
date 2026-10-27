@@ -12,7 +12,7 @@ public class ClientSurvivalFly implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FabricClientEvents.registerKeybinds();
-        FabricClientEvents.registerConnectionChecks();
+        FabricClientEvents.registerClientConnectionChecks();
 
         Balm.initializeMod(ModConstants.MOD_ID, FabricLoadContext.INSTANCE, ClientMain::cInitialize);
     }

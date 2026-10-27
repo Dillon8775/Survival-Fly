@@ -3,7 +3,6 @@ package net.dillon.survivalfly;
 import net.blay09.mods.balm.Balm;
 import net.blay09.mods.balm.neoforge.platform.runtime.NeoForgeLoadContext;
 import net.dillon.survivalfly.helper.ModConstants;
-import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.main.CommonMain;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;

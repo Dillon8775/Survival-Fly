@@ -1,5 +1,6 @@
 package net.dillon.survivalfly.screen;
 
+import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.dillonlib.screen.DillonLibMenuScreen;
@@ -9,6 +10,7 @@ import net.dillon.dillonlib.util.KeybindScrollHelper;
 import net.dillon.survivalfly.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.keybind.ModKeyMappings;
+import net.dillon.survivalfly.packet.serverbound.RequestServerConfigC2SPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -16,10 +18,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
 
-import static net.dillon.dillonlib.task.ClientTasks.openDebugEntriesScreen;
-import static net.dillon.dillonlib.task.ClientTasks.openScreen;
+import static net.dillon.dillonlib.task.ClientTasks.*;
 import static net.dillon.survivalfly.helper.ModConstants.HAS_UPDATE;
 import static net.dillon.survivalfly.helper.ModConstants.VERSION;
+import static net.dillon.survivalfly.option.OptionInstances.common;
 
 @Dill(DillType.CLIENT)
 public class MainMenuScreen extends DillonLibMenuScreen {
@@ -43,11 +45,17 @@ public class MainMenuScreen extends DillonLibMenuScreen {
     public void widgets() {
         this.createHeader(
                 Component.translatable("survivalfly.header.settings"),
-                Button.builder(Component.translatable("survivalfly.menu.configure"), button -> openScreen(ConfigurationScreen.configScreen(this))
+                Button.builder(Component.translatable("survivalfly.menu.configure"), button -> {
+                            if (isOnServer()) {
+                                Balm.networking().sendToServer(new RequestServerConfigC2SPacket());
+                            } else {
+                                openScreen(ConfigurationScreen.configScreen(common(), true).generateScreen(this));
+                            }
+                        }
                 ).build(),
 
                 Button.builder(Component.translatable("survivalfly.menu.keybinds"), button -> {
-                    KeybindScrollHelper.request(ModKeyMappings.SURVIVAL_FLY);
+                    KeybindScrollHelper.request(ModKeyMappings.SURVIVAL_FLY_KEY_CATEGORY);
                     openScreen(new KeyBindsScreen(this, Minecraft.getInstance().options));
                 }).build()
         );

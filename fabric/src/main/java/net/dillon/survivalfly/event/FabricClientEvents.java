@@ -16,7 +16,7 @@ public class FabricClientEvents {
         KeyMappingHelper.registerKeyMapping(ModKeyMappings.CHANGE_FLIGHT_SPEED);
     }
 
-    public static void registerConnectionChecks() {
+    public static void registerClientConnectionChecks() {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             ClientEvents.onPlayerJoin(handler.getConnection(), client.player);
         });

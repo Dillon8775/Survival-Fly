@@ -22,6 +22,9 @@
     "main": [
       "net.dillon.survivalfly.SurvivalFly"
     ],
+    "server": [
+      "net.dillon.survivalfly.ServerSurvivalFly"
+    ],
     "modmenu": [
       "net.dillon.survivalfly.impl.ModMenuImpl"
     ]

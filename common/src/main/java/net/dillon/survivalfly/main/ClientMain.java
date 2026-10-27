@@ -1,11 +1,13 @@
 package net.dillon.survivalfly.main;
 
+import net.blay09.mods.balm.Balm;
 import net.blay09.mods.balm.core.BalmRegistrars;
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.dillonlib.platform.info.UpdatableSpriteButton;
 import net.dillon.dillonlib.task.ClientTasks;
 import net.dillon.survivalfly.helper.ModConstants;
+import net.dillon.survivalfly.option.ModClientOptions;
 import net.dillon.survivalfly.screen.MainMenuScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -23,6 +25,8 @@ public class ClientMain {
 
     public static void cInitialize(BalmRegistrars balmRegistrars) {
         registerDebugEntries();
+
+        Balm.config().registerConfig(ModClientOptions.class);
     }
 
     public static UpdatableSpriteButton createMenuButton(Screen parent) {

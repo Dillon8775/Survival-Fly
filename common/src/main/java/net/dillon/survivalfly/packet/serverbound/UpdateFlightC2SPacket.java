@@ -6,11 +6,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 
+import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
+
 /**
  * The packet for updating {@code client to server} player flight.
  */
 public record UpdateFlightC2SPacket(boolean flight) implements CustomPacketPayload {
-    public static final Identifier ID = Identifier.parse("survivalfly:update_flight");
+    public static final Identifier ID = survivalFlyIdentifier("update_flight");
     public static final Type<UpdateFlightC2SPacket> PACKET_TYPE = new Type<>(ID);
     public static final StreamCodec<RegistryFriendlyByteBuf, UpdateFlightC2SPacket> CODEC =
             StreamCodec.composite(

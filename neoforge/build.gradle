@@ -98,7 +98,7 @@ modrinth {
     loaders = ['neoforge']
     dependencies {
         required.project "balm"
-        // required.project "yacl"
+        required.project "yacl"
         required.project "dillon-lib"
         optional.project "luckperms"
     }
