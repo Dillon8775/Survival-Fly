@@ -13,17 +13,17 @@ public class ModCommonOptions {
     public Permissions permissions = Permissions.ANYONE;
 
     @Comment("Allows all players to toggle flight speed. This value is irrelevant if the player has the flight_speed permission node (via LuckPerms) or if the player is an operator.")
-    public boolean flightSpeedModification = true;
+    public boolean allowPlayersToChangeFlightSpeed = true;
 
     @Comment("Requires the player to wear an elytra to use flight. The elytra's durability will decrement based on the player's flight speed.")
     public boolean elytraFlight = false;
+
+    @Comment("Prevents the player from using flight if they have taken any damage within 20 seconds.\n# Allowed values: off, players_and_mobs, players_only")
+    public FriendlyFlight friendlyFlight = FriendlyFlight.OFF;
 
     @Comment("Makes the player hungry when using flight.")
     public boolean flightExhaustion = false;
 
     @Comment("Allows crouching while flying without descending.")
     public boolean crouchFlight = false;
-
-    @Comment("Prevents the player from using flight if they have taken any damage within 20 seconds.\n# Allowed values: off, players_and_mobs, players_only")
-    public FriendlyFlight friendlyFlight = FriendlyFlight.OFF;
 }

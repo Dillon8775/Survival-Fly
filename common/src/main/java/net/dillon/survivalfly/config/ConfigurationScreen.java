@@ -24,6 +24,13 @@ public class ConfigurationScreen {
         boolean onServer = isOnServer();
         boolean canModifyOnServer = !onServer || hasPermissionOnServer;
 
+        Option<Boolean> serverWarnings = Option.<Boolean>createBuilder()
+                .name(Component.translatable("survivalfly.options.server_warnings"))
+                .description(OptionDescription.of(Component.translatable("survivalfly.options.server_warnings.description")))
+                .binding(true, () -> client().serverWarnings, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.serverWarnings = v))
+                .controller(BooleanControllerBuilder::create)
+                .build();
+
         return YetAnotherConfigLib.createBuilder()
                 .title(Component.translatable("survivalfly"))
                 .category(
@@ -32,8 +39,32 @@ public class ConfigurationScreen {
                                 .tooltip(Component.translatable("survivalfly.options.tooltip"))
                                 .group(
                                         OptionGroup.createBuilder()
-                                                .name(Component.translatable("survivalfly.options.general"))
-                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.general.description")))
+                                                .name(Component.translatable("survivalfly.options.universal"))
+                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.universal.description")))
+                                                .option(
+                                                        Option.<Boolean>createBuilder()
+                                                                .name(Component.translatable("survivalfly.options.crouch_flight"))
+                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.crouch_flight.description")))
+                                                                .binding(false, () -> common().crouchFlight, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.crouchFlight = v))
+                                                                .controller(BooleanControllerBuilder::create)
+                                                                .build()
+                                                )
+                                                .build()
+                                )
+                                .group(
+                                        OptionGroup.createBuilder()
+                                                .name(
+                                                        onServer
+                                                                ? Component.translatable("survivalfly.options.server_options")
+                                                                : Component.translatable("survivalfly.options.local_options")
+                                                )
+                                                .description(
+                                                        OptionDescription.of(
+                                                              onServer
+                                                                      ? Component.translatable("survivalfly.options.server_options.description")
+                                                                      : Component.translatable("survivalfly.options.local_options.description")
+                                                        )
+                                                )
                                                 .option(
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.enable_mod"))
@@ -88,51 +119,29 @@ public class ConfigurationScreen {
                                                 )
                                                 .option(
                                                         Option.<Boolean>createBuilder()
-                                                                .name(Component.translatable("survivalfly.options.flight_speed_modification"))
+                                                                .name(Component.translatable("survivalfly.options.allow_players_to_change_flight_speed"))
                                                                 .description(
                                                                         OptionDescription.of(
-                                                                                optionTooltip(Component.translatable("survivalfly.options.flight_speed_modification.tooltip"), canModifyOnServer)
+                                                                                optionTooltip(Component.translatable("survivalfly.options.allow_players_to_change_flight_speed.description"), canModifyOnServer)
                                                                         )
                                                                 )
                                                                 .available(canModifyOnServer)
                                                                 .binding(true, () -> {
                                                                     if (onServer) {
-                                                                        return serverConfig.flightSpeedModification;
+                                                                        return serverConfig.allowPlayersToChangeFlightSpeed;
                                                                     } else {
-                                                                        return common().flightSpeedModification;
+                                                                        return common().allowPlayersToChangeFlightSpeed;
                                                                     }
                                                                 }, v -> {
                                                                     if (onServer) {
-                                                                        updateServerConfig(serverConfig, server -> server.flightSpeedModification = v);
+                                                                        updateServerConfig(serverConfig, server -> server.allowPlayersToChangeFlightSpeed = v);
                                                                     } else {
-                                                                        Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.flightSpeedModification = v);
+                                                                        Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.allowPlayersToChangeFlightSpeed = v);
                                                                     }
                                                                 })
                                                                 .controller(BooleanControllerBuilder::create)
                                                                 .build()
                                                 )
-                                                .option(
-                                                        Option.<Boolean>createBuilder()
-                                                                .name(Component.translatable("survivalfly.options.crouch_flight"))
-                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.crouch_flight.description")))
-                                                                .binding(false, () -> common().crouchFlight, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.crouchFlight = v))
-                                                                .controller(BooleanControllerBuilder::create)
-                                                                .build()
-                                                )
-                                                .option(
-                                                        Option.<Boolean>createBuilder()
-                                                                .name(Component.translatable("survivalfly.options.safe_mode"))
-                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.safe_mode.description")))
-                                                                .binding(true, () -> client().safeMode, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.safeMode = v))
-                                                                .controller(TickBoxControllerBuilder::create)
-                                                                .build()
-                                                )
-                                                .build()
-                                )
-                                .group(
-                                        OptionGroup.createBuilder()
-                                                .name(Component.translatable("survivalfly.options.modes"))
-                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.modes.description")))
                                                 .option(
                                                         Option.<FriendlyFlight>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.friendly_flight"))
@@ -221,11 +230,19 @@ public class ConfigurationScreen {
                                                 .description(OptionDescription.of(Component.translatable("survivalfly.options.client.description")))
                                                 .option(
                                                         Option.<Boolean>createBuilder()
-                                                                .name(Component.translatable("survivalfly.options.server_warnings"))
-                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.server_warnings.description")))
-                                                                .binding(true, () -> client().serverWarnings, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.serverWarnings = v))
-                                                                .controller(BooleanControllerBuilder::create)
+                                                                .name(Component.translatable("survivalfly.options.safe_mode"))
+                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.safe_mode.description")))
+                                                                .binding(true, () -> client().safeMode, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.safeMode = v))
+                                                                .controller(TickBoxControllerBuilder::create)
+                                                                .addListener((opt, event) -> {
+                                                                    if (event == OptionEventListener.Event.STATE_CHANGE || event == OptionEventListener.Event.INITIAL) {
+                                                                        serverWarnings.setAvailable(!opt.pendingValue());
+                                                                    }
+                                                                })
                                                                 .build()
+                                                )
+                                                .option(
+                                                        serverWarnings
                                                 )
                                                 .option(
                                                         Option.<MenuButton>createBuilder()
@@ -252,6 +269,7 @@ public class ConfigurationScreen {
             return Component.translatable("survivalfly.options.no_permission.tooltip");
         }
 
-        return tooltip;
+        return Component.translatable(isOnServer() ? "survivalfly.server_option" : "survivalfly.client_option")
+                .copy().append(tooltip);
     }
 }

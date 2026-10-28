@@ -69,7 +69,7 @@ public class PermissionUtil {
             return true;
         }
 
-        return common().flightSpeedModification || PermissionUtil.hasAdminPermissionsOrCommandSource(commandSourceStack);
+        return common().allowPlayersToChangeFlightSpeed || PermissionUtil.hasAdminPermissionsOrCommandSource(commandSourceStack);
     }
 
     /**

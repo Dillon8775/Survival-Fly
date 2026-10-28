@@ -37,9 +37,9 @@ public class FlightSpeedCommand {
                         Commands.literal("allowmodification")
                                 .executes(context -> {
                                     updateCommon(common -> {
-                                        common.flightSpeedModification = !common.flightSpeedModification;
+                                        common.allowPlayersToChangeFlightSpeed = !common.allowPlayersToChangeFlightSpeed;
                                     });
-                                    sendSourceMessage(context, common().flightSpeedModification ? FLIGHT_SPEED_ALLOWED : FLIGHT_SPEED_DISALLOWED);
+                                    sendSourceMessage(context, common().allowPlayersToChangeFlightSpeed ? FLIGHT_SPEED_ALLOWED : FLIGHT_SPEED_DISALLOWED);
                                     return 1;
                                 })
                 )

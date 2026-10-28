@@ -85,7 +85,7 @@ public class ServerPacketHandlers {
                 config -> {
                     config.enableMod = received.enableMod;
                     config.permissions = received.permissions;
-                    config.flightSpeedModification = received.flightSpeedModification;
+                    config.allowPlayersToChangeFlightSpeed = received.allowPlayersToChangeFlightSpeed;
                     config.elytraFlight = received.elytraFlight;
                     config.flightExhaustion = received.flightExhaustion;
                     config.crouchFlight = received.crouchFlight;
