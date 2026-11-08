@@ -54,7 +54,11 @@ public class ServerPacketHandlers {
 
             serverPlayer.getAbilities().setFlyingSpeed(speed);
             serverPlayer.onUpdateAbilities();
-            serverPlayer.sendOverlayMessage(Component.translatable("survivalfly.current_flight_speed", ModHelper.flyingSpeedAsDecimalString(player)).withStyle(ChatFormatting.GREEN));
+
+            Component message = payload.reset()
+                    ? Component.translatable("survivalfly.reset_flight_speed")
+                    : Component.translatable("survivalfly.current_flight_speed", ModHelper.flyingSpeedAsDecimalString(player));
+            serverPlayer.sendOverlayMessage(message.copy().withStyle(ChatFormatting.GREEN));
         }
     }
 

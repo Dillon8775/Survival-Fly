@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.util;
 
-public interface PlayerAbilitiesExtension {
+public interface PlayerAbilitiesExtensionImpl {
     void setEverEnabledFlight(boolean value);
     void setWantToFlyAgain(boolean value);
     void setDamageTicks(int value);

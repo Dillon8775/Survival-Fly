@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.event;
 
-import net.dillon.survivalfly.keybind.ModKeyMappings;
+import net.dillon.survivalfly.client.keybind.ModKeyMappings;
 import net.dillon.survivalfly.main.ClientEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

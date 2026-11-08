@@ -11,13 +11,15 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 /**
  * The packet for sending {@code client to server} flight speed changes.
  */
-public record UpdateFlightSpeedC2SPacket(float speed) implements CustomPacketPayload {
+public record UpdateFlightSpeedC2SPacket(float speed, boolean reset) implements CustomPacketPayload {
     public static final Identifier ID = survivalFlyIdentifier("update_flight_speed");
     public static final Type<UpdateFlightSpeedC2SPacket> PACKET_TYPE = new Type<>(ID);
     public static final StreamCodec<RegistryFriendlyByteBuf, UpdateFlightSpeedC2SPacket> CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.FLOAT,
                     UpdateFlightSpeedC2SPacket::speed,
+                    ByteBufCodecs.BOOL,
+                    UpdateFlightSpeedC2SPacket::reset,
                     UpdateFlightSpeedC2SPacket::new
             );
 

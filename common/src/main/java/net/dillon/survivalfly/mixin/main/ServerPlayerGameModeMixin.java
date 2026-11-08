@@ -1,6 +1,6 @@
 package net.dillon.survivalfly.mixin.main;
 
-import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.level.GameType;
@@ -23,7 +23,7 @@ public class ServerPlayerGameModeMixin {
     @Inject(method = "changeGameModeForPlayer", at = @At("TAIL"))
     private void fixFlyingInconsistency(GameType gameMode, CallbackInfoReturnable<Boolean> cir) {
         if (this.player.gameMode.getGameModeForPlayer().isSurvival()) {
-            if (!((PlayerAbilitiesExtension)this.player).hasEverEnabledFlight()) {
+            if (!((PlayerAbilitiesExtensionImpl)this.player).hasEverEnabledFlight()) {
                 this.player.getAbilities().mayfly = false;
                 this.player.getAbilities().flying = false;
             }

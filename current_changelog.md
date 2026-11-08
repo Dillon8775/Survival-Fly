@@ -1,4 +1,6 @@
 # Version 1.3.9
+- Now requires [DillonLib](https://modrinth.com/mod/dillon-lib) version 1.3 or higher.
+- Due to DillonLib changes, removed the menu button option.
 - Mod now uses [YACL](https://modrinth.com/mod/yacl) (YetAnotherConfigLib) again, this time with more server configurability.
 - Administrators can now modify the mod's server settings via the Survival Fly configuration screen.
     - If the player is in a singleplayer world, any setting modified in the screen will change the player's local config (they do not need admin permissions in their world for this).
@@ -7,4 +9,5 @@
 - Renamed the Flight Speed Modification option to Allow Players to Change Flight Speed.
 - Added a keybind to open the mod's main menu (Tab + S).
 - Fixed issue where some events are not registered on fabric.
+- Fixed issue where resetting flight speed does not display correct text.
 - Removed the Toggle Flight keybind.

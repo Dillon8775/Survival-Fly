@@ -2,7 +2,7 @@ package net.dillon.survivalfly.helper;
 
 import com.mojang.brigadier.context.CommandContext;
 import net.dillon.survivalfly.util.ModTexts;
-import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -56,7 +56,7 @@ public class ModHelper {
      * @return if the player's flight abilities should be allowed.
      */
     public static boolean isFlyingAllowed(ServerPlayer player) {
-        return ((PlayerAbilitiesExtension)player).flyingAllowed();
+        return ((PlayerAbilitiesExtensionImpl)player).flyingAllowed();
     }
 
     /**
@@ -73,9 +73,9 @@ public class ModHelper {
     public static void stopFlightForPlayer(ServerPlayer player, boolean attacker) {
         if (player.getAbilities().mayfly) {
             player.sendOverlayMessage(attacker ? ModTexts.COMBAT : ModTexts.DAMAGED);
-            ((PlayerAbilitiesExtension) player).setWantToFlyAgain(true);
+            ((PlayerAbilitiesExtensionImpl) player).setWantToFlyAgain(true);
         }
-        ((PlayerAbilitiesExtension) player).setDamageTicks(DEFAULT_DAMAGE_TIME_TICKS);
+        ((PlayerAbilitiesExtensionImpl) player).setDamageTicks(DEFAULT_DAMAGE_TIME_TICKS);
     }
 
     /**

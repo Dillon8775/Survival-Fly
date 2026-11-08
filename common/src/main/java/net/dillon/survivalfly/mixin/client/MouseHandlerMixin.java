@@ -2,8 +2,8 @@ package net.dillon.survivalfly.mixin.client;
 
 import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillType;
-import net.dillon.survivalfly.keybind.ModKeyMappings;
+import net.dillon.dillonlib.annotation.DillEnv;
+import net.dillon.survivalfly.client.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.player.LocalPlayer;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
-@Dill(DillType.CLIENT)
+@Dill(env = DillEnv.CLIENT)
 @Mixin(MouseHandler.class)
 public class MouseHandlerMixin {
 
@@ -52,7 +52,7 @@ public class MouseHandlerMixin {
             return;
         }
 
-        Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(speed));
+        Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(speed, false));
         ci.cancel();
     }
 }
