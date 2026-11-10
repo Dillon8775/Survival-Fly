@@ -1,17 +1,17 @@
 {
   "survivalfly": "Survival Fly",
   "survivalfly.update_available": "A newer version of Survival Fly is available",
-  "survivalfly.disclaimer": "Mod Disclaimer",
-  "survivalfly.warning": "§cPlease note that this mod is §c§n§onot a hack.\n\n§r§f§cIt only works on servers that have this mod installed.\n\nYou should not attempt to cheat on a server with this mod.",
+  "survivalfly.warning": "§cPlease note that this mod is §c§lnot a hack, §r§f§cand only works on servers that have this mod installed. You should not attempt to cheat on a server with this mod.",
 
   "survivalfly.title": "Survival Fly Main Menu",
 
   "survivalfly.header.settings": "§l§nSettings",
-  "survivalfly.header.utilities": "§l§nUtilities",
+  "survivalfly.header.resources_and_utilities": "§l§nResources & Utilities",
 
-  "survivalfly.menu.configure": "Mod Settings...",
+  "survivalfly.menu.configure": "Configure Survival Fly...",
   "survivalfly.menu.keybinds": "Keybinds...",
   "survivalfly.menu.debug_huds": "Debug HUDs...",
+  "survivalfly.menu.disclaimer": "Disclaimer...",
 
   "survivalfly.options.tooltip": "Configure all Survival Fly features!",
 
@@ -50,6 +50,8 @@
   "survivalfly.options.client.description": "Configure client-side options for Survival Fly",
   "survivalfly.options.server_warnings": "Server Warnings",
   "survivalfly.options.server_warnings.description": "Sends warning messages to the player upon joining a server that does not have Survival Fly installed.",
+  "survivalfly.options.menu_button": "Menu Button",
+  "survivalfly.options.menu_button.description": "Determines where the Survival Fly menu button should display.\n\nEverywhere → §7in the default position on the pause screen and title screen§r§f\n\nTitle Only → §7only on the title screen§r§f\n\nOFF → §7do not display the menu button at all. You should only disable this if you have another way of accessing the menu, via Mod Menu or (Neo)Forge's mod list.",
   "survivalfly.options.menu_button.off": "OFF",
   "survivalfly.options.menu_button.title_only": "Title Only",
   "survivalfly.options.menu_button.everywhere": "Everywhere",
@@ -57,6 +59,16 @@
 
   "survivalfly.client_option": "§7§o(synced with your §b§olocal §7§oconfig)\n\n",
   "survivalfly.server_option": "§7§o(synced with this §a§oserver's §7§oconfig)\n\n",
+
+  "survivalfly.configuration.client.title": "Client",
+  "survivalfly.configuration.seenWarningMessage": "Seen Warning Messages",
+  "survivalfly.configuration.seenWarningMessage.tooltip": "Determines if you have seen the disclaimer for Survival Fly.",
+  "survivalfly.configuration.serverWarnings": "Server Warnings",
+  "survivalfly.configuration.serverWarnings.tooltip": "Sends warning messages to the player upon joining a server that does not have Survival Fly installed.",
+  "survivalfly.configuration.menuButton": "Menu Button",
+  "survivalfly.configuration.menuButton.tooltip": "Determines where the Survival Fly menu button should display.\n\nEverywhere → §7in the default position on the pause screen and title screen§r§f\n\nTitle Only → §7only on the title screen§r§f\n\nOFF → §7do not display the menu button at all. You should only disable this if you have another way of accessing the menu, via Mod Menu or (Neo)Forge's mod list.",
+  "survivalfly.configuration.safeMode": "Safe Mode",
+  "survivalfly.configuration.safeMode.tooltip": "Prevents joining servers that do not have this mod installed.",
 
   "key.category.survivalfly.survival_fly": "Survival Fly",
   "key.survivalfly.open_survival_fly_main_menu": "Open Survival Fly Main Menu",

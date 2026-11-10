@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.client.keybind;
+package net.dillon.survivalfly.keybind;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.blay09.mods.balm.Balm;
@@ -7,11 +7,13 @@ import net.blay09.mods.kuma.api.KeyModifiers;
 import net.blay09.mods.kuma.api.Kuma;
 import net.blay09.mods.kuma.api.ManagedKeyMapping;
 import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillEnv;
+import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.dillonlib.factory.ClientFactories;
-import net.dillon.survivalfly.client.screen.MainMenuScreen;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
+import net.dillon.survivalfly.screen.MainMenuScreen;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.network.chat.Component;
 
 import static net.dillon.dillonlib.task.ClientTasks.openScreen;
 import static net.dillon.survivalfly.helper.ModConstants.DEFAULT_FLIGHT_SPEED;
@@ -20,7 +22,7 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 /**
  * Keybindings for the {@code SurvivalFly} mod.
  */
-@Dill(env = DillEnv.CLIENT)
+@Dill(DillType.CLIENT)
 public class ModKeyMappings {
     public static final KeyMapping.Category SURVIVAL_FLY_KEY_CATEGORY = KeyMapping.Category.register(survivalFlyIdentifier("survival_fly"));
 
@@ -49,7 +51,8 @@ public class ModKeyMappings {
             InputConstants.KEY_B,
             player -> {
                 if (player != null && player.getAbilities().mayfly) {
-                    Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(DEFAULT_FLIGHT_SPEED, true));
+                    Balm.networking().sendToServer(new UpdateFlightSpeedC2SPacket(DEFAULT_FLIGHT_SPEED));
+                    player.sendOverlayMessage(Component.translatable("survivalfly.reset_flight_speed").withStyle(ChatFormatting.GREEN));
                 }
             }
     );

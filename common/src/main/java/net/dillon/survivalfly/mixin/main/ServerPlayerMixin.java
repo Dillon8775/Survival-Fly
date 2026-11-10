@@ -2,7 +2,7 @@ package net.dillon.survivalfly.mixin.main;
 
 import com.mojang.authlib.GameProfile;
 import net.dillon.survivalfly.util.ModTexts;
-import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,7 +28,7 @@ import static net.dillon.survivalfly.helper.ModHelper.*;
 import static net.dillon.survivalfly.option.OptionInstances.common;
 
 @Mixin(ServerPlayer.class)
-public abstract class ServerPlayerMixin extends Player implements PlayerAbilitiesExtensionImpl {
+public abstract class ServerPlayerMixin extends Player implements PlayerAbilitiesExtension {
     @Shadow
     protected abstract boolean isPvpAllowed();
     @Unique
@@ -196,7 +196,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
                     this.playedBroken = true;
                 }
             } else {
-                if (((PlayerAbilitiesExtensionImpl)player).hasEverEnabledFlight()) {
+                if (((PlayerAbilitiesExtension)player).hasEverEnabledFlight()) {
                     player.getAbilities().mayfly = true;
                     if (isElytra && validDurability) {
                         this.playedBroken = false;

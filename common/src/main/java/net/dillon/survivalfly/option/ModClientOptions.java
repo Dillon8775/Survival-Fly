@@ -12,6 +12,9 @@ public class ModClientOptions {
     @Comment("Sends warning messages to the player when joining servers without Survival Fly installed.")
     public boolean serverWarnings = true;
 
+    @Comment("Determines where to display the Survival Fly menu button.")
+    public MenuButton menuButton = MenuButton.TITLE_ONLY;
+
     @Comment("Prevents players from joining a server that doesn't have the mod installed.")
     public boolean safeMode = true;
 }

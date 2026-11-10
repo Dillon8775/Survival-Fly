@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.helper;
 
-import net.dillon.dillonlib.platform.info.ModInfo;
+import net.dillon.dillonlib.util.UpdateChecker;
+import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -11,12 +12,12 @@ import org.slf4j.LoggerFactory;
  */
 public class ModConstants {
     public static final String MOD_ID = "survivalfly";
-    public static final ModInfo MOD_INFO = ModInfo.create(
-            MOD_ID,
-            "survival-fly",
-            Component.translatable("survivalfly")
-    );
+    public static final Component VERSION = Component.literal(SurvivalFlyPlatforms.getPlatform().modVersion());
     public static final Logger LOGGER = LoggerFactory.getLogger("Survival Fly");
+    public static final boolean HAS_UPDATE = UpdateChecker.hasUpdate(UpdateChecker.checkForUpdate(
+            "survival-fly",
+            SurvivalFlyPlatforms.getPlatform().modVersion()
+    ));
     public static final Identifier LOGO = Identifier.fromNamespaceAndPath("survivalfly", "survivalfly");
 
     public static final float DEFAULT_FLIGHT_SPEED = 0.05F;

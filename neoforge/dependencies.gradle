@@ -8,6 +8,6 @@ dependencies {
 
     compileOnly "net.luckperms:api:${luckperms_version}"
 
-//    runtimeOnly "net.dillon.qualityofqueso:qualityofqueso-neoforge-mc26.3:unspecified"
-//    runtimeOnly "net.dillon.simplekeybinds:simplekeybinds-neoforge-mc26.3:unspecified"
+    runtimeOnly "net.dillon.qualityofqueso:qualityofqueso-neoforge-mc26.3:unspecified"
+    runtimeOnly "net.dillon.simplekeybinds:simplekeybinds-neoforge-mc26.3:unspecified"
 }

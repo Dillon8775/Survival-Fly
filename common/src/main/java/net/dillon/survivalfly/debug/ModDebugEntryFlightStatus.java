@@ -1,9 +1,7 @@
-package net.dillon.survivalfly.client.debug;
+package net.dillon.survivalfly.debug;
 
-import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillEnv;
 import net.dillon.survivalfly.helper.ModHelper;
-import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.debug.DebugScreenDisplayer;
 import net.minecraft.client.player.LocalPlayer;
@@ -14,12 +12,11 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import org.jspecify.annotations.Nullable;
 
 import static net.dillon.dillonlib.task.ClientTasks.getMinecraft;
-import static net.dillon.survivalfly.client.debug.ModDebugScreenEntries.FLIGHT_STATUS_GROUP;
+import static net.dillon.survivalfly.debug.ModDebugScreenEntries.FLIGHT_STATUS_GROUP;
 
 /**
  * Displays the player's flight status.
  */
-@Dill(env = DillEnv.CLIENT)
 public class ModDebugEntryFlightStatus extends ModDebugEntry {
 
     @Override
@@ -44,6 +41,6 @@ public class ModDebugEntryFlightStatus extends ModDebugEntry {
             return;
         }
 
-        lines.addToGroup(FLIGHT_STATUS_GROUP, ((PlayerAbilitiesExtensionImpl)serverPlayer).flyingAllowed() ? "Able to Fly" : "Unable to Fly");
+        lines.addToGroup(FLIGHT_STATUS_GROUP, ((PlayerAbilitiesExtension)serverPlayer).flyingAllowed() ? "Able to Fly" : "Unable to Fly");
     }
 }

@@ -1,7 +1,7 @@
 package net.dillon.survivalfly.mixin.client;
 
 import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillEnv;
+import net.dillon.dillonlib.annotation.DillType;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Input;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 import static net.dillon.survivalfly.option.OptionInstances.common;
 
-@Dill(env = DillEnv.CLIENT)
+@Dill(DillType.CLIENT)
 @Mixin(LocalPlayer.class)
 public class LocalPlayerMixin {
     @Shadow

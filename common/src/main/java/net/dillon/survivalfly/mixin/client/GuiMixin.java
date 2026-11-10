@@ -1,8 +1,6 @@
 package net.dillon.survivalfly.mixin.client;
 
-import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillEnv;
-import net.dillon.survivalfly.client.screen.WarningScreen;
+import net.dillon.survivalfly.screen.WarningScreen;
 import net.dillon.survivalfly.util.Overrides;
 import net.minecraft.client.GameLoadCookie;
 import net.minecraft.client.Minecraft;
@@ -14,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.dillon.survivalfly.option.OptionInstances.client;
 
-@Dill(env = DillEnv.CLIENT)
 @Mixin(Gui.class)
 public class GuiMixin {
 

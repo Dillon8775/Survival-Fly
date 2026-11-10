@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.client.config;
+package net.dillon.survivalfly.config;
 
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
@@ -6,12 +6,9 @@ import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.blay09.mods.balm.Balm;
 import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillEnv;
-import net.dillon.dillonlib.widespread.DillonsTexts;
-import net.dillon.survivalfly.option.FriendlyFlight;
-import net.dillon.survivalfly.option.ModClientOptions;
-import net.dillon.survivalfly.option.ModCommonOptions;
-import net.dillon.survivalfly.option.Permissions;
+import net.dillon.dillonlib.annotation.DillType;
+import net.dillon.dillonlib.util.Texts;
+import net.dillon.survivalfly.option.*;
 import net.minecraft.network.chat.Component;
 
 import static net.dillon.dillonlib.task.ClientTasks.isOnServer;
@@ -20,7 +17,7 @@ import static net.dillon.survivalfly.option.OptionInstances.*;
 /**
  * The main configuration screen for Survival Fly.
  */
-@Dill(env = DillEnv.CLIENT)
+@Dill(DillType.CLIENT)
 public class ConfigurationScreen {
 
     public static YetAnotherConfigLib configScreen(ModCommonOptions serverConfig, boolean hasPermissionOnServer) {
@@ -117,7 +114,7 @@ public class ConfigurationScreen {
                                                                 })
                                                                 .controller(o -> EnumControllerBuilder.create(o)
                                                                         .enumClass(Permissions.class)
-                                                                        .formatValue(v -> !canModifyOnServer ? DillonsTexts.BLANK : Component.translatable(v.getTranslationKey())))
+                                                                        .formatValue(v -> !canModifyOnServer ? Texts.BLANK : Component.translatable(v.getTranslationKey())))
                                                                 .build()
                                                 )
                                                 .option(
@@ -246,6 +243,16 @@ public class ConfigurationScreen {
                                                 )
                                                 .option(
                                                         serverWarnings
+                                                )
+                                                .option(
+                                                        Option.<MenuButton>createBuilder()
+                                                                .name(Component.translatable("survivalfly.options.menu_button"))
+                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.menu_button.description")))
+                                                                .binding(MenuButton.TITLE_ONLY, () -> client().menuButton, v -> Balm.config().updateLocalConfig(ModClientOptions.class, config -> config.menuButton = v))
+                                                                .controller(o -> EnumControllerBuilder.create(o)
+                                                                        .enumClass(MenuButton.class)
+                                                                        .formatValue(v -> Component.translatable(v.getTranslationKey())))
+                                                                .build()
                                                 )
                                                 .build()
                                 )

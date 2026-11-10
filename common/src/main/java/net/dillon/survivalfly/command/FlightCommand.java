@@ -3,7 +3,7 @@ package net.dillon.survivalfly.command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.dillon.survivalfly.permission.Nodes;
 import net.dillon.survivalfly.permission.PermissionUtil;
-import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
+import net.dillon.survivalfly.util.PlayerAbilitiesExtension;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -96,7 +96,7 @@ public class FlightCommand {
                 source.sendSuccess(() -> flightChangedSelf(value), true);
             } else if (!isFlyingAllowed(player)) {
                 source.sendSuccess(() -> FLIGHT_NOT_ALLOWED_SELF, true);
-                ((PlayerAbilitiesExtensionImpl)player).setWantToFlyAgain(true);
+                ((PlayerAbilitiesExtension)player).setWantToFlyAgain(true);
             } else if (!hasElytra(player)) {
                 source.sendSuccess(() -> NO_ELYTRA_FLIGHT_SELF, true);
             } else {
@@ -129,7 +129,7 @@ public class FlightCommand {
             if (!(player.gameMode.getGameModeForPlayer().isCreative() || player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR)) {
                 if (player.getAbilities().mayfly != value) {
                     player.getAbilities().mayfly = value;
-                    ((PlayerAbilitiesExtensionImpl)player).setEverEnabledFlight(value);
+                    ((PlayerAbilitiesExtension)player).setEverEnabledFlight(value);
                     if (player.getAbilities().flying && !player.getAbilities().mayfly) {
                         player.getAbilities().flying = false;
                     }

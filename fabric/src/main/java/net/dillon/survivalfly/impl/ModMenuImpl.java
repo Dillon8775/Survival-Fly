@@ -2,7 +2,7 @@ package net.dillon.survivalfly.impl;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import net.dillon.survivalfly.client.screen.MainMenuScreen;
+import net.dillon.survivalfly.screen.MainMenuScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 

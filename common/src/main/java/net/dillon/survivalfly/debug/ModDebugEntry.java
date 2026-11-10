@@ -1,7 +1,5 @@
-package net.dillon.survivalfly.client.debug;
+package net.dillon.survivalfly.debug;
 
-import net.dillon.dillonlib.annotation.Dill;
-import net.dillon.dillonlib.annotation.DillEnv;
 import net.minecraft.client.gui.components.debug.DebugEntryCategory;
 import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 
@@ -10,7 +8,6 @@ import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 /**
  * An abstract Quality of Queso {@link DebugScreenEntry}.
  */
-@Dill(env = DillEnv.CLIENT)
 public abstract class ModDebugEntry implements DebugScreenEntry {
 
     /**
