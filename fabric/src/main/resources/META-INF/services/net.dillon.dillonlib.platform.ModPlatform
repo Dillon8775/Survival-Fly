@@ -1,3 +1,1 @@
-# SurvivalFlyPlatform has a dedicated service registration. Do not register it
-# here: DillonLib scans every ModPlatform while mixins are being prepared, and
-# this implementation's Minecraft types (including ServerPlayer) must load later.
+net.dillon.survivalfly.platform.FabricSurvivalFlyPlatform
