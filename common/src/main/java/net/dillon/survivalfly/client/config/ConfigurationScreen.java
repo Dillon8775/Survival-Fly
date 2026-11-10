@@ -47,9 +47,14 @@ public class ConfigurationScreen {
                                                 .option(
                                                         Option.<Boolean>createBuilder()
                                                                 .name(Component.translatable("survivalfly.options.crouch_flight"))
-                                                                .description(OptionDescription.of(Component.translatable("survivalfly.options.crouch_flight.description")))
+                                                                .description(
+                                                                        OptionDescription.of(
+                                                                                Component.translatable("survivalfly.options.crouch_flight.description")
+                                                                        )
+                                                                )
                                                                 .binding(false, () -> common().crouchFlight, v -> Balm.config().updateLocalConfig(ModCommonOptions.class, config -> config.crouchFlight = v))
                                                                 .controller(BooleanControllerBuilder::create)
+                                                                .available(!onServer)
                                                                 .build()
                                                 )
                                                 .build()

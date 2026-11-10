@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.*;
 
 import static net.dillon.dillonlib.task.ClientTasks.openScreen;
+import static net.dillon.dillonlib.task.CommonTasks.sendUpdateMessage;
 import static net.dillon.survivalfly.helper.ModConstants.MOD_INFO;
 import static net.dillon.survivalfly.helper.ModHelper.modEnabled;
 
@@ -63,7 +64,7 @@ public class CommonEvents {
             return;
         }
 
-        MOD_INFO.sendUpdateMessage(player);
+        sendUpdateMessage(MOD_INFO, player);
 
         ((PlayerAbilitiesExtensionImpl)player).setEverEnabledFlight(player.getAbilities().mayfly);
     }

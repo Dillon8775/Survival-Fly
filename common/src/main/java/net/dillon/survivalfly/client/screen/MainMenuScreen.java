@@ -8,6 +8,7 @@ import net.dillon.dillonlib.client.component.DoneButtonBuilder;
 import net.dillon.dillonlib.client.component.GridBuilder;
 import net.dillon.dillonlib.client.screen.DillonLibScreen;
 import net.dillon.dillonlib.client.util.KeybindScrollHelper;
+import net.dillon.dillonlib.widespread.DillonsWidgets;
 import net.dillon.survivalfly.client.config.ConfigurationScreen;
 import net.dillon.survivalfly.client.keybind.ModKeyMappings;
 import net.dillon.survivalfly.packet.serverbound.RequestServerConfigC2SPacket;
@@ -102,7 +103,7 @@ public class MainMenuScreen extends DillonLibScreen {
         builder.fillRowAndCenter(row);
 
         builder.fillRow(
-                MOD_INFO.createVersionLabel(this),
+                DillonsWidgets.createVersionLabel(MOD_INFO, this),
                 builder.alignHorizontallyCenter().paddingTop(8)
         );
 

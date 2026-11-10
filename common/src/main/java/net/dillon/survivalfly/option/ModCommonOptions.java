@@ -24,6 +24,6 @@ public class ModCommonOptions {
     @Comment("Makes the player hungry when using flight.")
     public boolean flightExhaustion = false;
 
-    @Comment("Allows crouching while flying without descending.")
+    @Comment("Allows crouching while flying without descending (client-only).")
     public boolean crouchFlight = false;
 }

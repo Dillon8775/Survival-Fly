@@ -50,9 +50,6 @@
   "survivalfly.options.client.description": "Configure client-side options for Survival Fly",
   "survivalfly.options.server_warnings": "Server Warnings",
   "survivalfly.options.server_warnings.description": "Sends warning messages to the player upon joining a server that does not have Survival Fly installed.",
-  "survivalfly.options.menu_button.off": "OFF",
-  "survivalfly.options.menu_button.title_only": "Title Only",
-  "survivalfly.options.menu_button.everywhere": "Everywhere",
   "survivalfly.options.no_permission.tooltip": "§cYou do not have permissions to modify this setting on this server.",
 
   "survivalfly.client_option": "§7§o(synced with your §b§olocal §7§oconfig)\n\n",
