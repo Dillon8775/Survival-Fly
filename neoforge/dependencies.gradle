@@ -3,7 +3,7 @@ dependencies {
         changing = balm_version.contains('SNAPSHOT')
     }
 
-    implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-neoforge"
+    // implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-neoforge"
     implementation "net.dillon.dillonlib:dillonlib-neoforge-mc26.3:unspecified"
 
     compileOnly "net.luckperms:api:${luckperms_version}"

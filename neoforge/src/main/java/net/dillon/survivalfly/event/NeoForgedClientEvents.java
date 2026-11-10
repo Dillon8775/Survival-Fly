@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
 @EventBusSubscriber(modid = ModConstants.MOD_ID, value = Dist.CLIENT)
-public class NeoForgeClientEvents {
+public class NeoForgedClientEvents {
 
     @SubscribeEvent
     public static void registerNeoForgedKeybindings(RegisterKeyMappingsEvent event) {
