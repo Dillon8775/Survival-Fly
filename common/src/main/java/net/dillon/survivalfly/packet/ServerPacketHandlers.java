@@ -6,8 +6,8 @@ import net.dillon.survivalfly.command.FlightCommand;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.helper.ModHelper;
 import net.dillon.survivalfly.option.ModCommonOptions;
-import net.dillon.survivalfly.packet.clientbound.SendServerOptionsS2CPacket;
-import net.dillon.survivalfly.packet.serverbound.RequestServerConfigC2SPacket;
+import net.dillon.survivalfly.packet.clientbound.ReceiveServerOptionsS2CPacket;
+import net.dillon.survivalfly.packet.serverbound.RequestServerOptionsC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateServerOptionsC2SPacket;
@@ -65,9 +65,17 @@ public class ServerPacketHandlers {
     /**
      * Handles requesting the {@code server} config.
      */
-    public static void handleRequestServerConfig(ServerPlayer player, RequestServerConfigC2SPacket packet) {
+    public static void handleRequestServerConfig(ServerPlayer player, RequestServerOptionsC2SPacket packet) {
         ModCommonOptions serverOptions = common();
-        Balm.networking().sendTo(player, SendServerOptionsS2CPacket.from(serverOptions, SimplePermissions.admin(player.createCommandSourceStack())));
+
+        Balm.networking().sendTo(
+                player,
+                ReceiveServerOptionsS2CPacket.from(
+                        serverOptions,
+                        SimplePermissions.admin(player.createCommandSourceStack())
+                )
+        );
+
         ModConstants.LOGGER.info("{} requested this server's config", player.getDisplayName().getString());
     }
 

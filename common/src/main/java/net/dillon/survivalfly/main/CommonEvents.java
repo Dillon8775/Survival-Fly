@@ -4,14 +4,13 @@ import net.blay09.mods.balm.Balm;
 import net.dillon.survivalfly.client.config.ConfigurationScreen;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.packet.ServerPacketHandlers;
-import net.dillon.survivalfly.packet.clientbound.SendServerOptionsS2CPacket;
-import net.dillon.survivalfly.packet.serverbound.RequestServerConfigC2SPacket;
+import net.dillon.survivalfly.packet.clientbound.ReceiveServerOptionsS2CPacket;
+import net.dillon.survivalfly.packet.serverbound.RequestServerOptionsC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateFlightSpeedC2SPacket;
 import net.dillon.survivalfly.packet.serverbound.UpdateServerOptionsC2SPacket;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
 
@@ -27,7 +26,7 @@ public class CommonEvents {
     private static final Set<UUID> FLYING_PLAYERS = new HashSet<>();
     private static final Map<UUID, Float> FLIGHT_SPEED = new HashMap<>();
 
-    public static void onPlayerClone(boolean isWasDeath, Player original, Player entity, float flyingSpeed) {
+    public static void onPlayerClone(boolean isWasDeath, ServerPlayer original, ServerPlayer entity, float flyingSpeed) {
         if (!modEnabled()) {
             return;
         }
@@ -40,33 +39,31 @@ public class CommonEvents {
         }
     }
 
-    public static void onPlayerRespawn(Player player) {
+    public static void onPlayerRespawn(ServerPlayer serverPlayer) {
         if (!modEnabled()) {
             return;
         }
 
-        if (FLYING_PLAYERS.contains(player.getUUID())) {
-            player.getAbilities().mayfly = true;
-            FLYING_PLAYERS.remove(player.getUUID());
+        if (FLYING_PLAYERS.contains(serverPlayer.getUUID())) {
+            serverPlayer.getAbilities().mayfly = true;
+            FLYING_PLAYERS.remove(serverPlayer.getUUID());
         }
-        if (FLIGHT_SPEED.containsKey(player.getUUID())) {
-            player.getAbilities().setFlyingSpeed(FLIGHT_SPEED.getOrDefault(player.getUUID(), ModConstants.DEFAULT_FLIGHT_SPEED));
-            FLIGHT_SPEED.remove(player.getUUID());
+        if (FLIGHT_SPEED.containsKey(serverPlayer.getUUID())) {
+            serverPlayer.getAbilities().setFlyingSpeed(FLIGHT_SPEED.getOrDefault(serverPlayer.getUUID(), ModConstants.DEFAULT_FLIGHT_SPEED));
+            FLIGHT_SPEED.remove(serverPlayer.getUUID());
         }
 
-        if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.onUpdateAbilities();
-        }
+        serverPlayer.onUpdateAbilities();
     }
 
-    public static void onPlayerJoin(Player player) {
+    public static void onPlayerJoin(ServerPlayer serverPlayer) {
         if (!modEnabled()) {
             return;
         }
 
-        sendUpdateMessage(MOD_INFO, player);
+        sendUpdateMessage(MOD_INFO, serverPlayer);
 
-        ((PlayerAbilitiesExtensionImpl)player).setEverEnabledFlight(player.getAbilities().mayfly);
+        ((PlayerAbilitiesExtensionImpl)serverPlayer).setEverEnabledFlight(serverPlayer.getAbilities().mayfly);
     }
 
     /**
@@ -90,9 +87,9 @@ public class CommonEvents {
         );
 
         Balm.networking().registerServerboundPacket(
-                RequestServerConfigC2SPacket.PACKET_TYPE,
-                RequestServerConfigC2SPacket.class,
-                RequestServerConfigC2SPacket.CODEC,
+                RequestServerOptionsC2SPacket.PACKET_TYPE,
+                RequestServerOptionsC2SPacket.class,
+                RequestServerOptionsC2SPacket.CODEC,
                 ServerPacketHandlers::handleRequestServerConfig
         );
 
@@ -104,9 +101,9 @@ public class CommonEvents {
         );
 
         Balm.networking().registerClientboundPacket(
-                SendServerOptionsS2CPacket.PACKET_TYPE,
-                SendServerOptionsS2CPacket.class,
-                SendServerOptionsS2CPacket.CODEC,
+                ReceiveServerOptionsS2CPacket.PACKET_TYPE,
+                ReceiveServerOptionsS2CPacket.class,
+                ReceiveServerOptionsS2CPacket.CODEC,
                 (player, server) -> {
                     openScreen(ConfigurationScreen.configScreen(server.to(), server.hasPermission()).generateScreen(null));
                 }

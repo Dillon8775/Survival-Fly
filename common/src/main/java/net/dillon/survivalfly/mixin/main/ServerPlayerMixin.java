@@ -71,6 +71,14 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
     }
 
     /**
+     * Gets the player's damage ticks.
+     */
+    @Override
+    public int getDamageTicks() {
+        return this.damageTimeTicks;
+    }
+
+    /**
      * @return if the player has ever had flight before.
      */
     @Override

@@ -15,12 +15,12 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 @Dill(env = DillEnv.CLIENT)
 public class ModDebugScreenEntries {
     public static final DebugEntryCategory SURVIVAL_FLY = new DebugEntryCategory(Component.translatable("survivalfly"), 5.0F);
-    public static final Identifier FLIGHT_STATUS_GROUP = survivalFlyIdentifier("flight_status_group");
+    public static final Identifier FLIGHT_STATUS_GROUP = survivalFlyIdentifier("flight_speed_group");
 
     /**
      * Registers all Survival Fly debug entries.
      */
     public static void registerDebugEntries() {
-        DebugScreenEntriesInvoker.invokeRegister(survivalFlyIdentifier("flight_status"), new ModDebugEntryFlightStatus());
+        DebugScreenEntriesInvoker.invokeRegister(survivalFlyIdentifier("flight_speed"), new ModDebugEntryFlightSpeed());
     }
 }

@@ -11,4 +11,5 @@
 - Added a keybind to open the mod's main menu (Tab + S).
 - Fixed issue where some events are not registered on fabric.
 - Fixed issue where resetting flight speed does not display correct text.
+- Flight debug entry is now simplified.
 - Removed the Toggle Flight keybind.

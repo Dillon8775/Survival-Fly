@@ -10,13 +10,13 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 /**
  * Requests the {@code server} config for Survival Fly.
  */
-public record RequestServerConfigC2SPacket() implements CustomPacketPayload {
-    public static final Identifier ID = survivalFlyIdentifier("request_server_side_options_c2s");
-    public static final CustomPacketPayload.Type<RequestServerConfigC2SPacket> PACKET_TYPE = new CustomPacketPayload.Type<>(ID);
+public record RequestServerOptionsC2SPacket() implements CustomPacketPayload {
+    public static final Identifier ID = survivalFlyIdentifier("request_server_options");
+    public static final CustomPacketPayload.Type<RequestServerOptionsC2SPacket> PACKET_TYPE = new CustomPacketPayload.Type<>(ID);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, RequestServerConfigC2SPacket> CODEC = StreamCodec.ofMember(
+    public static final StreamCodec<RegistryFriendlyByteBuf, RequestServerOptionsC2SPacket> CODEC = StreamCodec.ofMember(
             (buf, packet) -> {},
-            buf -> new RequestServerConfigC2SPacket()
+            buf -> new RequestServerOptionsC2SPacket()
     );
 
     @Override

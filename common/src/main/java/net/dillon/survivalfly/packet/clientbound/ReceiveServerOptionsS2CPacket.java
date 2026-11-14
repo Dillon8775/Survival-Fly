@@ -12,24 +12,24 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 /**
  * Sends the server config to the {@code client}.
  */
-public record SendServerOptionsS2CPacket(String jsonOptions, boolean hasPermission) implements CustomPacketPayload {
-    public static final Identifier ID = survivalFlyIdentifier("send_server_options");
-    public static final CustomPacketPayload.Type<SendServerOptionsS2CPacket> PACKET_TYPE = new CustomPacketPayload.Type<>(ID);
+public record ReceiveServerOptionsS2CPacket(String jsonOptions, boolean hasPermission) implements CustomPacketPayload {
+    public static final Identifier ID = survivalFlyIdentifier("receive_server_options");
+    public static final CustomPacketPayload.Type<ReceiveServerOptionsS2CPacket> PACKET_TYPE = new CustomPacketPayload.Type<>(ID);
     public static final Gson GSON = new Gson();
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SendServerOptionsS2CPacket> CODEC = StreamCodec.ofMember(
+    public static final StreamCodec<RegistryFriendlyByteBuf, ReceiveServerOptionsS2CPacket> CODEC = StreamCodec.ofMember(
         (buf, packet) -> {
             packet.writeUtf(buf.jsonOptions());
             packet.writeBoolean(buf.hasPermission());
         },
-        buf -> new SendServerOptionsS2CPacket(
+        buf -> new ReceiveServerOptionsS2CPacket(
                 buf.readUtf(),
                 buf.readBoolean()
         )
     );
 
-    public static SendServerOptionsS2CPacket from(ModCommonOptions options, boolean hasPermission) {
-        return new SendServerOptionsS2CPacket(GSON.toJson(options), hasPermission);
+    public static ReceiveServerOptionsS2CPacket from(ModCommonOptions options, boolean hasPermission) {
+        return new ReceiveServerOptionsS2CPacket(GSON.toJson(options), hasPermission);
     }
 
     public ModCommonOptions to() {

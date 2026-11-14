@@ -11,7 +11,7 @@ import net.dillon.dillonlib.client.util.KeybindScrollHelper;
 import net.dillon.dillonlib.widespread.DillonsWidgets;
 import net.dillon.survivalfly.client.config.ConfigurationScreen;
 import net.dillon.survivalfly.client.keybind.ModKeyMappings;
-import net.dillon.survivalfly.packet.serverbound.RequestServerConfigC2SPacket;
+import net.dillon.survivalfly.packet.serverbound.RequestServerOptionsC2SPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -41,7 +41,7 @@ public class MainMenuScreen extends DillonLibScreen {
     public void widgets() {
         AbstractWidget configure = Button.builder(Component.translatable("survivalfly.menu.configure"), button -> {
                     if (isOnServer()) {
-                        Balm.networking().sendToServer(new RequestServerConfigC2SPacket());
+                        Balm.networking().sendToServer(new RequestServerOptionsC2SPacket());
                     } else {
                         openScreen(ConfigurationScreen.configScreen(common(), true).generateScreen(this));
                     }
