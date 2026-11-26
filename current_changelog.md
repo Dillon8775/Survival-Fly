@@ -13,3 +13,5 @@
 - Fixed issue where resetting flight speed does not display correct text.
 - Flight debug entry is now simplified.
 - Removed the Toggle Flight keybind.
+- Removed flight speed node.
+- If allow flight speed modification reset to default

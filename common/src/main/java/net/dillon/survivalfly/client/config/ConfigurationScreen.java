@@ -175,7 +175,6 @@ public class ConfigurationScreen {
                                                                 .controller(o -> EnumControllerBuilder.create(o)
                                                                         .enumClass(FriendlyFlight.class)
                                                                         .formatValue(v -> Component.translatable(v.getTranslationKey())))
-                                                                .available(!onServer)
                                                                 .build()
                                                 )
                                                 .option(
@@ -201,7 +200,6 @@ public class ConfigurationScreen {
                                                                     }
                                                                 })
                                                                 .controller(BooleanControllerBuilder::create)
-                                                                .available(!onServer)
                                                                 .build()
                                                 )
                                                 .option(
@@ -227,7 +225,6 @@ public class ConfigurationScreen {
                                                                     }
                                                                 })
                                                                 .controller(BooleanControllerBuilder::create)
-                                                                .available(!onServer)
                                                                 .build()
                                                 )
                                                 .build()

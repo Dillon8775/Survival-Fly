@@ -99,15 +99,15 @@ public class FlightCommand {
     /**
      * Toggles fly for each target independently.
      */
-    private static int executeToggle(CommandSourceStack source, Collection<ServerPlayer> targets, boolean otherPlayers) {
-        if (!hasPermission(source, otherPlayers)) {
+    private static int executeToggle(CommandSourceStack source, Collection<ServerPlayer> targets) {
+        if (!hasPermission(source, true)) {
             return CommonTasks.sendNoPermissionMessage(source);
         }
 
         int i = 0;
 
         for (ServerPlayer player : targets) {
-            i += execute(source, List.of(player), !player.getAbilities().mayfly, otherPlayers);
+            i += execute(source, List.of(player), !player.getAbilities().mayfly, true);
         }
 
         return i;
@@ -141,8 +141,7 @@ public class FlightCommand {
                                         .executes(
                                                 context -> executeToggle(
                                                         context.getSource(),
-                                                        EntityArgument.getPlayers(context, "target"),
-                                                        true
+                                                        EntityArgument.getPlayers(context, "target")
                                                 )
                                         )
                         )

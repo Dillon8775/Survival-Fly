@@ -15,6 +15,7 @@ import java.util.List;
 
 public abstract class ClientSurvivalFlyPlatform extends ClientModPlatform {
 
+    @Override
     public abstract boolean canSendPacket(LocalPlayer localPlayer);
 
     @Override

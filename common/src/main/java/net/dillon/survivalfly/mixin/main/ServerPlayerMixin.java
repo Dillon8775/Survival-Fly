@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.mixin.main;
 
 import com.mojang.authlib.GameProfile;
+import net.dillon.survivalfly.permission.PermissionUtil;
 import net.dillon.survivalfly.util.ModTexts;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
 import net.minecraft.server.level.ServerLevel;
@@ -138,6 +139,11 @@ public abstract class ServerPlayerMixin extends Player implements PlayerAbilitie
         ServerPlayer player = (ServerPlayer)(Object)this;
         if (!modEnabled() || isInvalidPlayerGameMode(player)) {
             return;
+        }
+
+        if (!PermissionUtil.hasPermissionToChangeFlightSpeed(player.createCommandSourceStack())) {
+            player.getAbilities().setFlyingSpeed(DEFAULT_FLIGHT_SPEED);
+            player.onUpdateAbilities();
         }
 
         // Friendly flight functionality (stops player flight if taking damage)

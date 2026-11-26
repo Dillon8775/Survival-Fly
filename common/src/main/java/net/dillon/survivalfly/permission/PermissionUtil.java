@@ -1,5 +1,6 @@
 package net.dillon.survivalfly.permission;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.dillon.dillonlib.core.DillonLibModReferences;
 import net.dillon.survivalfly.platform.ModReferences;
 import net.minecraft.commands.CommandPermissionLevels;
@@ -39,23 +40,23 @@ public class PermissionUtil {
     /**
      * @return if the player has permission to execute a command, with the default fallback.
      */
-    public static boolean hasPermissionDefaultFallback(CommandSourceStack commandSourceStack, ServerPlayer player, Nodes node) {
+    public static boolean hasPermissionDefaultFallback(CommandSourceStack source, ServerPlayer player, Nodes node) {
         if (!modEnabled()) {
             return false;
         }
 
-        return hasPermissionToExecute(player, node, hasCurrentPermissionId(commandSourceStack));
+        return hasPermissionToExecute(player, node, hasCurrentPermissionId(source));
     }
 
     /**
      * @return if the source has node/default permission, or is a non-player source like a command block.
      */
-    public static boolean hasPermissionDefaultFallbackOrCommandSource(CommandSourceStack commandSourceStack, ServerPlayer player, Nodes node) {
+    public static boolean hasPermissionDefaultFallbackOrCommandSource(CommandSourceStack source, ServerPlayer player, Nodes node) {
         if (!modEnabled()) {
             return false;
         }
 
-        return hasPermissionDefaultFallback(commandSourceStack, player, node) || commandSourceStack.getEntity() == null;
+        return hasPermissionDefaultFallback(source, player, node) || source.getEntity() == null;
     }
 
     /**
@@ -76,47 +77,51 @@ public class PermissionUtil {
     /**
      * @return if the player is allowed to execute the flight speed command.
      */
-    public static boolean hasPermissionToChangeFlightSpeed(CommandSourceStack commandSourceStack) {
-        if (PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT_SPEED)) {
-            return true;
+    public static boolean hasPermissionToChangeFlightSpeed(CommandSourceStack source) {
+        try {
+            if (PermissionUtil.hasPermission(source.getPlayerOrException(), Nodes.FLIGHT_SPEED.getNode(), false)) {
+                return true;
+            }
+        } catch (CommandSyntaxException c) {
+            return false;
         }
 
-        return common().allowPlayersToChangeFlightSpeed || PermissionUtil.hasAdminPermissionsOrCommandSource(commandSourceStack);
+        return common().allowPlayersToChangeFlightSpeed || PermissionUtil.hasAdminPermissionsOrCommandSource(source);
     }
 
     /**
      * @return if the player's permission level is above or equal to the default set permissions id.
      */
-    private static boolean hasCurrentPermissionId(CommandSourceStack commandSourceStack) {
+    private static boolean hasCurrentPermissionId(CommandSourceStack source) {
         if (!modEnabled()) {
             return false;
         }
 
-        return hasPermissionLevel(commandSourceStack, getPermissionLevel(common().permissions.getOrdinal()));
+        return hasPermissionLevel(source, getPermissionLevel(common().permissions.getOrdinal()));
     }
 
     /**
      * @return if the source has admin permissions, or is a non-player source like a command block.
      */
-    public static boolean hasAdminPermissionsOrCommandSource(CommandSourceStack commandSourceStack) {
+    public static boolean hasAdminPermissionsOrCommandSource(CommandSourceStack source) {
         if (!modEnabled()) {
             return false;
         }
 
         return Commands.hasPermission(CommandPermissionLevels.LEVEL_ADMINS)
                 .test()
-                .check(commandSourceStack.permissions())
-                || !commandSourceStack.isPlayer();
+                .check(source.permissions())
+                || !source.isPlayer();
     }
 
     /**
      * @return if the player's permission level is equivalent to the passed in value.
      */
-    private static boolean hasPermissionLevel(CommandSourceStack commandSourceStack, PermissionLevel level) {
+    private static boolean hasPermissionLevel(CommandSourceStack source, PermissionLevel level) {
         if (!modEnabled()) {
             return false;
         }
 
-        return commandSourceStack.permissions().hasPermission(new Permission.HasCommandLevel(level));
+        return source.permissions().hasPermission(new Permission.HasCommandLevel(level));
     }
 }
