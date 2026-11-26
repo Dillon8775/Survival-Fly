@@ -2,6 +2,7 @@ package net.dillon.survivalfly.permission;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.dillon.dillonlib.core.DillonLibModReferences;
+import net.dillon.dillonlib.task.CommonTasks;
 import net.dillon.survivalfly.platform.ModReferences;
 import net.minecraft.commands.CommandPermissionLevels;
 import net.minecraft.commands.CommandSourceStack;
@@ -108,10 +109,7 @@ public class PermissionUtil {
             return false;
         }
 
-        return Commands.hasPermission(CommandPermissionLevels.LEVEL_ADMINS)
-                .test()
-                .check(source.permissions())
-                || !source.isPlayer();
+        return CommonTasks.hasAdminPermissionsOrCommandSource(source);
     }
 
     /**
