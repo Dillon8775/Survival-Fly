@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 
 import static net.dillon.dillonlib.task.ClientTasks.getScreen;
 import static net.dillon.dillonlib.task.ClientTasks.openScreen;
-import static net.dillon.survivalfly.client.debug.ModDebugScreenEntries.registerDebugEntries;
 
 /**
  * The client entrypoint for Survival Fly.
@@ -20,9 +19,7 @@ import static net.dillon.survivalfly.client.debug.ModDebugScreenEntries.register
 @Dill(env = DillEnv.CLIENT)
 public class ClientMain {
 
-    public static void cInitialize(BalmRegistrars balmRegistrars) {
-        registerDebugEntries();
-
+    public static void cInitialize(BalmRegistrars registrars) {
         Balm.config().registerConfig(ModClientOptions.class);
     }
 

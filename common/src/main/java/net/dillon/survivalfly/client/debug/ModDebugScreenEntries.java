@@ -2,11 +2,14 @@ package net.dillon.survivalfly.client.debug;
 
 import net.dillon.dillonlib.annotation.Dill;
 import net.dillon.dillonlib.annotation.DillEnv;
-import net.dillon.dillonlib.mixin.accessor.DebugScreenEntriesInvoker;
 import net.minecraft.client.gui.components.debug.DebugEntryCategory;
+import net.minecraft.client.gui.components.debug.DebugGroup;
+import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 
+import static net.dillon.dillonlib.client.component.DebugBuilder.basicDebugCategory;
+import static net.dillon.dillonlib.factory.ClientFactories.createDebugEntryKey;
 import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
 
 /**
@@ -14,13 +17,18 @@ import static net.dillon.survivalfly.helper.ModHelper.survivalFlyIdentifier;
  */
 @Dill(env = DillEnv.CLIENT)
 public class ModDebugScreenEntries {
-    public static final DebugEntryCategory SURVIVAL_FLY = new DebugEntryCategory(Component.translatable("survivalfly"), 5.0F);
-    public static final Identifier FLIGHT_STATUS_GROUP = survivalFlyIdentifier("flight_speed_group");
+    public static final ResourceKey<DebugScreenEntry> FLIGHT_SPEED = key("flight_speed");
+
+    protected static final DebugGroup MOD_GROUP = DebugGroup.Builder
+            .titled(Component.translatable("survivalfly"))
+            .build();
+
+    protected static final DebugEntryCategory MOD_CATEGORY = basicDebugCategory(Component.translatable("survivalfly"));
 
     /**
-     * Registers all Survival Fly debug entries.
+     * @return a debug entry key.
      */
-    public static void registerDebugEntries() {
-        DebugScreenEntriesInvoker.invokeRegister(survivalFlyIdentifier("flight_speed"), new ModDebugEntryFlightSpeed());
+    private static ResourceKey<DebugScreenEntry> key(String name) {
+        return createDebugEntryKey(survivalFlyIdentifier(name));
     }
 }

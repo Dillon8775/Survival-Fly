@@ -1,8 +1,7 @@
 package net.dillon.survivalfly.command;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.dillon.survivalfly.permission.Nodes;
-import net.dillon.survivalfly.permission.PermissionUtil;
+import com.mojang.brigadier.CommandDispatcher;
+import net.dillon.dillonlib.task.CommonTasks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -21,28 +20,6 @@ import static net.dillon.survivalfly.util.ModTexts.*;
 public class FlightStatusCommand {
     private static final Component NO_ELYTRA_FLIGHT_STATUS_SELF = Component.literal("You don't have flying abilities because you don't have an elytra equipped.");
     private static final Component FLIGHT_STATUS_NOT_ALLOWED_SELF = Component.literal("You don't have flying abilities because you have taken damage within the last 20 seconds.");
-
-    /**
-     * @return the {@code /flightstatus} command.
-     */
-    public static LiteralArgumentBuilder<CommandSourceStack> getFlightStatusCommand() {
-        return Commands.literal("flightstatus")
-                .requires(commandSourceStack -> PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
-                .executes(
-                        context -> execute(
-                                context.getSource(),
-                                context.getSource().getPlayerOrException()
-                        )
-                )
-                .then(
-                        Commands.argument("target", EntityArgument.player())
-                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                .executes(context -> execute(
-                                        context.getSource(),
-                                        EntityArgument.getPlayer(context, "target")
-                                ))
-                );
-    }
 
     /**
      * Returns the feedback text based on if the command succeeded or not.
@@ -78,7 +55,11 @@ public class FlightStatusCommand {
     /**
      * Executes the command.
      */
-    private static int execute(CommandSourceStack source, ServerPlayer target) {
+    private static int execute(CommandSourceStack source, ServerPlayer target, boolean otherPlayers) {
+        if (!FlightCommand.hasPermission(source, otherPlayers)) {
+            return CommonTasks.sendNoPermissionMessage(source);
+        }
+
         if (target.gameMode.getGameModeForPlayer().isCreative() || target.gameMode.getGameModeForPlayer() == GameType.SPECTATOR) {
             sendSuccess(source, target, false);
             return 0;
@@ -86,6 +67,31 @@ public class FlightStatusCommand {
             sendSuccess(source, target, true);
             return 1;
         }
+    }
+
+    /**
+     * Registers the {@code /flightstatus} command.
+     */
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
+                Commands.literal("flightstatus")
+                        .executes(
+                                context -> execute(
+                                        context.getSource(),
+                                        context.getSource().getPlayerOrException(),
+                                        false
+                                )
+                        )
+                        .then(
+                                Commands.argument("target", EntityArgument.player())
+                                        .executes(context -> execute(
+                                                        context.getSource(),
+                                                        EntityArgument.getPlayer(context, "target"),
+                                                        true
+                                                )
+                                        )
+                        )
+        );
     }
 
     private static Component getFlightStatusSelf(boolean value) {

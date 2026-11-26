@@ -2,10 +2,10 @@ package net.dillon.survivalfly;
 
 import net.blay09.mods.balm.Balm;
 import net.blay09.mods.balm.neoforge.platform.runtime.NeoForgeLoadContext;
-import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.client.keybind.ModKeyMappings;
-import net.dillon.survivalfly.main.ClientMain;
 import net.dillon.survivalfly.client.screen.MainMenuScreen;
+import net.dillon.survivalfly.helper.ModConstants;
+import net.dillon.survivalfly.main.ClientMain;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;

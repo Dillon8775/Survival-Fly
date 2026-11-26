@@ -1,7 +1,6 @@
 package net.dillon.survivalfly.command;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.dillon.dillonlib.util.SimplePermissions;
+import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -10,19 +9,6 @@ import net.minecraft.network.chat.Component;
  * The functionality for the {@code /survivalfly} command.
  */
 public class SurvivalFlyCommand {
-
-    /**
-     * @return Registers the survivalfly command.
-     */
-    public static LiteralArgumentBuilder<CommandSourceStack> getHelpCommand() {
-        return Commands.literal("survivalfly")
-                .requires(SimplePermissions::all)
-                .executes(
-                        context -> {
-                            context.getSource().sendSystemMessage(getMessage());
-                            return 0;
-                        });
-    }
 
     /**
      * @return A message on how to use all Survival Fly commands!
@@ -65,5 +51,20 @@ public class SurvivalFlyCommand {
                 .append("\n").append(flightStatusCommandUsages)
                 .append("\n\n").append(flightSpeedCommand)
                 .append("\n").append(flightSpeedCommandUsages);
+    }
+
+    /**
+     * Registers the {@code /survivalfly} command.
+     */
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
+                Commands.literal("survivalfly")
+                        .executes(
+                                context -> {
+                                    context.getSource().sendSystemMessage(getMessage());
+                                    return 0;
+                                }
+                        )
+        );
     }
 }

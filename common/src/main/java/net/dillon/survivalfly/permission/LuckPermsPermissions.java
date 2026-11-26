@@ -1,4 +1,4 @@
-package net.dillon.survivalfly.platform;
+package net.dillon.survivalfly.permission;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -6,10 +6,15 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.util.Tristate;
 import net.minecraft.server.level.ServerPlayer;
 
-public class NeoForgeSurvivalFlyPlatform extends SurvivalFlyPlatform {
+/**
+ * Safe-accessor class for {@link LuckPerms}.
+ */
+public class LuckPermsPermissions {
 
-    @Override
-    boolean hasPermissionOnPlatform(ServerPlayer player, String node, boolean fallback) {
+    /**
+     * @return if the player can execute commands with {@code LuckPerms} (platform specific).
+     */
+    protected static boolean luckPermsPermission(ServerPlayer player, String node, boolean fallback) {
         LuckPerms lp = LuckPermsProvider.get();
         User user = lp.getUserManager().getUser(player.getUUID());
 

@@ -1,7 +1,6 @@
 package net.dillon.survivalfly.packet;
 
 import net.blay09.mods.balm.Balm;
-import net.dillon.dillonlib.util.SimplePermissions;
 import net.dillon.survivalfly.command.FlightCommand;
 import net.dillon.survivalfly.helper.ModConstants;
 import net.dillon.survivalfly.helper.ModHelper;
@@ -14,6 +13,8 @@ import net.dillon.survivalfly.packet.serverbound.UpdateServerOptionsC2SPacket;
 import net.dillon.survivalfly.permission.Nodes;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandPermissionLevels;
+import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +38,7 @@ public class ServerPacketHandlers {
         }
 
         if (PermissionUtil.hasPermissionDefaultFallback(serverPlayer.createCommandSourceStack(), serverPlayer, Nodes.FLIGHT)) {
-            FlightCommand.execute(serverPlayer.createCommandSourceStack(), List.of(serverPlayer), packet.flight());
+            FlightCommand.execute(serverPlayer.createCommandSourceStack(), List.of(serverPlayer), packet.flight(), false);
         }
     }
 
@@ -72,7 +73,8 @@ public class ServerPacketHandlers {
                 player,
                 ReceiveServerOptionsS2CPacket.from(
                         serverOptions,
-                        SimplePermissions.admin(player.createCommandSourceStack())
+                        Commands.hasPermission(CommandPermissionLevels.LEVEL_ADMINS)
+                                .test(player.createCommandSourceStack())
                 )
         );
 
@@ -87,7 +89,8 @@ public class ServerPacketHandlers {
 
         String playerName = player.getDisplayName().getString();
 
-        if (!SimplePermissions.admin(player.createCommandSourceStack())) {
+        if (!Commands.hasPermission(CommandPermissionLevels.LEVEL_ADMINS)
+                .test(player.createCommandSourceStack())) {
             ModConstants.LOGGER.info("{} attempted to modify server config, but doesn't have permissions.", playerName);
             return;
         }

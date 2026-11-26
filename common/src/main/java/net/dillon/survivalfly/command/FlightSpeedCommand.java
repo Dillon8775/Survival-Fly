@@ -1,11 +1,12 @@
 package net.dillon.survivalfly.command;
 
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.CommandDispatcher;
+import net.dillon.dillonlib.task.CommonTasks;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.IntegerArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.gamerules.GameRules;
@@ -28,93 +29,27 @@ public class FlightSpeedCommand {
     private static final Component FLIGHT_SPEED_DISALLOWED = Component.literal("Flight speed modification for all players is now disabled, unless they have the LuckPerms permission node \"flight_speed\", or they are a server operator.");
 
     /**
-     * @return the {@code /flightspeed} command.
-     */
-    public static LiteralArgumentBuilder<CommandSourceStack> getFlightSpeedCommand() {
-        return Commands.literal("flightspeed")
-                .requires(PermissionUtil::hasPermissionToChangeFlightSpeed)
-                .then(
-                        Commands.literal("allowmodification")
-                                .executes(context -> {
-                                    updateCommon(common -> {
-                                        common.allowPlayersToChangeFlightSpeed = !common.allowPlayersToChangeFlightSpeed;
-                                    });
-                                    sendSourceMessage(context, common().allowPlayersToChangeFlightSpeed ? FLIGHT_SPEED_ALLOWED : FLIGHT_SPEED_DISALLOWED);
-                                    return 1;
-                                })
-                )
-                .then(
-                        Commands.literal("set")
-                                .then(
-                                        Commands.argument(SPEED_ARGUMENT_NAME, IntegerArgumentType.integer(0, 100))
-                                                .executes(context -> execute(
-                                                        context.getSource(),
-                                                        List.of(context.getSource().getPlayerOrException()),
-                                                        percentageAsDecimal(IntegerArgumentType.getInteger(context, SPEED_ARGUMENT_NAME))
-                                                ))
-                                                .then(
-                                                        Commands.argument("target", EntityArgument.players())
-                                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                                                .executes(context -> execute(
-                                                                        context.getSource(),
-                                                                        EntityArgument.getPlayers(context, "target"),
-                                                                        percentageAsDecimal(IntegerArgumentType.getInteger(context, SPEED_ARGUMENT_NAME))
-                                                                ))
-                                                )
-                                )
-                )
-                .then(
-                        Commands.literal("get")
-                                .executes(
-                                        context -> getSpeed(
-                                                context.getSource(),
-                                                context.getSource().getPlayerOrException()
-                                        ))
-                                .then(
-                                        Commands.argument("target", EntityArgument.player())
-                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                                .executes(context -> getSpeed(
-                                                        context.getSource(),
-                                                        EntityArgument.getPlayer(context, "target")
-                                                ))
-                                )
-                )
-                .then(
-                        Commands.literal("reset")
-                                .executes(context -> execute(
-                                        context.getSource(),
-                                        List.of(context.getSource().getPlayerOrException()),
-                                        DEFAULT_FLIGHT_SPEED
-                                ))
-                                .then(
-                                        Commands.argument("target", EntityArgument.players())
-                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                                .executes(context -> execute(
-                                                        context.getSource(),
-                                                        EntityArgument.getPlayers(context, "target"),
-                                                        DEFAULT_FLIGHT_SPEED
-                                                ))
-                                )
-                );
-    }
-
-    /**
      * Tells the players speed.
      */
-    private static void tellSpeed(CommandSourceStack source, ServerPlayer player, float speed) {
+    private static int tellSpeed(CommandSourceStack source, ServerPlayer player, float speed, boolean otherPlayers) {
+        if (!hasPermission(source, otherPlayers)) {
+            return CommonTasks.sendNoPermissionMessage(source);
+        }
+
         if (source.getEntity() == player) {
             source.sendSuccess(() -> getFlightSpeedSelf(speed), true);
         } else {
             source.sendSuccess(() -> getFlightSpeedOther(player, speed), true);
         }
+
+        return 1;
     }
 
     /**
      * Gets the speed of each player.
      */
-    private static int getSpeed(CommandSourceStack context, ServerPlayer target) {
-        tellSpeed(context, target, decimalAsPercentage(target.getAbilities().getFlyingSpeed()));
-        return 0;
+    private static int getSpeed(CommandSourceStack source, ServerPlayer target, boolean otherPlayers) {
+        return tellSpeed(source, target, decimalAsPercentage(target.getAbilities().getFlyingSpeed()), otherPlayers);
     }
 
     /**
@@ -151,21 +86,121 @@ public class FlightSpeedCommand {
     /**
      * Changes fly speed for player.
      */
-    private static int execute(CommandSourceStack context, Collection<ServerPlayer> targets, float speed) {
+    private static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, float speed, boolean otherPlayers) {
+        if (!hasPermission(source, otherPlayers)) {
+            return CommonTasks.sendNoPermissionMessage(source);
+        }
+
         int i = 0;
 
         for (ServerPlayer player : targets) {
             if (player.getAbilities().mayfly) {
                 player.getAbilities().setFlyingSpeed(speed);
                 player.onUpdateAbilities();
-                sendSuccess(context, player, hasElytra(player) && isFlyingAllowed(player), decimalAsPercentage(speed));
+                sendSuccess(source, player, hasElytra(player) && isFlyingAllowed(player), decimalAsPercentage(speed));
                 i++;
             } else {
-                sendSuccess(context, player, false, decimalAsPercentage(speed));
+                sendSuccess(source, player, false, decimalAsPercentage(speed));
             }
         }
 
         return i;
+    }
+
+    /**
+     * @return if the player has permission to execute the flight command.
+     */
+    private static boolean hasPermission(CommandSourceStack source, boolean otherPlayers) {
+        return otherPlayers
+                ? PermissionUtil.hasAdminPermissionsOrCommandSource(source)
+                : PermissionUtil.hasPermissionToChangeFlightSpeed(source);
+    }
+
+    /**
+     * Registers the {@code /flightspeed} command.
+     */
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
+                Commands.literal("flightspeed")
+                        .then(
+                                Commands.literal("allowmodification")
+                                        .executes(context -> {
+                                                    CommandSourceStack source = context.getSource();
+                                                    if (!PermissionUtil.hasAdminPermissionsOrCommandSource(source)) {
+                                                        return CommonTasks.sendNoPermissionMessage(source);
+                                                    }
+
+                                                    updateCommon(common -> {
+                                                        common.allowPlayersToChangeFlightSpeed = !common.allowPlayersToChangeFlightSpeed;
+                                                    });
+                                                    sendSourceMessage(context, common().allowPlayersToChangeFlightSpeed ? FLIGHT_SPEED_ALLOWED : FLIGHT_SPEED_DISALLOWED);
+                                                    return 1;
+                                                }
+                                        )
+                        )
+                        .then(
+                                Commands.literal("set")
+                                        .then(
+                                                Commands.argument(SPEED_ARGUMENT_NAME, IntegerArgument.integer(0, 100))
+                                                        .executes(context -> execute(
+                                                                        context.getSource(),
+                                                                        List.of(context.getSource().getPlayerOrException()),
+                                                                        percentageAsDecimal(IntegerArgument.getInteger(context, SPEED_ARGUMENT_NAME)),
+                                                                        false
+                                                                )
+                                                        )
+                                                        .then(
+                                                                Commands.argument("target", EntityArgument.players())
+                                                                        .executes(context -> execute(
+                                                                                        context.getSource(),
+                                                                                        EntityArgument.getPlayers(context, "target"),
+                                                                                        percentageAsDecimal(IntegerArgument.getInteger(context, SPEED_ARGUMENT_NAME)),
+                                                                                        true
+                                                                                )
+                                                                        )
+                                                        )
+                                        )
+                        )
+                        .then(
+                                Commands.literal("get")
+                                        .executes(
+                                                context -> getSpeed(
+                                                        context.getSource(),
+                                                        context.getSource().getPlayerOrException(),
+                                                        false
+                                                )
+                                        )
+                                        .then(
+                                                Commands.argument("target", EntityArgument.player())
+                                                        .executes(context -> getSpeed(
+                                                                        context.getSource(),
+                                                                        EntityArgument.getPlayer(context, "target"),
+                                                                        true
+                                                                )
+                                                        )
+                                        )
+                        )
+                        .then(
+                                Commands.literal("reset")
+                                        .executes(context -> execute(
+                                                        context.getSource(),
+                                                        List.of(context.getSource().getPlayerOrException()),
+                                                        DEFAULT_FLIGHT_SPEED,
+                                                        false
+                                                )
+                                        )
+                                        .then(
+                                                Commands.argument("target", EntityArgument.players())
+                                                        .executes(context -> execute(
+                                                                        context.getSource(),
+                                                                        EntityArgument.getPlayers(context, "target"),
+                                                                        DEFAULT_FLIGHT_SPEED,
+                                                                        true
+                                                                )
+                                                        )
+                                        )
+                        )
+        );
     }
 
     private static Component getFlightSpeedSelf(float value) {

@@ -1,8 +1,10 @@
 package net.dillon.survivalfly.permission;
 
-import net.dillon.dillonlib.util.SimplePermissions;
-import net.dillon.survivalfly.platform.SurvivalFlyPlatforms;
+import net.dillon.dillonlib.core.DillonLibModReferences;
+import net.dillon.survivalfly.platform.ModReferences;
+import net.minecraft.commands.CommandPermissionLevels;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permission;
 import net.minecraft.server.permissions.PermissionLevel;
@@ -14,6 +16,16 @@ import static net.dillon.survivalfly.option.OptionInstances.common;
  * Permission utility class for Survival Fly.
  */
 public class PermissionUtil {
+
+    /**
+     * @return If the player has permission to execute a command.
+     */
+    public static boolean hasPermission(ServerPlayer player, String node, boolean fallback) {
+        if (DillonLibModReferences.isModLoaded(ModReferences.LUCKPERMS)) {
+            return LuckPermsPermissions.luckPermsPermission(player, node, fallback);
+        }
+        return fallback;
+    }
 
     /**
      * @return the permission level required to run any /flight commands.
@@ -58,7 +70,7 @@ public class PermissionUtil {
             return fallback;
         }
 
-        return SurvivalFlyPlatforms.getPlatform().hasPermission(player, node.getNode(), fallback);
+        return hasPermission(player, node.getNode(), fallback);
     }
 
     /**
@@ -91,7 +103,10 @@ public class PermissionUtil {
             return false;
         }
 
-        return SimplePermissions.admin(commandSourceStack) || SimplePermissions.notPlayer(commandSourceStack);
+        return Commands.hasPermission(CommandPermissionLevels.LEVEL_ADMINS)
+                .test()
+                .check(commandSourceStack.permissions())
+                || !commandSourceStack.isPlayer();
     }
 
     /**

@@ -26,6 +26,6 @@ public abstract class ModDebugEntry implements DebugScreenEntry {
      */
     @Override
     public DebugEntryCategory category() {
-        return ModDebugScreenEntries.SURVIVAL_FLY;
+        return ModDebugScreenEntries.MOD_CATEGORY;
     }
 }

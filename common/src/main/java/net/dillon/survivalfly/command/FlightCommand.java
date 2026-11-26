@@ -1,6 +1,7 @@
 package net.dillon.survivalfly.command;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.CommandDispatcher;
+import net.dillon.dillonlib.task.CommonTasks;
 import net.dillon.survivalfly.permission.Nodes;
 import net.dillon.survivalfly.permission.PermissionUtil;
 import net.dillon.survivalfly.util.PlayerAbilitiesExtensionImpl;
@@ -28,66 +29,6 @@ public class FlightCommand {
     private static final Component FLIGHT_NOT_ALLOWED_SELF = Component.literal("You have taken damage within the last 20 seconds, cannot enable flight!");
 
     /**
-     * @return Registers the flight command.
-     */
-    public static LiteralArgumentBuilder<CommandSourceStack> getFlightCommand() {
-        return Commands.literal("flight")
-                .requires(commandSourceStack -> PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(commandSourceStack, commandSourceStack.getPlayer(), Nodes.FLIGHT))
-                .executes(
-                        context -> execute(
-                                context.getSource(),
-                                List.of(context.getSource().getPlayerOrException()),
-                                !context.getSource().getPlayerOrException().getAbilities().mayfly
-                        )
-                )
-                .then(
-                        Commands.argument("target", EntityArgument.players())
-                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                .executes(
-                                        context -> executeToggle(
-                                                context.getSource(),
-                                                EntityArgument.getPlayers(context, "target")
-                                        )
-                                )
-                )
-                .then(
-                        Commands.literal("enable")
-                                .executes(context -> execute(
-                                        context.getSource(),
-                                        List.of(context.getSource().getPlayerOrException()),
-                                        true
-                                ))
-                                .then(
-                                        Commands.argument("target", EntityArgument.players())
-                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                                .executes(
-                                                        context -> execute(
-                                                                context.getSource(),
-                                                                EntityArgument.getPlayers(context, "target"), true
-                                                        )
-                                                )
-                                )
-                )
-                .then(
-                        Commands.literal("disable")
-                                .executes(context -> execute(
-                                        context.getSource(),
-                                        List.of(context.getSource().getPlayerOrException()),
-                                        false
-                                ))
-                                .then(
-                                        Commands.argument("target", EntityArgument.players())
-                                                .requires(PermissionUtil::hasAdminPermissionsOrCommandSource)
-                                                .executes(
-                                                        context -> execute(
-                                                                context.getSource(), EntityArgument.getPlayers(context, "target"), false
-                                                        )
-                                                )
-                                )
-                );
-    }
-
-    /**
      * Sends messages to chat based on the player's flight ability.
      */
     private static void sendFeedback(CommandSourceStack source, ServerPlayer player, boolean success, boolean value) {
@@ -96,7 +37,7 @@ public class FlightCommand {
                 source.sendSuccess(() -> flightChangedSelf(value), true);
             } else if (!isFlyingAllowed(player)) {
                 source.sendSuccess(() -> FLIGHT_NOT_ALLOWED_SELF, true);
-                ((PlayerAbilitiesExtensionImpl)player).setWantToFlyAgain(true);
+                ((PlayerAbilitiesExtensionImpl) player).setWantToFlyAgain(true);
             } else if (!hasElytra(player)) {
                 source.sendSuccess(() -> NO_ELYTRA_FLIGHT_SELF, true);
             } else {
@@ -122,14 +63,18 @@ public class FlightCommand {
     /**
      * Enables/disables fly for certain players.
      */
-    public static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, boolean value) {
+    public static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, boolean value, boolean otherPlayers) {
+        if (!hasPermission(source, otherPlayers)) {
+            return CommonTasks.sendNoPermissionMessage(source);
+        }
+
         int i = 0;
 
         for (ServerPlayer player : targets) {
             if (!(player.gameMode.getGameModeForPlayer().isCreative() || player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR)) {
                 if (player.getAbilities().mayfly != value) {
                     player.getAbilities().mayfly = value;
-                    ((PlayerAbilitiesExtensionImpl)player).setEverEnabledFlight(value);
+                    ((PlayerAbilitiesExtensionImpl) player).setEverEnabledFlight(value);
                     if (player.getAbilities().flying && !player.getAbilities().mayfly) {
                         player.getAbilities().flying = false;
                     }
@@ -154,14 +99,96 @@ public class FlightCommand {
     /**
      * Toggles fly for each target independently.
      */
-    private static int executeToggle(CommandSourceStack source, Collection<ServerPlayer> targets) {
+    private static int executeToggle(CommandSourceStack source, Collection<ServerPlayer> targets, boolean otherPlayers) {
+        if (!hasPermission(source, otherPlayers)) {
+            return CommonTasks.sendNoPermissionMessage(source);
+        }
+
         int i = 0;
 
         for (ServerPlayer player : targets) {
-            i += execute(source, List.of(player), !player.getAbilities().mayfly);
+            i += execute(source, List.of(player), !player.getAbilities().mayfly, otherPlayers);
         }
 
         return i;
+    }
+
+    /**
+     * @return if the player has permission to execute the flight command.
+     */
+    protected static boolean hasPermission(CommandSourceStack source, boolean otherPlayers) {
+        return otherPlayers
+                ? PermissionUtil.hasAdminPermissionsOrCommandSource(source)
+                : PermissionUtil.hasPermissionDefaultFallbackOrCommandSource(source, source.getPlayer(), Nodes.FLIGHT);
+    }
+
+    /**
+     * Registers the {@code /flight} command.
+     */
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
+                Commands.literal("flight")
+                        .executes(
+                                context -> execute(
+                                        context.getSource(),
+                                        List.of(context.getSource().getPlayerOrException()),
+                                        !context.getSource().getPlayerOrException().getAbilities().mayfly,
+                                        false
+                                )
+                        )
+                        .then(
+                                Commands.argument("target", EntityArgument.players())
+                                        .executes(
+                                                context -> executeToggle(
+                                                        context.getSource(),
+                                                        EntityArgument.getPlayers(context, "target"),
+                                                        true
+                                                )
+                                        )
+                        )
+                        .then(
+                                Commands.literal("enable")
+                                        .executes(context -> execute(
+                                                        context.getSource(),
+                                                        List.of(context.getSource().getPlayerOrException()),
+                                                        true,
+                                                        false
+                                                )
+                                        )
+                                        .then(
+                                                Commands.argument("target", EntityArgument.players())
+                                                        .executes(
+                                                                context -> execute(
+                                                                        context.getSource(),
+                                                                        EntityArgument.getPlayers(context, "target"),
+                                                                        true,
+                                                                        true
+                                                                )
+                                                        )
+                                        )
+                        )
+                        .then(
+                                Commands.literal("disable")
+                                        .executes(context -> execute(
+                                                        context.getSource(),
+                                                        List.of(context.getSource().getPlayerOrException()),
+                                                        false,
+                                                        false
+                                                )
+                                        )
+                                        .then(
+                                                Commands.argument("target", EntityArgument.players())
+                                                        .executes(
+                                                                context -> execute(
+                                                                        context.getSource(),
+                                                                        EntityArgument.getPlayers(context, "target"),
+                                                                        false,
+                                                                        true
+                                                                )
+                                                        )
+                                        )
+                        )
+        );
     }
 
     private static Component flightChangedSelf(boolean value) {

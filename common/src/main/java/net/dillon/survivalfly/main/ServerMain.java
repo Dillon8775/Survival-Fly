@@ -10,6 +10,6 @@ import net.dillon.dillonlib.annotation.DillEnv;
 @Dill(env = DillEnv.DEDICATED_SERVER)
 public class ServerMain {
 
-    public static void sInitialize(BalmRegistrars balmRegistrars) {
+    public static void sInitialize(BalmRegistrars registrars) {
     }
 }

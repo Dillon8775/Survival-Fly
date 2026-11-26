@@ -11,7 +11,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import org.jspecify.annotations.Nullable;
 
 import static net.dillon.dillonlib.task.ClientTasks.getMinecraft;
-import static net.dillon.survivalfly.client.debug.ModDebugScreenEntries.FLIGHT_STATUS_GROUP;
+import static net.dillon.survivalfly.client.debug.ModDebugScreenEntries.MOD_GROUP;
 
 /**
  * Displays the player's flight status.
@@ -27,6 +27,10 @@ public class ModDebugEntryFlightSpeed extends ModDebugEntry {
             return;
         }
 
-        lines.addToGroup(FLIGHT_STATUS_GROUP, "Flight Speed: " + ModHelper.flyingSpeedAsDecimalString(player));
+        lines.addFactToGroup(
+                MOD_GROUP,
+                "Flight Speed",
+                fact -> fact.value(ModHelper.flyingSpeedAsDecimalString(player))
+        );
     }
 }

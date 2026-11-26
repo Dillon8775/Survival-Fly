@@ -9,7 +9,6 @@ import java.util.function.Consumer;
  * Getters for all Survival Fly's option instances.
  */
 public class OptionInstances {
-    public static ModCommonOptions CURRENT_SERVER_INSTANCE = null;
 
     /**
      * Returns the options.

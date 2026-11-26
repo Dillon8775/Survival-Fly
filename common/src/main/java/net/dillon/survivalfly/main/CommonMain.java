@@ -13,7 +13,7 @@ import static net.dillon.survivalfly.main.CommonEvents.registerPackets;
  */
 public class CommonMain {
 
-    public static void initialize(BalmRegistrars balmRegistrars) {
+    public static void initialize(BalmRegistrars registrars) {
         registerPackets();
 
         Balm.config().registerConfig(ModCommonOptions.class);

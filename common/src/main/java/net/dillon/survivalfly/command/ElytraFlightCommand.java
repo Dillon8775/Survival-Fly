@@ -1,8 +1,8 @@
 package net.dillon.survivalfly.command;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.dillon.dillonlib.util.SimplePermissions;
+import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandPermissionLevels;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -21,23 +21,26 @@ public class ElytraFlightCommand {
     private static final Component ELYTRA_FLIGHT_DESC = Component.literal("Players must be wearing an elytra to use /flight.");
 
     /**
-     * @return Registers the elytraflight command.
+     * Registers the elytraflight command.
      */
-    public static LiteralArgumentBuilder<CommandSourceStack> getElytraFlightCommand() {
-        return Commands.literal("elytraflight")
-                .requires(SimplePermissions::admin)
-                .executes(
-                        context -> {
-                            updateCommon(common -> {
-                                common.elytraFlight = !common.elytraFlight;
-                            });
-                            if (common().elytraFlight) {
-                                context.getSource().sendSystemMessage(ELYTRA_FLIGHT_ENABLED);
-                                context.getSource().sendSystemMessage(ELYTRA_FLIGHT_DESC);
-                            } else {
-                                context.getSource().sendSystemMessage(ELYTRA_FLIGHT_DISABLED);
-                            }
-                            return 0;
-                        });
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
+                Commands.literal("elytraflight")
+                        .requires(Commands.hasPermission(CommandPermissionLevels.LEVEL_ADMINS))
+                        .executes(
+                                context -> {
+                                    updateCommon(common -> {
+                                        common.elytraFlight = !common.elytraFlight;
+                                    });
+                                    if (common().elytraFlight) {
+                                        context.getSource().sendSystemMessage(ELYTRA_FLIGHT_ENABLED);
+                                        context.getSource().sendSystemMessage(ELYTRA_FLIGHT_DESC);
+                                    } else {
+                                        context.getSource().sendSystemMessage(ELYTRA_FLIGHT_DISABLED);
+                                    }
+                                    return 0;
+                                }
+                        )
+        );
     }
 }
