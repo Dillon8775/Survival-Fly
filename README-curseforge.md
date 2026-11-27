@@ -3,6 +3,8 @@
 ---
 
 # Adds a <i>/flight</i> command for survival players!
+<img alt = "Latest Version" width = 300 src="https://img.shields.io/badge/MC-Latest_Version-313E51?style=for-the-badge&logo=anycubic&labelColor=555555">
+<br><br>
 <img alt = "Client-side, server optional" width = 350 src="https://img.shields.io/badge/Side-Server_(Client_Optional)-05A358?style=for-the-badge&logo=serverfault">
 
 ---
